@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"doctor-portrait: %{http_code}\\\\n\" http://localhost:3000/images/doctor-portrait.jpg)",
+      "Bash(curl -s -o /dev/null -w \"video-1: %{http_code}\\\\n\" http://localhost:3000/images/video-1.jpg)",
+      "Bash(curl -s -o /dev/null -w \"avatar-1: %{http_code}\\\\n\" http://localhost:3000/images/avatar-1.png)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"http://localhost:3000/_next/image?url=%2Fimages%2Fspecialty-1.jpg&w=640&q=75\")",
+      "Bash(python -c ' *)",
+      "Bash(curl -s http://localhost:3000/ar -o /c/Users/akkrrammm/Downloads/hussein_zakaria/website/scratch_ar.html)",
+      "Bash(rm scratch_ar.html)",
+      "Bash(curl -s http://localhost:3000/ar -o scratch_ar.html)",
+      "Bash(python analyze_sections.py)",
+      "Bash(python analyze_cards.py)",
+      "Bash(python analyze_accents.py)",
+      "Bash(python crop_regions.py)"
+    ]
+  }
+}

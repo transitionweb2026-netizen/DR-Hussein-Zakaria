@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Developer Handoff</title>
+<style>
+body{font-family:Inter,Arial,sans-serif;margin:0;background:#071b36;color:#eef7ff;padding:40px}
+main{max-width:960px;margin:auto}h1{font-size:34px}h2{margin-top:30px;color:#73baff}
+.card{background:#0c2d57;border:1px solid #285b8d;border-radius:16px;padding:20px;margin:16px 0}
+code{background:#041326;padding:3px 6px;border-radius:6px}li{margin:8px 0;line-height:1.55}
+a{color:#79c0ff}
+</style></head><body><main>
+<h1>Dr. Hussein Zakaria — Developer Handoff</h1>
+<div class="card">
+<p><strong>Approved master size:</strong> 864 × 1821px.</p>
+<p><strong>Exact visual prototype:</strong> <a href="index.html">index.html</a>.</p>
+<p>The file <code>assets/approved-homepage.png</code> is the approved source of truth for spacing, colors, proportions, card sizing, glass effects, typography scale, and section rhythm.</p>
+</div>
+<h2>Section order</h2>
+<div class="card"><ol>
+<li>Header + Hero + floating social rail + appointment/about CTAs</li>
+<li>About the Doctor: 16:9 video left, copy/features right</li>
+<li>Our Services: four equal cards + View More Services</li>
+<li>Achievements: five statistics cards</li>
+<li>Why Choose Dr. Hussein Zakaria: bullet list + doctor visual</li>
+<li>Patient Reviews: four cards + View More Reviews</li>
+<li>Videos + Certifications block</li>
+<li>Articles + Frequently Asked Questions split section</li>
+<li>Final booking CTA slider/banner</li>
+<li>Five-column footer</li>
+</ol></div>
+<h2>Implementation rules</h2>
+<div class="card"><ul>
+<li>Rebuild at a desktop content width that preserves the approved proportions rather than stretching horizontally.</li>
+<li>All icons must stay square and use <code>aspect-ratio:1</code>; never stretch SVGs or raster icons.</li>
+<li>Use light blue translucent glass cards with thin white/blue borders, soft blur, inner highlights, and restrained blue shadows.</li>
+<li>Keep the overall page light blue—not white, and not dark navy.</li>
+<li>Preserve equal widths/heights within each repeated card row.</li>
+<li>Images use <code>object-fit:cover</code> or <code>contain</code> depending on the approved reference; never distort.</li>
+<li>The final implementation should recreate the artwork with semantic HTML/CSS/JS/React. This prototype intentionally uses the approved rendered artwork to guarantee a 1:1 visual checkpoint.</li>
+</ul></div>
+</main></body></html>

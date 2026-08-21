@@ -1,0 +1,550 @@
+{
+  "meta": {
+    "title": "Dr. Hussein Zakaria — Consultant Neurosurgeon in Cairo",
+    "description": "Dr. Hussein Zakaria provides world-class neurosurgical care for brain, spine, and nerve conditions in Cairo, Egypt — advanced technology, proven outcomes, and a patient-first approach."
+  },
+  "header": {
+    "logoName": "Dr. Hussein Zakaria",
+    "logoTitle": "Neurosurgeon"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "videos": "Videos",
+    "patientStories": "Patient Stories",
+    "articles": "Articles",
+    "contact": "Contact",
+    "bookAppointment": "Book Appointment"
+  },
+  "hero": {
+    "eyebrow": "Precision. Experience. Compassion",
+    "headingPrefix": "Advanced Care for",
+    "headingHighlight": "Brain & Spine",
+    "paragraph": "Dr. Hussein Zakaria provides world-class neurosurgical care, combining advanced technology with a patient-first approach to complex brain, spine, and nerve conditions.",
+    "ctaPrimary": "Book Appointment",
+    "ctaSecondary": "Watch Video",
+    "statsMore": "More achievements",
+    "phoneLabel": "Call Us Anytime",
+    "socialLabel": "Follow Dr. Hussein",
+    "stats": {
+      "years": { "value": "10+", "label": "Years of Experience" },
+      "surgeries": { "value": "500+", "label": "Successful Surgeries" }
+    }
+  },
+  "aboutIntro": {
+    "eyebrow": "About the Doctor",
+    "headingPrefix": "A Trusted Partner in",
+    "headingHighlight": "Neurosurgical Care",
+    "paragraph1": "Dr. Hussein Zakaria is a consultant neurosurgeon based in Cairo, with over a decade of experience treating complex conditions of the brain, spine, and peripheral nerves.",
+    "paragraph2": "He combines advanced surgical technology with a calm, patient-first approach — guiding every patient from diagnosis through recovery with clarity and genuine care.",
+    "doctorName": "Dr. Hussein Zakaria",
+    "doctorTitle": "Consultant Neurosurgeon",
+    "cta": "Learn More About Dr. Hussein"
+  },
+  "videoIntro": {
+    "eyebrow": "Introduction",
+    "heading": "Meet Dr. Hussein Zakaria",
+    "description": "A closer look at our approach to neurosurgical care, our technology, and what to expect as a patient.",
+    "duration": "02:14"
+  },
+  "stats": {
+    "eyebrow": "By the Numbers",
+    "heading": "A Track Record You Can Trust",
+    "items": [
+      { "value": 10, "suffix": "+", "label": "Years of Experience" },
+      { "value": 500, "suffix": "+", "label": "Successful Surgeries" },
+      { "value": 98, "suffix": "%", "label": "Patient Satisfaction" },
+      { "value": 15000, "suffix": "+", "label": "Hours in Surgery" },
+      { "value": 5000, "suffix": "+", "label": "Patients Treated" }
+    ]
+  },
+  "timeline": {
+    "eyebrow": "Career Journey",
+    "heading": "A Path Defined by Excellence",
+    "items": [
+      {
+        "year": "2008",
+        "title": "Doctor of Medicine",
+        "description": "Graduated with honors from Cairo University Faculty of Medicine."
+      },
+      {
+        "year": "2012",
+        "title": "Neurosurgery Residency",
+        "description": "Completed specialized residency training in neurosurgery at a leading Cairo university hospital."
+      },
+      {
+        "year": "2015",
+        "title": "International Fellowship",
+        "description": "Advanced fellowship training in minimally invasive spine and cranial surgery abroad."
+      },
+      {
+        "year": "2018",
+        "title": "Consultant Neurosurgeon",
+        "description": "Appointed consultant neurosurgeon, leading complex brain and spine cases."
+      },
+      {
+        "year": "2024",
+        "title": "Private Practice",
+        "description": "Established a dedicated neurosurgical practice serving patients across Cairo."
+      }
+    ]
+  },
+  "certificates": {
+    "eyebrow": "Credentials",
+    "heading": "Board Certifications & Training",
+    "items": [
+      { "title": "Board Certified Neurosurgeon", "issuer": "Egyptian Fellowship of Neurological Surgery", "year": "2018" },
+      { "title": "Fellowship in Spine Surgery", "issuer": "International Spine Society", "year": "2015" },
+      { "title": "Advanced Microsurgery Training", "issuer": "European Association of Neurosurgical Societies", "year": "2016" },
+      { "title": "Minimally Invasive Neurosurgery", "issuer": "American Association of Neurological Surgeons", "year": "2019" }
+    ]
+  },
+  "mainSpecialties": {
+    "eyebrow": "Our Specialties",
+    "heading": "Comprehensive Neurosurgical Care",
+    "viewAll": "View All Services"
+  },
+  "doctorMessage": {
+    "eyebrow": "A Message From",
+    "headingPrefix": "Dr. Hussein",
+    "headingHighlight": "Zakaria",
+    "quote": "Every patient who walks through my door deserves not just my expertise, but my full attention and care. Neurosurgery isn't only about treating a condition — it's about restoring confidence, function, and quality of life. I'm honored to walk this journey with each of my patients.",
+    "signatureName": "Dr. Hussein Zakaria",
+    "signatureTitle": "Consultant Neurosurgeon"
+  },
+  "services": {
+    "items": [
+      {
+        "id": "brain",
+        "icon": "brain",
+        "title": "Brain & Tumor Surgery",
+        "description": "Advanced microsurgical techniques for brain tumors, aneurysms, and complex cranial conditions."
+      },
+      {
+        "id": "spine",
+        "icon": "spine",
+        "title": "Spine Surgery",
+        "description": "Minimally invasive solutions for spinal disorders, disc herniation, and chronic back pain."
+      },
+      {
+        "id": "nerve",
+        "icon": "nerve",
+        "title": "Peripheral Nerve Surgery",
+        "description": "Expert care for nerve compression, injuries, and neuropathic pain."
+      },
+      {
+        "id": "minimally-invasive",
+        "icon": "scan",
+        "title": "Minimally Invasive Procedures",
+        "description": "Cutting-edge endoscopic techniques for faster recovery and less pain."
+      }
+    ]
+  },
+  "whyChoose": {
+    "eyebrow": "Why Choose Dr. Hussein Zakaria",
+    "headingPrefix": "Dedicated to Excellence",
+    "headingHighlight": "in Every Step",
+    "paragraph": "Combining advanced technology, surgical expertise, and a compassionate approach to deliver the best outcomes for every patient.",
+    "doctorName": "Dr. Hussein Zakaria",
+    "doctorTitle": "Neurosurgeon",
+    "features": [
+      {
+        "icon": "cpu",
+        "title": "Advanced Technology",
+        "description": "State-of-the-art equipment for precise diagnosis and treatment."
+      },
+      {
+        "icon": "heart-handshake",
+        "title": "Personalized Care",
+        "description": "Tailored treatment plans designed around your unique needs."
+      },
+      {
+        "icon": "trending-up",
+        "title": "Proven Results",
+        "description": "A track record of successful outcomes and patient satisfaction."
+      },
+      {
+        "icon": "life-buoy",
+        "title": "Compassionate Support",
+        "description": "With you at every step of your journey to recovery."
+      }
+    ]
+  },
+  "specialties": {
+    "eyebrow": "Our Specialties",
+    "heading": "Comprehensive Neurosurgical Care",
+    "items": [
+      { "id": "brain-tumor", "icon": "brain-tumor", "title": "Brain Tumor" },
+      { "id": "aneurysm", "icon": "aneurysm", "title": "Aneurysm" },
+      { "id": "spine-disorders", "icon": "spine", "title": "Spine Disorders" },
+      { "id": "disc-herniation", "icon": "disc", "title": "Disc Herniation" },
+      { "id": "hydrocephalus", "icon": "hydrocephalus", "title": "Hydrocephalus" },
+      { "id": "peripheral-nerve", "icon": "nerve", "title": "Peripheral Nerve" }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "Patient Reviews",
+    "heading": "Trusted by Patients",
+    "items": [
+      {
+        "name": "Ahmed Adel",
+        "role": "Brain Surgery Patient",
+        "quote": "Dr. Hussein is truly exceptional. His expertise and care gave me a new lease on life. Thorough, patient, and reassuring throughout.",
+        "rating": 5
+      },
+      {
+        "name": "Sara Fouad",
+        "role": "Spine Surgery Patient",
+        "quote": "From consultation to recovery, everything was handled with professionalism and genuine compassion. I felt supported every step of the way.",
+        "rating": 5
+      },
+      {
+        "name": "Mohamed Hussein",
+        "role": "Aneurysm Patient",
+        "quote": "The best decision I made was choosing Dr. Hussein. His skill and calm confidence during a frightening time made all the difference.",
+        "rating": 5
+      },
+      {
+        "name": "Mahmoud Sherif",
+        "role": "Peripheral Nerve Patient",
+        "quote": "From the first consultation, I felt safe and reassured. A precise, respectful approach that gave me my life back.",
+        "rating": 5
+      },
+      {
+        "name": "Lina Hassan",
+        "role": "Hydrocephalus Patient",
+        "quote": "Dr. Hussein explained every step clearly and made a frightening diagnosis feel manageable. Forever grateful for his care.",
+        "rating": 5
+      }
+    ]
+  },
+  "videos": {
+    "eyebrow": "Education & Awareness",
+    "heading": "Watch & Learn",
+    "viewAll": "View All Videos",
+    "items": [
+      {
+        "title": "Understanding Brain Tumors",
+        "description": "Causes, symptoms & treatment",
+        "duration": "05:24"
+      },
+      {
+        "title": "Minimally Invasive Spine Surgery",
+        "description": "Benefits & recovery process",
+        "duration": "04:18"
+      },
+      {
+        "title": "Peripheral Nerve Disorders",
+        "description": "Symptoms & treatment options",
+        "duration": "03:47"
+      },
+      {
+        "title": "When to See a Neurosurgeon",
+        "description": "Red flags & important signs",
+        "duration": "06:12"
+      },
+      {
+        "title": "Living with Hydrocephalus",
+        "description": "Diagnosis & treatment options",
+        "duration": "04:52"
+      },
+      {
+        "title": "Recovery After Brain Surgery",
+        "description": "What to expect week by week",
+        "duration": "05:36"
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Frequently Asked Questions",
+    "heading": "Answers to Common Questions",
+    "items": [
+      {
+        "question": "When should I see a neurosurgeon?",
+        "answer": "If you experience persistent headaches, numbness, weakness, chronic back or neck pain, or any neurological symptoms that don't improve, it's best to schedule a consultation for proper evaluation."
+      },
+      {
+        "question": "What should I bring to my appointment?",
+        "answer": "Please bring your ID, any previous medical reports, imaging (MRI/CT scans), a list of current medications, and your referral if you have one."
+      },
+      {
+        "question": "Is neurosurgery safe?",
+        "answer": "Modern neurosurgery uses advanced imaging, navigation, and microsurgical techniques that make procedures significantly safer than in the past, with outcomes tailored to each patient's risk profile."
+      },
+      {
+        "question": "Do you offer minimally invasive options?",
+        "answer": "Yes. Dr. Hussein Zakaria specializes in endoscopic and minimally invasive techniques whenever they are clinically appropriate, reducing recovery time and surgical risk."
+      },
+      {
+        "question": "What is the recovery time?",
+        "answer": "Recovery varies by procedure and condition, ranging from a few days for minimally invasive treatments to several weeks for complex surgeries. A personalized recovery plan is provided for every patient."
+      },
+      {
+        "question": "How do I book an appointment?",
+        "answer": "You can book directly through the \"Book Appointment\" button on this website, or call our clinic during working hours and our team will assist you."
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "Take the First Step Toward Better Health",
+    "subtitle": "Reach out today and let us guide you to a healthier tomorrow.",
+    "whatsapp": "Contact via WhatsApp",
+    "call": "Call Now"
+  },
+  "footer": {
+    "description": "Expert neurosurgical care with compassion and precision.",
+    "quickLinksTitle": "Quick Links",
+    "quickLinks": ["Home", "Services", "Videos", "Patient Stories", "Articles", "Contact"],
+    "servicesTitle": "Services",
+    "services": [
+      "Brain Surgery",
+      "Spine Surgery",
+      "Minimally Invasive Procedures",
+      "Nerve Surgery",
+      "Endoscopic Procedures"
+    ],
+    "contactTitle": "Contact Information",
+    "phone": "+20 123 456 7890",
+    "email": "info@drhusseinzakaria.com",
+    "address": "Cairo, Egypt",
+    "hoursTitle": "Working Hours",
+    "weekdays": "Saturday – Thursday",
+    "weekdayHours": "9:00 AM – 6:00 PM",
+    "weekend": "Friday",
+    "weekendStatus": "Closed",
+    "copyright": "© {year} Dr. Hussein Zakaria. All Rights Reserved."
+  },
+  "servicesPage": {
+    "hero": {
+      "eyebrow": "Our Services",
+      "headingPrefix": "Comprehensive Neurosurgical",
+      "headingHighlight": "Services",
+      "paragraph": "From routine consultations to complex cranial and spinal procedures, explore the full range of neurosurgical care Dr. Hussein Zakaria provides."
+    },
+    "intro": {
+      "eyebrow": "General Services",
+      "heading": "Choose a Specialty to Explore",
+      "paragraph": "Select a category below to jump straight to its detailed procedures, or browse the full list further down the page."
+    },
+    "detailedHeading": "Detailed Procedures",
+    "viewProcedures": "View Procedures",
+    "cta": {
+      "title": "Not Sure Which Specialty Your Condition Falls Under?",
+      "subtitle": "Reach out and our team will help guide you to the right specialist and treatment plan."
+    },
+    "categories": [
+      { "id": "brain", "image": "service-category-1.jpg" },
+      { "id": "spine", "image": "service-category-2.jpg" },
+      { "id": "nerve", "image": "service-category-3.jpg" },
+      { "id": "minimally-invasive", "image": "service-category-4.jpg" }
+    ],
+    "surgeries": {
+      "brain": [
+        { "id": "brain-tumor-resection", "title": "Brain Tumor Resection", "short": "Microsurgical removal of benign and malignant brain tumors.", "description": "Using intraoperative navigation and microsurgical technique, Dr. Hussein Zakaria removes brain tumors with maximum precision while protecting healthy surrounding tissue and critical brain function.", "image": "surgery-1.jpg" },
+        { "id": "aneurysm-clipping", "title": "Aneurysm Clipping", "short": "Surgical treatment for cerebral aneurysms.", "description": "A precise microsurgical procedure to secure a weakened blood vessel in the brain, preventing rupture and reducing the risk of hemorrhagic stroke.", "image": "surgery-2.jpg" },
+        { "id": "skull-base-surgery", "title": "Skull Base Surgery", "short": "Complex procedures at the base of the skull.", "description": "Advanced surgical techniques to access and treat tumors and lesions located at the base of the skull, an area requiring exceptional surgical precision.", "image": "surgery-3.jpg" }
+      ],
+      "spine": [
+        { "id": "spinal-fusion", "title": "Spinal Fusion", "short": "Stabilizing the spine for chronic instability.", "description": "A procedure that permanently joins two or more vertebrae, eliminating painful motion and restoring stability for patients with spinal instability or severe degeneration.", "image": "surgery-4.jpg" },
+        { "id": "disc-replacement", "title": "Disc Replacement", "short": "Motion-preserving treatment for disc disease.", "description": "An artificial disc is used to replace a damaged spinal disc, relieving pain while preserving natural spinal movement — an alternative to fusion in select patients.", "image": "surgery-5.jpg" },
+        { "id": "minimally-invasive-decompression", "title": "Minimally Invasive Decompression", "short": "Relieving nerve pressure with small incisions.", "description": "A minimally invasive technique to relieve pressure on compressed spinal nerves, offering faster recovery and less postoperative pain than traditional open surgery.", "image": "surgery-6.jpg" }
+      ],
+      "nerve": [
+        { "id": "carpal-tunnel-release", "title": "Carpal Tunnel Release", "short": "Relief for median nerve compression.", "description": "A quick, effective procedure to relieve pressure on the median nerve at the wrist, restoring hand function and eliminating numbness and pain.", "image": "surgery-7.jpg" },
+        { "id": "nerve-repair", "title": "Peripheral Nerve Repair", "short": "Restoring function after nerve injury.", "description": "Microsurgical repair of injured peripheral nerves to restore sensation and movement, using advanced microsurgical technique for the best possible functional outcome.", "image": "surgery-8.jpg" },
+        { "id": "nerve-tumor-removal", "title": "Nerve Tumor Removal", "short": "Precise removal of nerve sheath tumors.", "description": "Careful microsurgical removal of tumors growing on or around peripheral nerves, designed to preserve nerve function throughout the procedure.", "image": "surgery-9.jpg" }
+      ],
+      "minimally-invasive": [
+        { "id": "endoscopic-spine-surgery", "title": "Endoscopic Spine Surgery", "short": "Ultra-minimally invasive spinal access.", "description": "Using a small endoscope and specialized instruments, spinal procedures are performed through incisions of less than a centimeter, minimizing tissue damage and recovery time.", "image": "surgery-10.jpg" },
+        { "id": "keyhole-craniotomy", "title": "Keyhole Craniotomy", "short": "Smaller openings, faster recovery.", "description": "A refined cranial approach using a smaller opening than traditional craniotomy, reducing surgical trauma while maintaining full access for safe tumor or lesion removal.", "image": "surgery-11.jpg" },
+        { "id": "percutaneous-procedures", "title": "Percutaneous Procedures", "short": "Needle-based treatments, no open incision.", "description": "Select spinal and nerve conditions can be treated through the skin using image-guided needles and instruments, avoiding open surgery altogether for eligible patients.", "image": "surgery-12.jpg" }
+      ]
+    }
+  },
+  "videosPage": {
+    "hero": {
+      "eyebrow": "Patient Education",
+      "headingPrefix": "Understand Your Condition,",
+      "headingHighlight": "One Video at a Time",
+      "paragraph": "Dr. Hussein Zakaria shares clear, accessible explanations of common neurosurgical conditions, procedures, and what to expect as a patient."
+    },
+    "intro": {
+      "eyebrow": "Watch & Learn",
+      "heading": "Featured Educational Videos",
+      "description": "A growing library of short videos covering brain, spine, and nerve conditions — designed to help patients feel informed and confident before their visit."
+    }
+  },
+  "patientStoriesPage": {
+    "hero": {
+      "eyebrow": "Real Patients, Real Outcomes",
+      "headingPrefix": "Stories of Recovery",
+      "headingHighlight": "and Renewed Hope",
+      "paragraph": "Every patient's journey is different. Here are a few stories, shared with permission, about the path from diagnosis to recovery."
+    },
+    "intro": {
+      "eyebrow": "Patient Stories",
+      "heading": "Journeys Through Care and Recovery"
+    },
+    "reviewsIntro": {
+      "eyebrow": "Patient Reviews",
+      "heading": "What Our Patients Say"
+    },
+    "readStory": "Read Full Story",
+    "labels": {
+      "condition": "The Condition",
+      "journey": "The Treatment Journey",
+      "outcome": "The Outcome"
+    },
+    "stories": [
+      {
+        "id": "story-1",
+        "name": "Ahmed Adel",
+        "title": "Reclaiming Life After a Brain Tumor Diagnosis",
+        "image": "patient-story-1.jpg",
+        "condition": "Ahmed came in with persistent headaches and blurred vision. Imaging revealed a benign but sizable brain tumor pressing on the optic pathway.",
+        "journey": "Dr. Hussein performed a microsurgical resection using intraoperative navigation to remove the tumor while protecting Ahmed's vision. The surgery took under four hours with no complications.",
+        "outcome": "Ahmed's headaches resolved completely within weeks, and his vision remained fully intact. He returned to work within a month."
+      },
+      {
+        "id": "story-2",
+        "name": "Sara Fouad",
+        "title": "A New Beginning After Spinal Fusion",
+        "image": "patient-story-2.jpg",
+        "condition": "Sara had lived with debilitating lower back pain for over three years due to severe disc degeneration and spinal instability.",
+        "journey": "After conservative treatments failed to provide relief, Dr. Hussein recommended a minimally invasive spinal fusion tailored to her specific anatomy.",
+        "outcome": "Sara was walking within a day of surgery and returned to her normal activities, including light exercise, within three months — completely pain-free."
+      },
+      {
+        "id": "story-3",
+        "name": "Mohamed Hussein",
+        "title": "Facing an Aneurysm with Confidence",
+        "image": "patient-story-3.jpg",
+        "condition": "An unruptured brain aneurysm was discovered incidentally during an unrelated scan, posing a serious future risk.",
+        "journey": "Dr. Hussein walked Mohamed through every option before performing a precise aneurysm clipping procedure to permanently secure the vessel.",
+        "outcome": "The procedure was successful with no neurological deficits. Mohamed describes the calm, thorough communication as what put him at ease."
+      },
+      {
+        "id": "story-4",
+        "name": "Mahmoud Sherif",
+        "title": "Restoring Function After a Nerve Injury",
+        "image": "patient-story-4.jpg",
+        "condition": "A workplace accident left Mahmoud with a severe injury to the nerves in his right arm, causing weakness and loss of sensation.",
+        "journey": "Dr. Hussein performed microsurgical nerve repair, carefully reconnecting the damaged nerve fibers under high magnification.",
+        "outcome": "Over several months of recovery, Mahmoud regained both strength and sensation in his arm, returning to his full daily routine."
+      },
+      {
+        "id": "story-5",
+        "name": "Lina Hassan",
+        "title": "Managing Hydrocephalus with Expert Care",
+        "image": "patient-story-5.jpg",
+        "condition": "Lina experienced sudden headaches, nausea, and balance issues, later diagnosed as hydrocephalus — fluid buildup in the brain.",
+        "journey": "Dr. Hussein placed a shunt system to safely drain the excess fluid, closely monitoring Lina throughout her recovery.",
+        "outcome": "Lina's symptoms resolved fully, and regular follow-ups confirm the shunt continues to function well with no complications."
+      },
+      {
+        "id": "story-6",
+        "name": "Omar Khaled",
+        "title": "Back on His Feet After Disc Herniation",
+        "image": "patient-story-6.jpg",
+        "condition": "Omar suffered a severe disc herniation that caused sharp, radiating leg pain and made walking difficult.",
+        "journey": "Dr. Hussein performed a minimally invasive decompression procedure to relieve pressure on the affected nerve root.",
+        "outcome": "Omar was discharged the same day and reported significant pain relief within 48 hours, returning to running within two months."
+      }
+    ]
+  },
+  "articlesPage": {
+    "hero": {
+      "eyebrow": "Insights & Education",
+      "headingPrefix": "Articles on Brain,",
+      "headingHighlight": "Spine & Nerve Health",
+      "paragraph": "In-depth, easy-to-understand articles written to help patients and families better understand neurosurgical conditions and treatment options."
+    },
+    "readMore": "Read More",
+    "featured": {
+      "id": "featured-article",
+      "category": "Brain Health",
+      "date": "2026-06-12",
+      "title": "5 Warning Signs You Should Never Ignore Before Seeing a Neurosurgeon",
+      "excerpt": "Persistent headaches, sudden numbness, and balance issues can sometimes signal something more serious. Here's what to watch for and when to seek expert evaluation.",
+      "image": "article-1.jpg",
+      "content": "Persistent headaches, sudden numbness, and balance issues can sometimes signal something more serious than everyday fatigue or stress. While most headaches and aches are harmless, certain warning signs deserve prompt medical attention.\n\n1. Sudden, severe headaches unlike any before — often described as a \"thunderclap\" headache, this can indicate bleeding in the brain and requires immediate evaluation.\n\n2. Progressive weakness or numbness on one side of the body — this may point to pressure on the brain or spinal cord from a tumor, herniated disc, or other structural cause.\n\n3. Unexplained balance or coordination problems — difficulty walking a straight line or frequent falls can signal issues affecting the brain or spinal cord.\n\n4. Vision changes accompanied by headache — blurred or double vision alongside headaches can indicate increased pressure inside the skull.\n\n5. Loss of bladder or bowel control with back pain — this combination can indicate serious spinal nerve compression and should be treated as an emergency.\n\nIf you experience any of these symptoms, don't wait — schedule a consultation for a thorough neurological evaluation. Early diagnosis makes treatment safer and outcomes better."
+    },
+    "items": [
+      {
+        "id": "article-2",
+        "category": "Spine Health",
+        "date": "2026-05-28",
+        "title": "Minimally Invasive vs. Traditional Spine Surgery: What's the Difference?",
+        "excerpt": "Not all spine surgeries are created equal. Here's how minimally invasive techniques compare to traditional open surgery.",
+        "image": "article-2.jpg",
+        "content": "When facing spine surgery, patients often ask about the difference between minimally invasive and traditional open techniques. Both aim to relieve pain and restore function, but they differ significantly in approach and recovery.\n\nTraditional open spine surgery involves a larger incision to give the surgeon direct visual access to the spine. It remains the right choice for certain complex cases, particularly extensive deformity correction or multi-level disease.\n\nMinimally invasive spine surgery uses specialized instruments and, often, an endoscope through incisions of less than a centimeter. Muscles are gently separated rather than cut, which typically means less postoperative pain, shorter hospital stays, and a faster return to daily activities.\n\nThe right approach depends on your specific condition, anatomy, and overall health. During your consultation, Dr. Hussein Zakaria will review your imaging and discuss which technique offers the safest, most effective path to recovery for your case."
+      },
+      {
+        "id": "article-3",
+        "category": "Nerve Health",
+        "date": "2026-05-10",
+        "title": "Living with Peripheral Neuropathy: Causes, Symptoms & Treatment",
+        "excerpt": "Numbness, tingling, and burning pain in the hands or feet can have many causes. Here's what you need to know.",
+        "image": "article-3.jpg",
+        "content": "Peripheral neuropathy refers to damage or dysfunction of the nerves outside the brain and spinal cord, most commonly affecting the hands and feet. Symptoms often include numbness, tingling, burning pain, or muscle weakness.\n\nCommon causes include diabetes, nerve compression (such as carpal tunnel syndrome), traumatic injury, and in some cases, tumors pressing on a nerve. Identifying the underlying cause is the first step toward effective treatment.\n\nTreatment ranges from conservative management — physical therapy, medication, and lifestyle changes — to surgical intervention when a nerve is compressed or structurally damaged. Nerve conduction studies and a thorough clinical examination help determine the best path forward.\n\nIf you're experiencing persistent numbness, tingling, or weakness, don't dismiss it as a minor issue. Early evaluation can prevent permanent nerve damage and significantly improve treatment outcomes."
+      },
+      {
+        "id": "article-4",
+        "category": "Patient Guide",
+        "date": "2026-04-22",
+        "title": "What to Expect Before, During, and After Brain Surgery",
+        "excerpt": "Facing brain surgery can be overwhelming. Here's a clear, step-by-step guide to the entire process.",
+        "image": "article-4.jpg",
+        "content": "Facing brain surgery can be overwhelming, but understanding the process can ease much of the anxiety involved. Here is what patients can generally expect.\n\nBefore surgery: You'll undergo detailed imaging (MRI/CT) and a full medical evaluation. Dr. Hussein will explain the procedure, risks, and expected outcomes in detail, and answer every question you have.\n\nDuring surgery: Most cranial procedures use advanced navigation technology to guide precise, minimally traumatic access to the affected area. Surgery duration varies depending on complexity, typically ranging from two to six hours.\n\nAfter surgery: You'll be monitored closely in a recovery unit before transferring to a regular room. Most patients stay in hospital for three to seven days, depending on the procedure. A personalized rehabilitation plan supports your return to daily life.\n\nRecovery timelines vary, but many patients resume light activities within a few weeks and return fully to work within one to three months. Your care team will guide you every step of the way."
+      },
+      {
+        "id": "article-5",
+        "category": "Spine Health",
+        "date": "2026-03-30",
+        "title": "Understanding Disc Herniation: Symptoms, Diagnosis & Treatment Options",
+        "excerpt": "A herniated disc is one of the most common causes of back and leg pain. Here's how it's diagnosed and treated.",
+        "image": "article-5.jpg",
+        "content": "A herniated disc occurs when the soft inner material of a spinal disc pushes through a tear in its tougher outer layer, often pressing on a nearby nerve. It's one of the most common causes of back and leg pain.\n\nSymptoms typically include localized back pain, along with sharp, radiating pain, numbness, or weakness that travels down an arm or leg depending on the disc's location. Symptoms often worsen with sitting, bending, or coughing.\n\nDiagnosis begins with a clinical examination and is confirmed with MRI imaging, which shows the exact location and severity of the herniation.\n\nMany cases improve with conservative treatment — rest, physical therapy, and anti-inflammatory medication. When symptoms persist or neurological function is affected, minimally invasive surgical options can relieve pressure on the nerve with a fast recovery time."
+      },
+      {
+        "id": "article-6",
+        "category": "Brain Health",
+        "date": "2026-03-05",
+        "title": "Brain Tumors: Debunking Common Myths and Misconceptions",
+        "excerpt": "A brain tumor diagnosis is frightening, but many common beliefs about it aren't accurate. Here's the truth.",
+        "image": "article-6.jpg",
+        "content": "A brain tumor diagnosis is understandably frightening, but many common beliefs surrounding it are not accurate. Separating fact from fear is an important part of the journey.\n\nMyth: All brain tumors are cancerous. Fact: Many brain tumors are benign (non-cancerous) and, while they still require treatment due to their location, are generally associated with better outcomes.\n\nMyth: Brain surgery always causes major complications. Fact: With modern navigation technology and microsurgical technique, the risk profile of brain surgery has improved dramatically over the past two decades.\n\nMyth: Recovery from brain tumor surgery takes years. Fact: While recovery is individualized, many patients return to normal daily activities within weeks to a few months, depending on tumor location and size.\n\nMyth: There's nothing you can do to prepare. Fact: A thorough consultation, complete imaging review, and open conversation with your neurosurgeon can significantly ease the process and improve confidence going into surgery."
+      }
+    ]
+  },
+  "contactPage": {
+    "hero": {
+      "eyebrow": "Get in Touch",
+      "headingPrefix": "We're Here to",
+      "headingHighlight": "Help",
+      "paragraph": "Have a question or ready to book a consultation? Reach out through any of the channels below — our team typically responds within one business day."
+    },
+    "infoHeading": "Contact Information",
+    "form": {
+      "eyebrow": "Send a Message",
+      "heading": "Tell Us How We Can Help",
+      "nameLabel": "Full Name",
+      "namePlaceholder": "Your full name",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "you@example.com",
+      "phoneLabel": "Phone Number",
+      "phonePlaceholder": "+20 1XX XXX XXXX",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Tell us a bit about your condition or question...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Thank you! Your message has been received — our team will be in touch shortly.",
+      "orLabel": "Or reach us directly"
+    },
+    "mapLabel": "Clinic Location"
+  },
+  "common": {
+    "minPlayed": "min",
+    "langSwitch": "العربية"
+  }
+}

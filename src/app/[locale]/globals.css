@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+:root {
+  /* Background — light powder-blue, sampled directly from Hussein's own approved mockup +
+     the exact literal gradient stops from its own index.html wrapper CSS (#c8e4fb → #dbeefe). */
+  --color-bg-50: #f4f9ff;
+  --color-bg-100: #dce9fa;
+  --color-bg-200: #cbdcf3;
+  --color-bg-300: #b8cff0;
+
+  /* Brand blue — primary accent, sampled directly from Hussein's own hero button gradient
+     (#5990f1 → #0d52cc). */
+  --color-brand-50: #eef5ff;
+  --color-brand-100: #dceaff;
+  --color-brand-200: #b7d3fe;
+  --color-brand-300: #8ab5fb;
+  --color-brand-400: #5b93f5;
+  --color-brand-500: #316be9;
+  --color-brand-600: #1c56d8;
+  --color-brand-700: #0d4fc7;
+  --color-brand-800: #0a3e9e;
+  --color-brand-900: #0a3280;
+
+  /* Navy — reserved for the dark decorative/placeholder-image islands only (video thumbnails,
+     specialty cards, doctor-portrait art) — not used as a page or card surface anymore. */
+  --color-navy-950: #020a18;
+  --color-navy-900: #04122c;
+  --color-navy-800: #08193a;
+  --color-navy-700: #0c2249;
+
+  /* Ink — text on the light surface, sampled/visually matched from Hussein's own headings */
+  --color-ink-900: #142c52;
+  --color-ink-700: #24406e;
+  --color-ink-600: #55719b;
+  --color-ink-400: #7b93b8;
+  --color-ink-300: #a3b8d6;
+
+  /* Gold — ratings accent, sampled from review star icons (unchanged by theme) */
+  --color-gold-400: #ffc35c;
+  --color-gold-500: #f2a93b;
+  --color-gold-600: #d6871c;
+
+  /* Structural — a visibly blue-tinted glass edge (not the near-invisible line this was before) */
+  --color-line: rgb(49 107 233 / 0.3);
+  --color-line-strong: rgb(26 100 220 / 0.45);
+  --color-glow: rgb(56 138 255 / 0.16);
+
+  /* Glass surface fill — genuinely blue-tinted translucent glass, not a whitened/frosted panel */
+  --color-glass: rgb(219 233 253 / 0.62);
+  --color-glass-strong: rgb(206 225 251 / 0.75);
+
+  --radius-sm: 0.75rem;
+  --radius-md: 1.125rem;
+  --radius-lg: 1.375rem;
+  --radius-card: 1.5rem;
+  --radius-xl: 1.875rem;
+  --radius-pill: 999px;
+
+  /* Reference cards separate from the page almost entirely via a soft diffused shadow and a
+     bright inset highlight, not a visible border line — sampled from a zoomed card-corner crop. */
+  --shadow-glass-sm: 0 14px 30px -14px rgb(31 89 208 / 0.2), inset 0 1px 0 0 rgb(255 255 255 / 0.85);
+  --shadow-glass: 0 26px 60px -20px rgb(31 89 208 / 0.22), inset 0 1px 0 0 rgb(255 255 255 / 0.9);
+  --shadow-glass-lg: 0 40px 90px -26px rgb(31 89 208 / 0.26), inset 0 1px 0 0 rgb(255 255 255 / 0.95);
+  /* Buttons carry a genuine soft glow halo bleeding onto the page, not just a contact shadow —
+     sampled from a zoomed button crop showing the blue bloom around the pill. */
+  --shadow-btn: 0 8px 18px -6px rgb(49 107 233 / 0.45), 0 0 34px 2px rgb(49 107 233 / 0.28);
+  --shadow-glow-brand: 0 0 0 1px rgb(56 138 255 / 0.12), 0 0 46px 4px rgb(56 138 255 / 0.3);
+  --shadow-navy: 0 26px 60px -22px rgb(2 10 24 / 0.5);
+}
+
+@theme inline {
+  --color-bg-50: var(--color-bg-50);
+  --color-bg-100: var(--color-bg-100);
+  --color-bg-200: var(--color-bg-200);
+  --color-bg-300: var(--color-bg-300);
+
+  --color-brand-50: var(--color-brand-50);
+  --color-brand-100: var(--color-brand-100);
+  --color-brand-200: var(--color-brand-200);
+  --color-brand-300: var(--color-brand-300);
+  --color-brand-400: var(--color-brand-400);
+  --color-brand-500: var(--color-brand-500);
+  --color-brand-600: var(--color-brand-600);
+  --color-brand-700: var(--color-brand-700);
+  --color-brand-800: var(--color-brand-800);
+  --color-brand-900: var(--color-brand-900);
+
+  --color-navy-950: var(--color-navy-950);
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-800: var(--color-navy-800);
+  --color-navy-700: var(--color-navy-700);
+
+  --color-ink-900: var(--color-ink-900);
+  --color-ink-700: var(--color-ink-700);
+  --color-ink-600: var(--color-ink-600);
+  --color-ink-400: var(--color-ink-400);
+  --color-ink-300: var(--color-ink-300);
+
+  --color-gold-400: var(--color-gold-400);
+  --color-gold-500: var(--color-gold-500);
+  --color-gold-600: var(--color-gold-600);
+
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+  --color-glow: var(--color-glow);
+  --color-glass: var(--color-glass);
+  --color-glass-strong: var(--color-glass-strong);
+  --color-base: var(--color-bg-100);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-card: var(--radius-card);
+  --radius-xl: var(--radius-xl);
+  --radius-pill: var(--radius-pill);
+
+  --shadow-glass-sm: var(--shadow-glass-sm);
+  --shadow-glass: var(--shadow-glass);
+  --shadow-glass-lg: var(--shadow-glass-lg);
+  --shadow-btn: var(--shadow-btn);
+  --shadow-glow-brand: var(--shadow-glow-brand);
+  --shadow-navy: var(--shadow-navy);
+
+  --font-sans: var(--font-jakarta), var(--font-cairo), ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: var(--font-cairo), var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-signature: var(--font-caveat), cursive;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 4s ease-in-out infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+  --animate-marquee: marquee 34s linear infinite;
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-draw-line: draw-line 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-modal-in: modal-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-backdrop-in: backdrop-in 0.25s ease-out both;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes draw-line {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+[dir="rtl"] {
+  --font-sans: var(--font-cairo), var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+@utility flip-rtl {
+  transform: scaleX(-1);
+}
+
+body {
+  font-family: var(--font-sans);
+  /* Flat fill sampled as the dominant color across the whole reference page (confirmed via
+     per-section histogram: the page is a near-uniform light blue, not a dramatic top-to-bottom
+     gradient — only the hero has a distinct bright highlight, handled locally in Hero). A CSS
+     gradient painted across the full ~5000px scrollable body can band/tile in some engines, so
+     a flat color is both more faithful to the reference and render-safe. */
+  background-color: #d3e6fa;
+  color: var(--color-ink-900);
+}
+
+::selection {
+  background: var(--color-brand-500);
+  color: white;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
