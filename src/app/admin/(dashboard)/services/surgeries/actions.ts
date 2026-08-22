@@ -24,7 +24,11 @@ export async function updateDetailedHeading(_prevState: ActionState, formData: F
   const supabase = await createClient();
   const { error } = await supabase
     .from("services_page_content")
-    .update({ detailed_heading: bilingualFromForm(formData, "detailed_heading") })
+    .update({
+      detailed_heading: bilingualFromForm(formData, "detailed_heading"),
+      symptoms_label: bilingualFromForm(formData, "symptoms_label"),
+      treatment_label: bilingualFromForm(formData, "treatment_label"),
+    })
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };

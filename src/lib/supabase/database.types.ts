@@ -204,6 +204,8 @@ export interface Database {
         hero_heading_highlight: Bilingual;
         hero_paragraph: Bilingual;
         hero_cta_label: Bilingual;
+        biography_eyebrow: Bilingual;
+        biography_heading: Bilingual;
         biography: Bilingual;
         doctor_image_media_id: string | null;
         education_heading: Bilingual;
@@ -231,6 +233,8 @@ export interface Database {
         intro_paragraph: Bilingual;
         detailed_heading: Bilingual;
         view_procedures_label: Bilingual;
+        symptoms_label: Bilingual;
+        treatment_label: Bilingual;
         cta_title: Bilingual;
         cta_subtitle: Bilingual;
         updated_at: string;

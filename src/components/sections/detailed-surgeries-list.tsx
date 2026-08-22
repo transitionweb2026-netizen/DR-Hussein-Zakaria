@@ -23,7 +23,15 @@ type Surgery = {
 
 type CategoryGroup = { id: string; slug: string; title: string; surgeries: Surgery[] };
 
-export function DetailedSurgeriesList({ groups }: { groups: CategoryGroup[] }) {
+export function DetailedSurgeriesList({
+  groups,
+  symptomsLabel,
+  treatmentLabel,
+}: {
+  groups: CategoryGroup[];
+  symptomsLabel: string;
+  treatmentLabel: string;
+}) {
   const [active, setActive] = useState<Surgery | null>(null);
 
   return (
@@ -78,14 +86,14 @@ export function DetailedSurgeriesList({ groups }: { groups: CategoryGroup[] }) {
 
               {active.symptoms && (
                 <div className="mt-5">
-                  <p className="text-xs font-bold uppercase tracking-wide text-ink-400">Symptoms</p>
+                  <p className="text-xs font-bold uppercase tracking-wide text-ink-400">{symptomsLabel}</p>
                   <p className="mt-1.5 text-sm leading-relaxed text-ink-600">{active.symptoms}</p>
                 </div>
               )}
 
               {active.treatmentInfo && (
                 <div className="mt-5">
-                  <p className="text-xs font-bold uppercase tracking-wide text-ink-400">Treatment</p>
+                  <p className="text-xs font-bold uppercase tracking-wide text-ink-400">{treatmentLabel}</p>
                   <p className="mt-1.5 text-sm leading-relaxed text-ink-600">{active.treatmentInfo}</p>
                 </div>
               )}

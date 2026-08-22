@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getLocale } from "next-intl/server";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
 import { GlassCard } from "@/components/ui/glass-card";
 import { GlowOrb } from "@/components/decorative/glow-orb";
@@ -49,6 +50,18 @@ export async function AboutBiography() {
           </Reveal>
 
           <Reveal delay={120}>
+            {(pickLocale(content?.biography_eyebrow, locale) || pickLocale(content?.biography_heading, locale)) && (
+              <div className="mb-6">
+                {pickLocale(content?.biography_eyebrow, locale) && (
+                  <Eyebrow className="mb-4">{pickLocale(content?.biography_eyebrow, locale)}</Eyebrow>
+                )}
+                {pickLocale(content?.biography_heading, locale) && (
+                  <h2 className="text-balance text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">
+                    {pickLocale(content?.biography_heading, locale)}
+                  </h2>
+                )}
+              </div>
+            )}
             <div className="space-y-4">
               {pickLocale(content?.biography, locale)
                 .split("\n\n")

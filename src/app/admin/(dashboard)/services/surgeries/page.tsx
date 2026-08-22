@@ -38,6 +38,10 @@ export default async function ServicesSurgeriesPage() {
 
       <AdminForm action={updateDetailedHeading} saveLabel="Save heading">
         <TranslatableInput name="detailed_heading" label="Section heading" defaultValue={content?.detailed_heading} />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <TranslatableInput name="symptoms_label" label='"Symptoms" sub-heading (shown in every surgery popup)' defaultValue={content?.symptoms_label} />
+          <TranslatableInput name="treatment_label" label='"Treatment" sub-heading (shown in every surgery popup)' defaultValue={content?.treatment_label} />
+        </div>
       </AdminForm>
 
       {categories.map((category) => {

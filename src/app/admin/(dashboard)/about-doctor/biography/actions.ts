@@ -12,7 +12,11 @@ export async function updateBiography(_prevState: ActionState, formData: FormDat
   const supabase = await createClient();
   const { error } = await supabase
     .from("about_page_content")
-    .update({ biography: bilingualFromForm(formData, "biography") })
+    .update({
+      biography_eyebrow: bilingualFromForm(formData, "biography_eyebrow"),
+      biography_heading: bilingualFromForm(formData, "biography_heading"),
+      biography: bilingualFromForm(formData, "biography"),
+    })
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };

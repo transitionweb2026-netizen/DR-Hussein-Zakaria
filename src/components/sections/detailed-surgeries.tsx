@@ -45,7 +45,11 @@ export async function DetailedSurgeries() {
           </Eyebrow>
         </Reveal>
 
-        <DetailedSurgeriesList groups={groups} />
+        <DetailedSurgeriesList
+          groups={groups}
+          symptomsLabel={pickLocale(content?.symptoms_label, locale)}
+          treatmentLabel={pickLocale(content?.treatment_label, locale)}
+        />
       </div>
     </section>
   );
