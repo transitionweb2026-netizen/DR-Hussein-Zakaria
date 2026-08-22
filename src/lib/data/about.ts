@@ -29,6 +29,20 @@ export async function getAboutSpecialtiesSection() {
   return data;
 }
 
+export async function getAboutVideoIntro() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("about_video_intro").select("*").eq("id", ID).maybeSingle();
+  if (!data) return null;
+  const urls = await resolveMediaUrls(supabase, [data.thumbnail_media_id]);
+  return { ...data, thumbnail_url: data.thumbnail_media_id ? urls[data.thumbnail_media_id] ?? null : null };
+}
+
+export async function getAboutStatsSection() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("about_stats_section").select("*").eq("id", ID).maybeSingle();
+  return data;
+}
+
 export async function getAllAboutEducation() {
   const supabase = await createClient();
   const { data } = await supabase.from("about_education").select("*").order("sort_order", { ascending: true });

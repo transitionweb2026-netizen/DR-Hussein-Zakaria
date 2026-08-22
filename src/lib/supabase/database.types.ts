@@ -281,9 +281,23 @@ export interface Database {
         { id: string; degree: Bilingual; institution: Bilingual; year: string } & Repeatable
       >;
 
-      about_timeline_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; updated_at: string }>;
-      about_certificates_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; updated_at: string }>;
-      about_specialties_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; updated_at: string }>;
+      about_video_intro: Derive<{
+        id: string;
+        eyebrow: Bilingual;
+        heading: Bilingual;
+        description: Bilingual;
+        duration: string;
+        thumbnail_media_id: string | null;
+        video_url: string | null;
+        video_provider: "youtube" | "vimeo" | "mp4" | null;
+        updated_at: string;
+      }>;
+
+      about_stats_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; description: Bilingual; updated_at: string }>;
+
+      about_timeline_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; description: Bilingual; updated_at: string }>;
+      about_certificates_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; description: Bilingual; updated_at: string }>;
+      about_specialties_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; description: Bilingual; view_all_label: Bilingual; updated_at: string }>;
 
       services_page_content: Derive<{
         id: string;

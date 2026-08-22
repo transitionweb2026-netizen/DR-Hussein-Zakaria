@@ -11,8 +11,8 @@ export default async function HomeDoctorMessagePage() {
   return (
     <div className="max-w-2xl space-y-8">
       <PageHeader
-        title="Home — Doctor Message"
-        description="Not currently displayed on the live site -- the Home page was rebuilt to a new 11-section structure that doesn't include this block. Content and image are preserved here in case you want to bring it back on a future page."
+        title="About Doctor — Message From Dr. Hussein Zakaria"
+        description="The personal quote/message section, near the bottom of the /about page."
       />
 
       <MediaUploadField label="Portrait photo" currentUrl={message?.portrait_image_url ?? null} action={updateDoctorMessagePortrait} />

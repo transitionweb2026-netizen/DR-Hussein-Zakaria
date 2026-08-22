@@ -1,7 +1,9 @@
 import { getLocale } from "next-intl/server";
+import { ArrowRight } from "lucide-react";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { GlassCard } from "@/components/ui/glass-card";
 import { IconTile } from "@/components/ui/icon-tile";
+import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { GlowOrb } from "@/components/decorative/glow-orb";
 import { getIcon } from "@/lib/icon-map";
@@ -26,6 +28,9 @@ export async function AboutSpecialties() {
           <h2 className="text-balance text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">
             {pickLocale(section?.heading, locale)}
           </h2>
+          {pickLocale(section?.description, locale) && (
+            <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-600">{pickLocale(section?.description, locale)}</p>
+          )}
         </Reveal>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -39,6 +44,12 @@ export async function AboutSpecialties() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={360} className="mt-12 flex justify-center">
+          <Button href="/services" size="lg" icon={<ArrowRight className="h-4.5 w-4.5" />}>
+            {pickLocale(section?.view_all_label, locale)}
+          </Button>
+        </Reveal>
       </div>
     </section>
   );

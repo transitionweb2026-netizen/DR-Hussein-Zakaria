@@ -11,7 +11,11 @@ export async function updateAboutTimelineSection(_prevState: ActionState, formDa
   const supabase = await createClient();
   const { error } = await supabase
     .from("about_timeline_section")
-    .update({ eyebrow: bilingualFromForm(formData, "eyebrow"), heading: bilingualFromForm(formData, "heading") })
+    .update({
+      eyebrow: bilingualFromForm(formData, "eyebrow"),
+      heading: bilingualFromForm(formData, "heading"),
+      description: bilingualFromForm(formData, "description"),
+    })
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };

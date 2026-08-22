@@ -11,7 +11,11 @@ export async function updateAboutCertificatesSection(_prevState: ActionState, fo
   const supabase = await createClient();
   const { error } = await supabase
     .from("about_certificates_section")
-    .update({ eyebrow: bilingualFromForm(formData, "eyebrow"), heading: bilingualFromForm(formData, "heading") })
+    .update({
+      eyebrow: bilingualFromForm(formData, "eyebrow"),
+      heading: bilingualFromForm(formData, "heading"),
+      description: bilingualFromForm(formData, "description"),
+    })
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };

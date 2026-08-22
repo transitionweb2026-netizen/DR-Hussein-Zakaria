@@ -5,10 +5,12 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PageHero } from "@/components/sections/page-hero";
 import { AboutBiography } from "@/components/sections/about-biography";
-import { AboutEducation } from "@/components/sections/about-education";
+import { AboutVideoIntroSection } from "@/components/sections/about-video-intro-section";
+import { AboutStats } from "@/components/sections/about-stats";
 import { AboutCareer } from "@/components/sections/about-career";
 import { AboutCertificates } from "@/components/sections/about-certificates";
 import { AboutSpecialties } from "@/components/sections/about-specialties";
+import { DoctorMessage } from "@/components/sections/doctor-message";
 import { FinalCta } from "@/components/sections/final-cta";
 import { getAboutPageContent } from "@/lib/data/about";
 import { getPageSeo } from "@/lib/data/global-settings";
@@ -45,10 +47,12 @@ export default async function AboutPage() {
           compact
         />
         <AboutBiography />
-        <AboutEducation />
+        <AboutVideoIntroSection />
+        <AboutStats />
         <AboutCareer />
         <AboutCertificates />
         <AboutSpecialties />
+        <DoctorMessage />
         <FinalCta sectionId="contact" title={pickLocale(content?.cta_title, locale)} subtitle={pickLocale(content?.cta_subtitle, locale)} />
       </main>
       <Footer />

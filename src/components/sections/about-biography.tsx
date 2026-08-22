@@ -19,7 +19,7 @@ export async function AboutBiography() {
       <GlowOrb className="top-10 -start-24 h-80 w-80" />
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-14">
-          <Reveal className="order-first">
+          <Reveal delay={120} className="order-first lg:order-last">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-sm">
               <div
                 aria-hidden
@@ -49,7 +49,7 @@ export async function AboutBiography() {
             </div>
           </Reveal>
 
-          <Reveal delay={120}>
+          <Reveal>
             {(pickLocale(content?.biography_eyebrow, locale) || pickLocale(content?.biography_heading, locale)) && (
               <div className="mb-6">
                 {pickLocale(content?.biography_eyebrow, locale) && (

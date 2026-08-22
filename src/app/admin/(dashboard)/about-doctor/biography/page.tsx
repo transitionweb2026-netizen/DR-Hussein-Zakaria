@@ -10,7 +10,7 @@ export default async function AboutBiographyPage() {
 
   return (
     <div className="max-w-2xl space-y-8">
-      <PageHeader title="About Doctor — Biography" description="The doctor's full biography and portrait shown on the /about page." />
+      <PageHeader title="About Doctor Page — Introduction" description="The doctor introduction section (second on the /about page) -- heading, text, and photo." />
 
       <MediaUploadField label="Doctor photo" currentUrl={content?.doctor_image_url ?? null} action={updateDoctorImage} size={140} />
 

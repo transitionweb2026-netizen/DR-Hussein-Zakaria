@@ -31,6 +31,9 @@ export async function AboutCareer() {
           <h2 className="text-balance text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">
             {pickLocale(section?.heading, locale)}
           </h2>
+          {pickLocale(section?.description, locale) && (
+            <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-600">{pickLocale(section?.description, locale)}</p>
+          )}
         </div>
 
         <CareerTimelineList items={resolvedItems} />
