@@ -170,13 +170,13 @@ export interface Database {
         updated_at: string;
       }>;
 
-      home_stats_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; updated_at: string }>;
+      home_stats_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; description: Bilingual; updated_at: string }>;
       home_stats: Derive<
         { id: string; label: Bilingual; value: number; suffix: string; icon: string } & Repeatable
       >;
 
       home_timeline_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; updated_at: string }>;
-      home_certificates_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; updated_at: string }>;
+      home_certificates_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; description: Bilingual; updated_at: string }>;
       home_specialties_section: Derive<{
         id: string;
         eyebrow: Bilingual;
@@ -184,6 +184,69 @@ export interface Database {
         view_all_label: Bilingual;
         updated_at: string;
       }>;
+
+      home_technologies_section: Derive<{
+        id: string;
+        eyebrow: Bilingual;
+        heading: Bilingual;
+        description: Bilingual;
+        updated_at: string;
+      }>;
+
+      technologies: Derive<
+        { id: string; name: Bilingual; description: Bilingual; icon: string; image_media_id: string | null } & Repeatable
+      >;
+
+      home_why_choose_section: Derive<{
+        id: string;
+        eyebrow: Bilingual;
+        heading_prefix: Bilingual;
+        heading_highlight: Bilingual;
+        description: Bilingual;
+        image_media_id: string | null;
+        updated_at: string;
+      }>;
+
+      why_choose_reasons: Derive<
+        { id: string; title: Bilingual; description: Bilingual; icon: string } & Repeatable
+      >;
+
+      home_reviews_section: Derive<{
+        id: string;
+        eyebrow: Bilingual;
+        heading: Bilingual;
+        description: Bilingual;
+        view_all_label: Bilingual;
+        updated_at: string;
+      }>;
+
+      home_videos_section: Derive<{
+        id: string;
+        eyebrow: Bilingual;
+        heading: Bilingual;
+        description: Bilingual;
+        view_all_label: Bilingual;
+        updated_at: string;
+      }>;
+
+      home_articles_section: Derive<{
+        id: string;
+        eyebrow: Bilingual;
+        heading: Bilingual;
+        description: Bilingual;
+        view_all_label: Bilingual;
+        updated_at: string;
+      }>;
+
+      home_faq_section: Derive<{
+        id: string;
+        eyebrow: Bilingual;
+        heading: Bilingual;
+        description: Bilingual;
+        updated_at: string;
+      }>;
+
+      faqs: Derive<{ id: string; question: Bilingual; answer: Bilingual } & Repeatable>;
 
       home_doctor_message: Derive<{
         id: string;

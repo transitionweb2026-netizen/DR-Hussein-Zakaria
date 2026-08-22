@@ -5,7 +5,7 @@ import { GlowOrb } from "@/components/decorative/glow-orb";
 import { getHomeCertificatesSection } from "@/lib/data/home";
 import { getPublishedCertificates } from "@/lib/data/shared-content";
 import { pickLocale } from "@/lib/i18n-content";
-import { CertificatesGrid } from "./certificates-grid";
+import { CertificatesCarousel } from "./certificates-carousel";
 
 export async function Certificates() {
   const locale = await getLocale();
@@ -30,9 +30,12 @@ export async function Certificates() {
           <h2 className="text-balance text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">
             {pickLocale(section?.heading, locale)}
           </h2>
+          {pickLocale(section?.description, locale) && (
+            <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-600">{pickLocale(section?.description, locale)}</p>
+          )}
         </Reveal>
 
-        <CertificatesGrid items={resolvedItems} />
+        <CertificatesCarousel items={resolvedItems} />
       </div>
     </section>
   );

@@ -81,3 +81,76 @@ export async function getHomeDoctorMessage() {
 // Shared "doctor facts" tables (career_timeline, certificates,
 // service_categories) live in src/lib/data/shared-content.ts -- Home and
 // the About page both read from there.
+
+export async function getHomeTechnologiesSection() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("home_technologies_section").select("*").eq("id", ID).maybeSingle();
+  return data;
+}
+
+export async function getAllTechnologies() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("technologies").select("*").order("sort_order", { ascending: true });
+  if (!data) return [];
+  const urls = await resolveMediaUrls(supabase, data.map((t) => t.image_media_id));
+  return data.map((t) => ({ ...t, image_url: t.image_media_id ? urls[t.image_media_id] ?? null : null }));
+}
+
+export async function getPublishedTechnologies() {
+  const all = await getAllTechnologies();
+  return all.filter((t) => t.status === "published");
+}
+
+export async function getHomeWhyChooseSection() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("home_why_choose_section").select("*").eq("id", ID).maybeSingle();
+  if (!data) return null;
+  const urls = await resolveMediaUrls(supabase, [data.image_media_id]);
+  return { ...data, image_url: data.image_media_id ? urls[data.image_media_id] ?? null : null };
+}
+
+export async function getAllWhyChooseReasons() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("why_choose_reasons").select("*").order("sort_order", { ascending: true });
+  return data ?? [];
+}
+
+export async function getPublishedWhyChooseReasons() {
+  const all = await getAllWhyChooseReasons();
+  return all.filter((r) => r.status === "published");
+}
+
+export async function getHomeReviewsSection() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("home_reviews_section").select("*").eq("id", ID).maybeSingle();
+  return data;
+}
+
+export async function getHomeVideosSection() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("home_videos_section").select("*").eq("id", ID).maybeSingle();
+  return data;
+}
+
+export async function getHomeArticlesSection() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("home_articles_section").select("*").eq("id", ID).maybeSingle();
+  return data;
+}
+
+export async function getHomeFaqSection() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("home_faq_section").select("*").eq("id", ID).maybeSingle();
+  return data;
+}
+
+export async function getAllFaqs() {
+  const supabase = await createClient();
+  const { data } = await supabase.from("faqs").select("*").order("sort_order", { ascending: true });
+  return data ?? [];
+}
+
+export async function getPublishedFaqs() {
+  const all = await getAllFaqs();
+  return all.filter((f) => f.status === "published");
+}

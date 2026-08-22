@@ -3,13 +3,15 @@ import { getTranslations } from "next-intl/server";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
-import { AboutIntro } from "@/components/sections/about-intro";
-import { VideoIntro } from "@/components/sections/video-intro";
+import { AboutVideoIntro } from "@/components/sections/about-video-intro";
+import { MainServices } from "@/components/sections/main-services";
 import { StatsSlider } from "@/components/sections/stats-slider";
-import { CareerTimeline } from "@/components/sections/career-timeline";
+import { Technologies } from "@/components/sections/technologies";
+import { WhyChooseSection } from "@/components/sections/why-choose-section";
+import { HomeReviews } from "@/components/sections/home-reviews";
+import { HomeFeaturedVideos } from "@/components/sections/home-featured-videos";
 import { Certificates } from "@/components/sections/certificates";
-import { MainSpecialties } from "@/components/sections/main-specialties";
-import { DoctorMessage } from "@/components/sections/doctor-message";
+import { HomeArticlesFaq } from "@/components/sections/home-articles-faq";
 import { FinalCta } from "@/components/sections/final-cta";
 import { getPageSeo } from "@/lib/data/global-settings";
 import { pickLocale } from "@/lib/i18n-content";
@@ -32,13 +34,15 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <AboutIntro />
-        <VideoIntro />
+        <AboutVideoIntro />
+        <MainServices />
         <StatsSlider />
-        <CareerTimeline />
+        <Technologies />
+        <WhyChooseSection />
+        <HomeReviews />
+        <HomeFeaturedVideos />
         <Certificates />
-        <MainSpecialties />
-        <DoctorMessage />
+        <HomeArticlesFaq />
         <FinalCta />
       </main>
       <Footer />

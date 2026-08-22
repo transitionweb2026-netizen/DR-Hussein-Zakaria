@@ -50,13 +50,18 @@ function AccordionItem({
 
 export function Accordion({
   items,
+  columns = 2,
   className,
 }: {
   items: AccordionItemData[];
+  /** Number of columns at the sm+ breakpoint (always 1 below that). The
+   * standalone full-width FAQ layout uses 2; the half-width Home
+   * Articles+FAQ layout passes 1. */
+  columns?: 1 | 2;
   className?: string;
 }) {
   return (
-    <div className={cn("grid grid-cols-1 gap-3 sm:grid-cols-2", className)}>
+    <div className={cn("grid grid-cols-1 gap-3", columns === 2 && "sm:grid-cols-2", className)}>
       {items.map((item, i) => (
         <AccordionItem key={item.question} item={item} defaultOpen={i === 0} />
       ))}

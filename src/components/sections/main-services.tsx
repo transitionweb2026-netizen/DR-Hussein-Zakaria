@@ -11,7 +11,7 @@ import { getHomeSpecialtiesSection } from "@/lib/data/home";
 import { getPublishedServiceCategories } from "@/lib/data/shared-content";
 import { pickLocale } from "@/lib/i18n-content";
 
-export async function MainSpecialties() {
+export async function MainServices() {
   const locale = await getLocale();
   const [section, items] = await Promise.all([getHomeSpecialtiesSection(), getPublishedServiceCategories()]);
 

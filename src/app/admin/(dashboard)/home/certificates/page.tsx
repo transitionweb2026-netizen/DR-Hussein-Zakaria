@@ -29,6 +29,7 @@ export default async function HomeCertificatesPage() {
       <AdminForm action={updateCertificatesSection} saveLabel="Save heading">
         <TranslatableInput name="eyebrow" label="Eyebrow" defaultValue={section?.eyebrow} />
         <TranslatableInput name="heading" label="Heading" defaultValue={section?.heading} />
+        <TranslatableInput name="description" label="Supporting text (optional)" defaultValue={section?.description} multiline rows={2} />
       </AdminForm>
 
       <div>

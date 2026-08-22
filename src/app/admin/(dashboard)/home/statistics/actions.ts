@@ -11,7 +11,11 @@ export async function updateStatsSection(_prevState: ActionState, formData: Form
   const supabase = await createClient();
   const { error } = await supabase
     .from("home_stats_section")
-    .update({ eyebrow: bilingualFromForm(formData, "eyebrow"), heading: bilingualFromForm(formData, "heading") })
+    .update({
+      eyebrow: bilingualFromForm(formData, "eyebrow"),
+      heading: bilingualFromForm(formData, "heading"),
+      description: bilingualFromForm(formData, "description"),
+    })
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };
