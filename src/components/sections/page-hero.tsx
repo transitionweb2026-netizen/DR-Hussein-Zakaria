@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,14 +6,8 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { GlassCard } from "@/components/ui/glass-card";
 import { IconTile } from "@/components/ui/icon-tile";
 import { CursorGlow } from "@/components/decorative/cursor-glow";
-import { FacebookIcon, InstagramIcon, TiktokIcon, YoutubeIcon } from "@/components/icons/social-icons";
-
-const socials = [
-  { icon: FacebookIcon, label: "Facebook" },
-  { icon: InstagramIcon, label: "Instagram" },
-  { icon: TiktokIcon, label: "TikTok" },
-  { icon: YoutubeIcon, label: "YouTube" },
-];
+import { getSiteSettings, getActiveSocialLinks } from "@/lib/data/global-settings";
+import { getSocialIcon } from "@/lib/social-icon-map";
 
 type CtaConfig = {
   label: string;
@@ -22,7 +15,7 @@ type CtaConfig = {
   icon?: ReactNode;
 };
 
-export function PageHero({
+export async function PageHero({
   sectionId,
   eyebrow,
   headingPrefix,
@@ -31,7 +24,12 @@ export function PageHero({
   primaryCta,
   secondaryCta,
   showPhoneCard = true,
-  backgroundImage = "/images/hero-bg.jpg",
+  // Defaults cover the pages whose own hero content isn't wired to Supabase
+  // yet (Services/Videos/Patient Stories/Articles/Contact -- later phases);
+  // Home passes its real CMS-sourced values explicitly.
+  phoneLabel = "Call Us Anytime",
+  socialLabel = "Follow us",
+  backgroundImage,
   compact = false,
 }: {
   sectionId?: string;
@@ -42,11 +40,15 @@ export function PageHero({
   primaryCta: CtaConfig;
   secondaryCta?: CtaConfig;
   showPhoneCard?: boolean;
-  backgroundImage?: string;
+  phoneLabel?: string;
+  socialLabel?: string;
+  /** Falls back to Global Settings → Branding's sitewide default, then to
+   * the static placeholder if nothing has been uploaded yet. */
+  backgroundImage?: string | null;
   compact?: boolean;
 }) {
-  const t = useTranslations("hero");
-  const tf = useTranslations("footer");
+  const [settings, socials] = await Promise.all([getSiteSettings(), getActiveSocialLinks()]);
+  const resolvedBackground = backgroundImage || settings?.default_hero_bg_url || "/images/hero-bg.jpg";
 
   return (
     <section
@@ -57,25 +59,30 @@ export function PageHero({
       }
     >
       <div className="absolute inset-0 -z-10">
-        <Image src={backgroundImage} alt="" fill priority sizes="100vw" className="object-cover" />
+        <Image src={resolvedBackground} alt="" fill priority sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/75 via-navy-950/45 to-navy-950/80" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg-100 to-transparent" />
       </div>
       <CursorGlow />
 
       <div className="absolute inset-y-0 start-3 z-10 hidden flex-col items-center justify-center gap-3 sm:flex lg:start-8">
-        <span className="sr-only">{t("socialLabel")}</span>
-        {socials.map(({ icon: Icon, label }, i) => (
-          <a
-            key={label}
-            href="#"
-            aria-label={label}
-            style={{ animationDelay: `${300 + i * 90}ms` }}
-            className="motion-safe:animate-fade-up flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-300/60 hover:bg-white/20"
-          >
-            <Icon className="h-4.5 w-4.5" />
-          </a>
-        ))}
+        <span className="sr-only">{socialLabel}</span>
+        {socials.map((social, i) => {
+          const Icon = getSocialIcon(social.icon);
+          return (
+            <a
+              key={social.id}
+              href={social.url || "#"}
+              aria-label={social.platform}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ animationDelay: `${300 + i * 90}ms` }}
+              className="motion-safe:animate-fade-up flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-300/60 hover:bg-white/20"
+            >
+              <Icon className="h-4.5 w-4.5" />
+            </a>
+          );
+        })}
       </div>
 
       <div
@@ -124,16 +131,21 @@ export function PageHero({
             className="mt-8 flex items-center gap-3 sm:hidden motion-safe:animate-fade-up"
             style={{ animationDelay: "300ms" }}
           >
-            {socials.map(({ icon: Icon, label }) => (
-              <a
-                key={label}
-                href="#"
-                aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+            {socials.map((social) => {
+              const Icon = getSocialIcon(social.icon);
+              return (
+                <a
+                  key={social.id}
+                  href={social.url || "#"}
+                  aria-label={social.platform}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              );
+            })}
           </div>
         </div>
 
@@ -146,9 +158,9 @@ export function PageHero({
               <div className="flex items-center gap-3.5">
                 <IconTile icon={Phone} size="sm" />
                 <div>
-                  <p className="text-xs font-semibold text-ink-400">{t("phoneLabel")}</p>
+                  <p className="text-xs font-semibold text-ink-400">{phoneLabel}</p>
                   <p dir="ltr" className="mt-0.5 text-lg font-extrabold text-ink-900">
-                    {tf("phone")}
+                    {settings?.phone || ""}
                   </p>
                 </div>
               </div>

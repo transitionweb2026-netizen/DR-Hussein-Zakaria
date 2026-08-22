@@ -5,6 +5,8 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { getPageSeo } from "@/lib/data/global-settings";
+import { pickLocale } from "@/lib/i18n-content";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -30,9 +32,11 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: "meta" });
+  const seo = await getPageSeo("default");
+
   return {
-    title: t("title"),
-    description: t("description"),
+    title: pickLocale(seo?.seo_title, locale) || t("title"),
+    description: pickLocale(seo?.meta_description, locale) || t("description"),
   };
 }
 

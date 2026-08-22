@@ -1,5 +1,4 @@
-import { useTranslations } from "next-intl";
-import { Award, HeartPulse, Users, Clock, Activity } from "lucide-react";
+import { getLocale } from "next-intl/server";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { GlassCard } from "@/components/ui/glass-card";
 import { IconTile } from "@/components/ui/icon-tile";
@@ -7,30 +6,25 @@ import { Counter } from "@/components/ui/counter";
 import { Carousel } from "@/components/ui/carousel";
 import { Reveal } from "@/components/ui/reveal";
 import { GlowOrb } from "@/components/decorative/glow-orb";
+import { getHomeStatsSection, getPublishedHomeStats } from "@/lib/data/home";
+import { pickLocale } from "@/lib/i18n-content";
+import { getIcon } from "@/lib/icon-map";
 
-type StatItem = {
-  value: number;
-  suffix: string;
-  label: string;
-};
+export async function StatsSlider() {
+  const locale = await getLocale();
+  const [section, stats] = await Promise.all([getHomeStatsSection(), getPublishedHomeStats()]);
 
-const icons = [Users, Activity, HeartPulse, Clock, Award];
-
-export function StatsSlider() {
-  const t = useTranslations("stats");
-  const items = t.raw("items") as StatItem[];
-
-  const slides = items.map((item, i) => {
-    const Icon = icons[i % icons.length];
+  const slides = stats.map((item) => {
+    const Icon = getIcon(item.icon);
     return (
-      <GlassCard key={item.label} hover className="flex w-[220px] flex-col items-center gap-4 p-7 text-center sm:w-[240px]">
+      <GlassCard key={item.id} hover className="flex w-[220px] flex-col items-center gap-4 p-7 text-center sm:w-[240px]">
         <IconTile icon={Icon} />
         <Counter
           value={item.value}
           suffix={item.suffix}
           className="text-3xl font-extrabold text-ink-900 sm:text-4xl"
         />
-        <p className="text-sm leading-snug text-ink-600">{item.label}</p>
+        <p className="text-sm leading-snug text-ink-600">{pickLocale(item.label, locale)}</p>
       </GlassCard>
     );
   });
@@ -41,10 +35,10 @@ export function StatsSlider() {
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal className="mx-auto mb-12 max-w-2xl text-center">
           <Eyebrow align="center" className="mb-4">
-            {t("eyebrow")}
+            {pickLocale(section?.eyebrow, locale)}
           </Eyebrow>
           <h2 className="text-balance text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">
-            {t("heading")}
+            {pickLocale(section?.heading, locale)}
           </h2>
         </Reveal>
 

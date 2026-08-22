@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/*
+ * The admin dashboard is deliberately a separate, plain, professional UI --
+ * not a reskin of the public site's glass/brand-blue design system. Neutral
+ * slate + one blue accent, nothing else.
+ */
+:root {
+  --color-admin-bg: #f8fafc;
+  --color-admin-surface: #ffffff;
+  --color-admin-border: #e2e8f0;
+  --color-admin-text: #0f172a;
+  --color-admin-muted: #64748b;
+  --color-admin-accent: #2563eb;
+  --color-admin-accent-hover: #1d4ed8;
+  --color-admin-danger: #dc2626;
+  --color-admin-success: #16a34a;
+}
+
+@theme inline {
+  --color-admin-bg: var(--color-admin-bg);
+  --color-admin-surface: var(--color-admin-surface);
+  --color-admin-border: var(--color-admin-border);
+  --color-admin-text: var(--color-admin-text);
+  --color-admin-muted: var(--color-admin-muted);
+  --color-admin-accent: var(--color-admin-accent);
+  --color-admin-accent-hover: var(--color-admin-accent-hover);
+  --color-admin-danger: var(--color-admin-danger);
+  --color-admin-success: var(--color-admin-success);
+}
