@@ -166,6 +166,7 @@ export interface Database {
         duration: string;
         thumbnail_media_id: string | null;
         video_url: string | null;
+        video_provider: "youtube" | "vimeo" | "mp4" | null;
         updated_at: string;
       }>;
 
@@ -202,6 +203,7 @@ export interface Database {
         hero_heading_prefix: Bilingual;
         hero_heading_highlight: Bilingual;
         hero_paragraph: Bilingual;
+        hero_cta_label: Bilingual;
         biography: Bilingual;
         doctor_image_media_id: string | null;
         education_heading: Bilingual;
@@ -246,6 +248,7 @@ export interface Database {
           treatment_info: Bilingual | null;
           faq: { question: Bilingual; answer: Bilingual }[] | null;
           video_url: string | null;
+          video_provider: "youtube" | "vimeo" | "mp4" | null;
           primary_image_media_id: string | null;
         } & Repeatable
       >;

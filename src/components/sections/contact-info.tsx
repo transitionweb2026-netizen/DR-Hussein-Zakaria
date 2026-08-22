@@ -1,27 +1,28 @@
-import { useTranslations } from "next-intl";
+import { getLocale } from "next-intl/server";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { IconTile } from "@/components/ui/icon-tile";
 import { Reveal } from "@/components/ui/reveal";
 import { GlowOrb } from "@/components/decorative/glow-orb";
-import { FacebookIcon, InstagramIcon, TiktokIcon, WhatsappIcon, YoutubeIcon } from "@/components/icons/social-icons";
-import { WHATSAPP_HREF, PHONE_HREF } from "@/lib/contact";
+import { WhatsappIcon } from "@/components/icons/social-icons";
+import { getSiteSettings, getActiveSocialLinks, getFooterContent } from "@/lib/data/global-settings";
+import { getSocialIcon } from "@/lib/social-icon-map";
+import { pickLocale } from "@/lib/i18n-content";
 
-const socials = [
-  { icon: FacebookIcon, label: "Facebook" },
-  { icon: InstagramIcon, label: "Instagram" },
-  { icon: TiktokIcon, label: "TikTok" },
-  { icon: YoutubeIcon, label: "YouTube" },
-];
+export async function ContactInfo() {
+  const locale = await getLocale();
+  const [settings, socials, footer] = await Promise.all([getSiteSettings(), getActiveSocialLinks(), getFooterContent()]);
 
-export function ContactInfo() {
-  const tf = useTranslations("footer");
+  const phone = settings?.phone ?? "";
+  const whatsapp = settings?.whatsapp_number ?? "";
+  const email = settings?.email ?? "";
+  const address = pickLocale(settings?.address, locale);
 
   const cards = [
-    { icon: Phone, label: tf("phone"), href: PHONE_HREF, dir: "ltr" as const },
-    { icon: WhatsappIcon, label: tf("phone"), href: WHATSAPP_HREF, dir: "ltr" as const },
-    { icon: Mail, label: tf("email"), href: `mailto:${tf("email")}`, dir: "ltr" as const },
-    { icon: MapPin, label: tf("address"), href: undefined, dir: undefined },
+    { icon: Phone, label: phone, href: `tel:${phone}`, dir: "ltr" as const },
+    { icon: WhatsappIcon, label: phone, href: `https://wa.me/${whatsapp}`, dir: "ltr" as const },
+    { icon: Mail, label: email, href: `mailto:${email}`, dir: "ltr" as const },
+    { icon: MapPin, label: address, href: undefined, dir: undefined },
   ];
 
   return (
@@ -50,26 +51,31 @@ export function ContactInfo() {
             <div className="flex items-center gap-3.5">
               <IconTile icon={Clock} size="xs" />
               <div>
-                <p className="text-sm font-bold text-ink-900">{tf("weekdays")}</p>
-                <p className="text-xs text-ink-400">{tf("weekdayHours")}</p>
+                <p className="text-sm font-bold text-ink-900">{pickLocale(footer?.weekdays_label, locale)}</p>
+                <p className="text-xs text-ink-400">{pickLocale(footer?.weekday_hours, locale)}</p>
               </div>
               <span className="mx-2 h-8 w-px bg-line" />
               <div>
-                <p className="text-sm font-bold text-ink-900">{tf("weekend")}</p>
-                <p className="text-xs text-ink-400">{tf("weekendStatus")}</p>
+                <p className="text-sm font-bold text-ink-900">{pickLocale(footer?.weekend_label, locale)}</p>
+                <p className="text-xs text-ink-400">{pickLocale(footer?.weekend_status, locale)}</p>
               </div>
             </div>
             <div className="flex items-center gap-2.5">
-              {socials.map(({ icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-line bg-glass-strong text-brand-600 shadow-glass-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-700"
-                >
-                  <Icon className="h-4.5 w-4.5" />
-                </a>
-              ))}
+              {socials.map((social) => {
+                const Icon = getSocialIcon(social.icon);
+                return (
+                  <a
+                    key={social.id}
+                    href={social.url || "#"}
+                    aria-label={social.platform}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-line bg-glass-strong text-brand-600 shadow-glass-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-700"
+                  >
+                    <Icon className="h-4.5 w-4.5" />
+                  </a>
+                );
+              })}
             </div>
           </GlassCard>
         </Reveal>

@@ -8,6 +8,10 @@ import { bilingualFromForm, stringFromForm, nullableStringFromForm, type ActionS
 const ID = "00000000-0000-0000-0000-000000000001";
 const PATH = "/admin/home/video-intro";
 
+function normalizeProvider(value: string): "youtube" | "vimeo" | "mp4" | null {
+  return value === "youtube" || value === "vimeo" || value === "mp4" ? value : null;
+}
+
 export async function updateHomeVideoIntro(_prevState: ActionState, formData: FormData): Promise<ActionState> {
   const supabase = await createClient();
   const { error } = await supabase
@@ -17,6 +21,7 @@ export async function updateHomeVideoIntro(_prevState: ActionState, formData: Fo
       heading: bilingualFromForm(formData, "heading"),
       description: bilingualFromForm(formData, "description"),
       duration: stringFromForm(formData, "duration"),
+      video_provider: normalizeProvider(stringFromForm(formData, "video_provider")),
       video_url: nullableStringFromForm(formData, "video_url"),
     })
     .eq("id", ID);

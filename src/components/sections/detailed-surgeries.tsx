@@ -1,33 +1,39 @@
-"use client";
-
-import { useState } from "react";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { getLocale } from "next-intl/server";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { GlassCard } from "@/components/ui/glass-card";
-import { Modal } from "@/components/ui/modal";
 import { Reveal } from "@/components/ui/reveal";
 import { GlowOrb } from "@/components/decorative/glow-orb";
+import { getServicesPageContent, getPublishedSurgeries } from "@/lib/data/services";
+import { getPublishedServiceCategories } from "@/lib/data/shared-content";
+import { pickLocale } from "@/lib/i18n-content";
+import { DetailedSurgeriesList } from "./detailed-surgeries-list";
 
-type Surgery = {
-  id: string;
-  title: string;
-  short: string;
-  description: string;
-  image: string;
-};
+export async function DetailedSurgeries() {
+  const locale = await getLocale();
+  const [content, categories, surgeries] = await Promise.all([
+    getServicesPageContent(),
+    getPublishedServiceCategories(),
+    getPublishedSurgeries(),
+  ]);
 
-type ServiceItem = {
-  id: string;
-  title: string;
-};
-
-export function DetailedSurgeries() {
-  const t = useTranslations("servicesPage");
-  const ts = useTranslations("services");
-  const categories = ts.raw("items") as ServiceItem[];
-  const surgeriesByCategory = t.raw("surgeries") as Record<string, Surgery[]>;
-  const [active, setActive] = useState<Surgery | null>(null);
+  const groups = categories.map((category) => ({
+    id: category.id,
+    slug: category.slug,
+    title: pickLocale(category.title, locale),
+    surgeries: surgeries
+      .filter((s) => s.category_id === category.id)
+      .map((s) => ({
+        id: s.id,
+        title: pickLocale(s.title, locale),
+        short: pickLocale(s.short_description, locale),
+        fullDescription: pickLocale(s.full_description, locale),
+        symptoms: s.symptoms ? pickLocale(s.symptoms, locale) : "",
+        treatmentInfo: s.treatment_info ? pickLocale(s.treatment_info, locale) : "",
+        faq: (s.faq ?? []).map((f) => ({ question: pickLocale(f.question, locale), answer: pickLocale(f.answer, locale) })),
+        videoUrl: s.video_url,
+        videoProvider: s.video_provider,
+        image: s.primary_image_url,
+      })),
+  }));
 
   return (
     <section className="relative overflow-hidden py-20 sm:py-28">
@@ -35,62 +41,12 @@ export function DetailedSurgeries() {
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal className="mx-auto mb-16 max-w-2xl text-center">
           <Eyebrow align="center" className="mb-4">
-            {t("detailedHeading")}
+            {pickLocale(content?.detailed_heading, locale)}
           </Eyebrow>
         </Reveal>
 
-        <div className="space-y-20">
-          {categories.map((category) => {
-            const surgeries = surgeriesByCategory[category.id] ?? [];
-            return (
-              <div key={category.id} id={`surgeries-${category.id}`} className="scroll-mt-28">
-                <Reveal>
-                  <h3 className="text-balance text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">
-                    {category.title}
-                  </h3>
-                </Reveal>
-                <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {surgeries.map((surgery, i) => (
-                    <Reveal key={surgery.id} delay={i * 90}>
-                      <GlassCard hover className="group h-full overflow-hidden p-2.5">
-                        <button type="button" onClick={() => setActive(surgery)} className="block w-full text-start">
-                          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)]">
-                            <Image
-                              src={`/images/${surgery.image}`}
-                              alt={surgery.title}
-                              fill
-                              sizes="(min-width: 1024px) 320px, 90vw"
-                              className="object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                          </div>
-                          <div className="px-2 pb-1 pt-4">
-                            <h4 className="text-sm font-bold text-ink-900">{surgery.title}</h4>
-                            <p className="mt-1.5 text-xs leading-relaxed text-ink-600">{surgery.short}</p>
-                          </div>
-                        </button>
-                      </GlassCard>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <DetailedSurgeriesList groups={groups} />
       </div>
-
-      <Modal open={active !== null} onClose={() => setActive(null)} className="max-w-2xl">
-        {active && (
-          <>
-            <div className="relative aspect-video w-full overflow-hidden rounded-t-card">
-              <Image src={`/images/${active.image}`} alt={active.title} fill sizes="700px" className="object-cover" />
-            </div>
-            <div className="p-6 sm:p-8">
-              <h3 className="text-xl font-extrabold text-ink-900 sm:text-2xl">{active.title}</h3>
-              <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-600">{active.description}</p>
-            </div>
-          </>
-        )}
-      </Modal>
     </section>
   );
 }

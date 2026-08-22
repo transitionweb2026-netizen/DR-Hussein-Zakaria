@@ -23,6 +23,7 @@ type ButtonAsButton = BaseProps & {
   href?: undefined;
   onClick?: () => void;
   type?: "button" | "submit";
+  disabled?: boolean;
 };
 
 type ButtonProps = ButtonAsLink | ButtonAsButton;
@@ -80,9 +81,14 @@ export function Button({
     );
   }
 
-  const { onClick, type } = rest as ButtonAsButton;
+  const { onClick, type, disabled } = rest as ButtonAsButton;
   return (
-    <button type={type ?? "button"} onClick={onClick} className={classes}>
+    <button
+      type={type ?? "button"}
+      onClick={onClick}
+      disabled={disabled}
+      className={cn(classes, "disabled:cursor-not-allowed disabled:opacity-60")}
+    >
       {content}
     </button>
   );
