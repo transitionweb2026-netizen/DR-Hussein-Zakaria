@@ -19,6 +19,7 @@ export async function updateBrandingText(_prevState: ActionState, formData: Form
     .eq("id", SETTINGS_ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "Branding saved." };
 }
 

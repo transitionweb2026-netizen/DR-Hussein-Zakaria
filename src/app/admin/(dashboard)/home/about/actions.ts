@@ -25,6 +25,7 @@ export async function updateHomeAbout(_prevState: ActionState, formData: FormDat
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "About section saved." };
 }
 

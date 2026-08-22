@@ -20,6 +20,7 @@ export async function updateSpecialtiesSection(_prevState: ActionState, formData
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "Section heading saved." };
 }
 

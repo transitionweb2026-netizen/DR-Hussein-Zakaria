@@ -20,6 +20,7 @@ export async function updateBiography(_prevState: ActionState, formData: FormDat
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "Biography saved." };
 }
 

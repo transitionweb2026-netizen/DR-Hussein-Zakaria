@@ -15,6 +15,7 @@ export async function updateStatsSection(_prevState: ActionState, formData: Form
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "Section heading saved." };
 }
 

@@ -15,6 +15,7 @@ export async function updateTimelineSection(_prevState: ActionState, formData: F
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "Section heading saved." };
 }
 

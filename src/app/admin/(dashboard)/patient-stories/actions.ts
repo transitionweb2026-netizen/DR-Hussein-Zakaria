@@ -29,6 +29,7 @@ export async function updatePageContent(_prevState: ActionState, formData: FormD
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "Page content saved." };
 }
 

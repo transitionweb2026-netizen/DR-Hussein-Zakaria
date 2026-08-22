@@ -25,6 +25,7 @@ export async function updateHomeHero(_prevState: ActionState, formData: FormData
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "Hero saved." };
 }
 

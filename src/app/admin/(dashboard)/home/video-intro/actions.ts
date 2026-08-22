@@ -27,6 +27,7 @@ export async function updateHomeVideoIntro(_prevState: ActionState, formData: Fo
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "Video intro saved." };
 }
 

@@ -23,6 +23,7 @@ export async function updateDoctorMessage(_prevState: ActionState, formData: For
     .eq("id", ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "Doctor message saved." };
 }
 

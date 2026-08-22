@@ -15,6 +15,7 @@ export async function updateBookAppointmentLabel(_prevState: ActionState, formDa
     .eq("id", SETTINGS_ID);
 
   if (error) return { status: "error", message: error.message };
+  revalidatePath(PATH);
   return { status: "success", message: "Saved." };
 }
 
