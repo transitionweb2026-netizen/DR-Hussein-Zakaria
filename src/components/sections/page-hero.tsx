@@ -31,6 +31,7 @@ export async function PageHero({
   socialLabel = "Follow us",
   backgroundImage,
   compact = false,
+  showOverlay = true,
 }: {
   sectionId?: string;
   eyebrow: string;
@@ -46,6 +47,10 @@ export async function PageHero({
    * the static placeholder if nothing has been uploaded yet. */
   backgroundImage?: string | null;
   compact?: boolean;
+  /** Darkening gradient tint over the background image. Defaults on
+   * everywhere (unchanged look on every other page) -- About's hero opts
+   * out to show its background image untinted. */
+  showOverlay?: boolean;
 }) {
   const [settings, socials] = await Promise.all([getSiteSettings(), getActiveSocialLinks()]);
   const resolvedBackground = backgroundImage || settings?.default_hero_bg_url || "/images/hero-bg.jpg";
@@ -60,7 +65,9 @@ export async function PageHero({
     >
       <div className="absolute inset-0 -z-10">
         <Image src={resolvedBackground} alt="" fill priority sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/75 via-navy-950/45 to-navy-950/80" />
+        {showOverlay && (
+          <div className="absolute inset-0 bg-gradient-to-b from-navy-950/75 via-navy-950/45 to-navy-950/80" />
+        )}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg-100 to-transparent" />
       </div>
       <CursorGlow />
