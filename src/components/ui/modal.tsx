@@ -43,7 +43,7 @@ export function Modal({
     >
       <div
         className={cn(
-          "motion-safe:animate-modal-in relative max-h-[88vh] w-full overflow-y-auto rounded-card border-2 border-white/40 bg-glass-strong shadow-glass-lg backdrop-blur-xl",
+          "glass-frame motion-safe:animate-modal-in relative max-h-[88vh] w-full overflow-y-auto rounded-card border-2 border-white/40 bg-glass-strong shadow-glass-lg backdrop-blur-xl",
           className
         )}
         onClick={(e) => e.stopPropagation()}

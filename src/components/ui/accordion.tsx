@@ -19,7 +19,7 @@ function AccordionItem({
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className="overflow-hidden rounded-lg border-2 border-line bg-glass shadow-glass-sm backdrop-blur-xl transition-colors duration-300 hover:border-brand-400">
+    <div className="glass-frame overflow-hidden rounded-lg border-2 border-line bg-glass shadow-glass-sm backdrop-blur-xl transition-colors duration-300 hover:border-brand-400">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

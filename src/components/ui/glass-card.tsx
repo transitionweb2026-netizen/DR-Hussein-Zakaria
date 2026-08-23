@@ -78,7 +78,7 @@ export function GlassCard<T extends ElementType = "div">({
       onPointerMove={wantsTilt ? handlePointerMove : undefined}
       onPointerLeave={wantsTilt ? handlePointerLeave : undefined}
       className={cn(
-        "relative isolate rounded-card border-2 backdrop-blur-xl",
+        "glass-frame relative isolate rounded-card border-2 backdrop-blur-xl",
         tone === "base" && "border-line bg-glass text-ink-900 shadow-glass",
         tone === "deep" &&
           "border-white/35 bg-gradient-to-br from-brand-400/90 to-brand-700/90 text-white shadow-glow-brand",

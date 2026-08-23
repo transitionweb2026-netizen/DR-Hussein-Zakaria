@@ -56,15 +56,49 @@
   --radius-xl: 1.875rem;
   --radius-pill: 999px;
 
-  /* Reference cards separate from the page almost entirely via a soft diffused shadow and a
-     bright inset highlight, not a visible border line — sampled from a zoomed card-corner crop. */
-  --shadow-glass-sm: 0 14px 30px -14px rgb(31 89 208 / 0.2), inset 0 1px 0 0 rgb(255 255 255 / 0.85);
-  --shadow-glass: 0 26px 60px -20px rgb(31 89 208 / 0.22), inset 0 1px 0 0 rgb(255 255 255 / 0.9);
-  --shadow-glass-lg: 0 40px 90px -26px rgb(31 89 208 / 0.26), inset 0 1px 0 0 rgb(255 255 255 / 0.95);
+  /* Premium 3D glass-box cards: each shadow token now stacks a short run of
+     tight, unblurred offset layers (the visible "edge/thickness" of a pane
+     of glass, like a beveled side wall) underneath the original soft
+     diffused ambient shadow (unchanged, keeps the page-separation look),
+     plus the original inset top highlight AND a new inset bottom shadow
+     (the underside of the glass catching its own shadow) for a believable
+     layered-glass read at rest, not just on hover. */
+  --shadow-glass-sm:
+    0 1px 0 0 rgb(20 61 148 / 0.16),
+    0 2px 0 0 rgb(20 61 148 / 0.11),
+    0 3px 0 0 rgb(20 61 148 / 0.07),
+    0 14px 30px -14px rgb(31 89 208 / 0.22),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.85),
+    inset 0 -1.5px 2px 0 rgb(20 61 148 / 0.1);
+  --shadow-glass:
+    0 1px 0 0 rgb(20 61 148 / 0.18),
+    0 2px 0 0 rgb(20 61 148 / 0.13),
+    0 3px 0 0 rgb(20 61 148 / 0.09),
+    0 4px 0 0 rgb(20 61 148 / 0.05),
+    0 26px 60px -20px rgb(31 89 208 / 0.24),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.9),
+    inset 0 -1.5px 3px 0 rgb(20 61 148 / 0.12);
+  --shadow-glass-lg:
+    0 1px 0 0 rgb(20 61 148 / 0.2),
+    0 2px 0 0 rgb(20 61 148 / 0.15),
+    0 3px 0 0 rgb(20 61 148 / 0.11),
+    0 5px 0 0 rgb(20 61 148 / 0.07),
+    0 7px 0 0 rgb(20 61 148 / 0.04),
+    0 40px 90px -26px rgb(31 89 208 / 0.3),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.95),
+    inset 0 -1.5px 3px 0 rgb(20 61 148 / 0.14);
   /* Buttons carry a genuine soft glow halo bleeding onto the page, not just a contact shadow —
      sampled from a zoomed button crop showing the blue bloom around the pill. */
   --shadow-btn: 0 8px 18px -6px rgb(49 107 233 / 0.45), 0 0 34px 2px rgb(49 107 233 / 0.28);
-  --shadow-glow-brand: 0 0 0 1px rgb(56 138 255 / 0.12), 0 0 46px 4px rgb(56 138 255 / 0.3);
+  /* "Deep" tone cards (brand-gradient fill, e.g. Final CTA) get the same
+     edge/thickness treatment, tuned to the darker surface. */
+  --shadow-glow-brand:
+    0 1px 0 0 rgb(255 255 255 / 0.22),
+    0 2px 0 0 rgb(255 255 255 / 0.13),
+    0 0 0 1px rgb(56 138 255 / 0.12),
+    0 0 46px 4px rgb(56 138 255 / 0.3),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.32),
+    inset 0 -2px 4px 0 rgb(2 20 60 / 0.25);
   --shadow-navy: 0 26px 60px -22px rgb(2 10 24 / 0.5);
 }
 
@@ -245,4 +279,51 @@ body {
 
 .text-balance {
   text-wrap: balance;
+}
+
+/* Glass-box card frame: a beveled, light-catching gradient border (light
+   top-left fading through the brand blue to a bright bottom-right glint),
+   built with the standard gradient-border mask-composite technique rather
+   than a flat single-color border — this is what actually reads as a
+   physical glass "frame/edge" instead of a flat outline. Sits at inset:0
+   with padding:1.5-2px, so it never affects layout/box size. Used by every
+   card-like surface (GlassCard, Modal, Accordion items) via one class. */
+.glass-frame {
+  position: relative;
+}
+
+.glass-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(
+    135deg,
+    rgb(255 255 255 / 0.95) 0%,
+    rgb(255 255 255 / 0.2) 32%,
+    rgb(49 107 233 / 0.45) 68%,
+    rgb(255 255 255 / 0.75) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.9;
+  transition: opacity 300ms ease-out, padding 300ms ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .glass-frame:hover::before {
+    opacity: 1;
+    padding: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-frame::before {
+    transition: none;
+  }
 }
