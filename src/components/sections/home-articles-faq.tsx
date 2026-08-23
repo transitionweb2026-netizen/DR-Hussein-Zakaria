@@ -8,6 +8,7 @@ import { GlowOrb } from "@/components/decorative/glow-orb";
 import { getHomeArticlesSection, getHomeFaqSection, getPublishedFaqs } from "@/lib/data/home";
 import { getPublishedArticles } from "@/lib/data/articles";
 import { pickLocale } from "@/lib/i18n-content";
+import { JsonLd } from "@/components/seo/json-ld";
 import { HomeArticleCards } from "./home-article-cards";
 
 export async function HomeArticlesFaq() {
@@ -31,8 +32,24 @@ export async function HomeArticlesFaq() {
     answer: pickLocale(f.answer, locale),
   }));
 
+  // Matches the FAQ content actually visible in the accordion below --
+  // Google's guidance is that FAQPage markup should reflect on-page
+  // content, not be added invisibly elsewhere.
+  const faqJsonLd = faqItems.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      }
+    : null;
+
   return (
     <section id="articles-faq" className="relative overflow-hidden py-20 sm:py-28">
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
       <GlowOrb className="top-1/4 -start-24 h-72 w-72" />
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-12">

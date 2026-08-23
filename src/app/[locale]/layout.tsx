@@ -5,9 +5,10 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { getPageSeo } from "@/lib/data/global-settings";
+import { getPageSeo, getSiteSettings, getActiveSocialLinks } from "@/lib/data/global-settings";
 import { pickLocale } from "@/lib/i18n-content";
-import { SITE_URL } from "@/lib/seo";
+import { SITE_URL, localizedUrl } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -59,8 +60,37 @@ export default async function LocaleLayout(props: LayoutProps<"/[locale]">) {
     notFound();
   }
 
-  const messages = await getMessages();
+  const [messages, settings, socialLinks] = await Promise.all([
+    getMessages(),
+    getSiteSettings(),
+    getActiveSocialLinks(),
+  ]);
   const dir = locale === "ar" ? "rtl" : "ltr";
+
+  // Sitewide Physician entity declaration -- the same real contact details
+  // and name already shown throughout the site (site_settings), not new
+  // content. medicalSpecialty is hardcoded because it's a stable fact
+  // ("Consultant Neurosurgeon" appears everywhere on the site already),
+  // not something that needs its own CMS field yet.
+  const physicianJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    name: pickLocale(settings?.site_name, locale),
+    medicalSpecialty: "Neurosurgery",
+    url: localizedUrl(locale, ""),
+    ...(settings?.logo_url ? { image: settings.logo_url } : {}),
+    ...(settings?.phone ? { telephone: settings.phone } : {}),
+    ...(settings?.email ? { email: settings.email } : {}),
+    ...(pickLocale(settings?.address, locale) ? { address: pickLocale(settings?.address, locale) } : {}),
+    ...(() => {
+      // Only genuine profile URLs belong in sameAs -- several social_links
+      // rows are still placeholder "#" hrefs (an admin hasn't filled in
+      // the real profile links yet), and those shouldn't be asserted as
+      // this entity's identity on other sites.
+      const realLinks = socialLinks.filter((link) => /^https?:\/\//.test(link.url));
+      return realLinks.length ? { sameAs: realLinks.map((link) => link.url) } : {};
+    })(),
+  };
 
   return (
     <html
@@ -69,6 +99,7 @@ export default async function LocaleLayout(props: LayoutProps<"/[locale]">) {
       className={`${jakarta.variable} ${cairo.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col overflow-x-hidden">
+        <JsonLd data={physicianJsonLd} />
         <NextIntlClientProvider messages={messages}>
           {props.children}
         </NextIntlClientProvider>
