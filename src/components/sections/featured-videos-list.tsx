@@ -30,13 +30,13 @@ export function FeaturedVideosList({ items }: { items: VideoItem[] }) {
           <Reveal key={item.id} delay={i * 90}>
             <GlassCard hover className="group h-full p-2.5">
               <button type="button" onClick={() => setActiveId(item.id)} className="block w-full text-start">
-                <div className="relative aspect-video w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)] bg-navy-950">
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)] bg-navy-950">
                   {item.thumbnail && (
                     <Image
                       src={item.thumbnail}
                       alt={item.title}
                       fill
-                      sizes="(min-width: 1024px) 400px, 90vw"
+                      sizes="(min-width: 1024px) 320px, 90vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   )}

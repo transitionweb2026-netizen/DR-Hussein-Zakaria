@@ -41,7 +41,7 @@ export default async function ServicesPage() {
           headingPrefix={pickLocale(content?.hero_heading_prefix, locale)}
           headingHighlight={pickLocale(content?.hero_heading_highlight, locale)}
           paragraph={pickLocale(content?.hero_paragraph, locale)}
-          primaryCta={{ label: pickLocale(content?.view_procedures_label, locale), href: "#services-overview", icon: <ArrowRight className="h-4 w-4" /> }}
+          primaryCta={{ label: pickLocale(content?.view_procedures_label, locale), href: "/videos", icon: <ArrowRight className="h-4 w-4" /> }}
           secondaryCta={{ label: pickLocale(finalCta?.whatsapp_label, locale), href: whatsappHref, icon: <WhatsappIcon className="h-4 w-4" /> }}
           compact
         />

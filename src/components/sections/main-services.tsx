@@ -1,12 +1,11 @@
+import Image from "next/image";
 import { getLocale } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { GlassCard } from "@/components/ui/glass-card";
-import { IconTile } from "@/components/ui/icon-tile";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { GlowOrb } from "@/components/decorative/glow-orb";
-import { getIcon } from "@/lib/icon-map";
 import { getHomeSpecialtiesSection } from "@/lib/data/home";
 import { getPublishedServiceCategories } from "@/lib/data/shared-content";
 import { pickLocale } from "@/lib/i18n-content";
@@ -31,13 +30,23 @@ export async function MainServices() {
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item, i) => (
             <Reveal key={item.id} delay={i * 90}>
-              <GlassCard hover className="group h-full p-6">
-                <IconTile icon={getIcon(item.icon)} />
-                <h3 className="mt-5 text-[1.05rem] font-bold text-ink-900">{pickLocale(item.title, locale)}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-600">{pickLocale(item.description, locale)}</p>
-                <span className="mt-5 flex h-9 w-9 items-center justify-center rounded-full border border-line text-brand-600 transition-all duration-300 group-hover:bg-brand-500 group-hover:text-white">
-                  <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
-                </span>
+              <GlassCard hover className="group flex h-full flex-col overflow-hidden p-2.5">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)]">
+                  <Image
+                    src={item.image_url || "/images/service-category-1.jpg"}
+                    alt={pickLocale(item.title, locale)}
+                    fill
+                    sizes="(min-width: 1024px) 300px, 90vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
+                  <h3 className="text-[1.05rem] font-bold text-ink-900">{pickLocale(item.title, locale)}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-600">{pickLocale(item.description, locale)}</p>
+                  <span className="mt-5 flex h-9 w-9 items-center justify-center rounded-full border border-line text-brand-600 transition-all duration-300 group-hover:bg-brand-500 group-hover:text-white">
+                    <ArrowRight className="h-4 w-4 rtl:-scale-x-100" />
+                  </span>
+                </div>
               </GlassCard>
             </Reveal>
           ))}

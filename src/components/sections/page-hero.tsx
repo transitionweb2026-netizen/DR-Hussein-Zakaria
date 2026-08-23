@@ -85,12 +85,7 @@ export async function PageHero({
         })}
       </div>
 
-      <div
-        className={
-          "relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-5 sm:px-8 sm:ps-20 lg:gap-10 lg:ps-24 " +
-          (showPhoneCard ? "lg:grid-cols-[1.2fr_0.8fr]" : "")
-        }
-      >
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-5 sm:px-8 sm:ps-20 lg:gap-10 lg:ps-24">
         <div>
           <Eyebrow tone="onDark" className="mb-5 motion-safe:animate-fade-up">
             {eyebrow}
@@ -149,25 +144,26 @@ export async function PageHero({
           </div>
         </div>
 
-        {showPhoneCard && (
-          <div
-            className="flex justify-center motion-safe:animate-fade-up lg:justify-end"
-            style={{ animationDelay: "340ms" }}
-          >
-            <GlassCard className="w-full max-w-xs p-5" hover sheen>
-              <div className="flex items-center gap-3.5">
-                <IconTile icon={Phone} size="sm" />
-                <div>
-                  <p className="text-xs font-semibold text-ink-400">{phoneLabel}</p>
-                  <p dir="ltr" className="mt-0.5 text-lg font-extrabold text-ink-900">
-                    {settings?.phone || ""}
-                  </p>
-                </div>
-              </div>
-            </GlassCard>
-          </div>
-        )}
       </div>
+
+      {showPhoneCard && (
+        <div
+          className="mt-8 flex justify-end px-5 motion-safe:animate-fade-up sm:px-8 sm:ps-20 lg:absolute lg:bottom-10 lg:end-8 lg:mt-0 lg:px-0 lg:ps-0"
+          style={{ animationDelay: "340ms" }}
+        >
+          <GlassCard className="w-full max-w-[200px] p-3.5" hover sheen>
+            <div className="flex items-center gap-2.5">
+              <IconTile icon={Phone} size="xs" />
+              <div>
+                <p className="text-[0.7rem] font-semibold text-ink-400">{phoneLabel}</p>
+                <p dir="ltr" className="mt-0.5 text-base font-extrabold text-ink-900">
+                  {settings?.phone || ""}
+                </p>
+              </div>
+            </div>
+          </GlassCard>
+        </div>
+      )}
     </section>
   );
 }

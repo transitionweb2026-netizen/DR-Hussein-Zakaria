@@ -25,7 +25,7 @@ export async function Hero() {
       }}
       secondaryCta={{
         label: pickLocale(hero?.cta_secondary_label, locale),
-        href: "#video",
+        href: "/services",
         icon: <Play className="h-4 w-4 fill-current" />,
       }}
     />

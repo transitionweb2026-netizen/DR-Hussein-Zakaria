@@ -56,8 +56,10 @@ export async function AboutBiography() {
                   <Eyebrow className="mb-4">{pickLocale(content?.biography_eyebrow, locale)}</Eyebrow>
                 )}
                 {pickLocale(content?.biography_heading, locale) && (
-                  <h2 className="text-balance text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl">
-                    {pickLocale(content?.biography_heading, locale)}
+                  <h2 className="text-balance text-4xl font-extrabold tracking-tight sm:text-5xl">
+                    <span className="bg-gradient-to-r from-brand-600 via-brand-500 to-brand-700 bg-clip-text text-transparent">
+                      {pickLocale(content?.biography_heading, locale)}
+                    </span>
                   </h2>
                 )}
               </div>
