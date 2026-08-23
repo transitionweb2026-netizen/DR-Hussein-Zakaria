@@ -84,7 +84,13 @@ export async function buildPageMetadata({
   const canonicalOverride = seo?.canonical_url?.trim();
   const canonical = canonicalOverride || alternates.canonical;
 
-  const robots = seo?.robots || undefined;
+  // The sitewide "block all indexing" switch (Settings -> SEO) is a
+  // deliberate global override: it wins over whatever a per-page robots
+  // value says, the same way WordPress's "discourage search engines"
+  // setting overrides individual post settings. Left off (the default),
+  // behavior is unchanged from before this field existed.
+  const robots = siteSettings?.block_all_indexing ? "noindex,nofollow" : seo?.robots || undefined;
+
   const ogImage = seo?.og_image_url || siteSettings?.default_hero_bg_url || undefined;
   const ogLocale = locale === "ar" ? "ar_AR" : "en_US";
   const ogAlternateLocale = locale === "ar" ? "en_US" : "ar_AR";
@@ -98,7 +104,7 @@ export async function buildPageMetadata({
       title,
       description,
       url: canonical,
-      siteName: "Dr. Hussein Zakaria",
+      siteName: pickLocale(siteSettings?.site_name, locale),
       locale: ogLocale,
       alternateLocale: ogAlternateLocale,
       type: "website",

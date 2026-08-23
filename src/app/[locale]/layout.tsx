@@ -68,15 +68,17 @@ export default async function LocaleLayout(props: LayoutProps<"/[locale]">) {
   const dir = locale === "ar" ? "rtl" : "ltr";
 
   // Sitewide Physician entity declaration -- the same real contact details
-  // and name already shown throughout the site (site_settings), not new
-  // content. medicalSpecialty is hardcoded because it's a stable fact
-  // ("Consultant Neurosurgeon" appears everywhere on the site already),
-  // not something that needs its own CMS field yet.
+  // and name already shown throughout the site (site_settings), including
+  // medicalSpecialty, which is CMS-controlled (Settings -> SEO) rather
+  // than hardcoded. The "Neurosurgery" fallback only fires if the CMS
+  // value is somehow blank -- it matches the migration's own column
+  // default, so it's never actually a different value in practice, just a
+  // guarantee this field can't render empty.
   const physicianJsonLd = {
     "@context": "https://schema.org",
     "@type": "Physician",
     name: pickLocale(settings?.site_name, locale),
-    medicalSpecialty: "Neurosurgery",
+    medicalSpecialty: pickLocale(settings?.medical_specialty, locale) || "Neurosurgery",
     url: localizedUrl(locale, ""),
     ...(settings?.logo_url ? { image: settings.logo_url } : {}),
     ...(settings?.phone ? { telephone: settings.phone } : {}),

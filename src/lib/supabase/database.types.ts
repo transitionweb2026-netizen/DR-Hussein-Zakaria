@@ -70,6 +70,8 @@ export interface Database {
         email: string;
         address: Bilingual;
         book_appointment_label: Bilingual;
+        medical_specialty: Bilingual;
+        block_all_indexing: boolean;
         updated_at: string;
       }>;
 
@@ -89,6 +91,8 @@ export interface Database {
         og_image_media_id: string | null;
         canonical_url: string | null;
         robots: string;
+        sitemap_priority: number;
+        sitemap_change_frequency: string;
         updated_at: string;
       }>;
 
