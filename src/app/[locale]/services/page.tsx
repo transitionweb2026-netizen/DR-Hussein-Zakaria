@@ -9,19 +9,21 @@ import { DetailedSurgeries } from "@/components/sections/detailed-surgeries";
 import { FinalCta } from "@/components/sections/final-cta";
 import { WhatsappIcon } from "@/components/icons/social-icons";
 import { getServicesPageContent } from "@/lib/data/services";
-import { getSiteSettings, getPageSeo, getFinalCtaContent } from "@/lib/data/global-settings";
+import { getSiteSettings, getFinalCtaContent } from "@/lib/data/global-settings";
 import { pickLocale } from "@/lib/i18n-content";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/services">
 ): Promise<Metadata> {
   const { locale } = await props.params;
-  const seo = await getPageSeo("services");
-  const seoTitle = pickLocale(seo?.seo_title, locale);
-  if (seoTitle) return { title: seoTitle, description: pickLocale(seo?.meta_description, locale) || undefined };
-
   const t = await getTranslations({ locale, namespace: "servicesPage" });
-  return { title: t("hero.headingPrefix") + " " + t("hero.headingHighlight") };
+  return buildPageMetadata({
+    pageKey: "services",
+    locale,
+    fallbackTitle: t("hero.headingPrefix") + " " + t("hero.headingHighlight"),
+    fallbackDescription: t("hero.paragraph"),
+  });
 }
 
 export default async function ServicesPage() {

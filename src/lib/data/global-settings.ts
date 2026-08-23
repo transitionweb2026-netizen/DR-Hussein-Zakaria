@@ -69,7 +69,13 @@ export async function getPageSeo(pageKey: string) {
 export async function getAllPageSeo() {
   const supabase = await createClient();
   const { data } = await supabase.from("page_seo").select("*").order("page_key", { ascending: true });
-  return data ?? [];
+  const rows = data ?? [];
+
+  const urls = await resolveMediaUrls(supabase, rows.map((row) => row.og_image_media_id));
+  return rows.map((row) => ({
+    ...row,
+    og_image_url: row.og_image_media_id ? urls[row.og_image_media_id] ?? null : null,
+  }));
 }
 
 export async function getFinalCtaContent() {

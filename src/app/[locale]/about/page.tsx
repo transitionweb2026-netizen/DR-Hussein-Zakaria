@@ -13,19 +13,20 @@ import { AboutSpecialties } from "@/components/sections/about-specialties";
 import { DoctorMessage } from "@/components/sections/doctor-message";
 import { FinalCta } from "@/components/sections/final-cta";
 import { getAboutPageContent } from "@/lib/data/about";
-import { getPageSeo } from "@/lib/data/global-settings";
 import { pickLocale } from "@/lib/i18n-content";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/about">
 ): Promise<Metadata> {
   const { locale } = await props.params;
-  const seo = await getPageSeo("about");
-  const seoTitle = pickLocale(seo?.seo_title, locale);
-  if (seoTitle) return { title: seoTitle, description: pickLocale(seo?.meta_description, locale) || undefined };
-
   const t = await getTranslations({ locale, namespace: "aboutIntro" });
-  return { title: t("headingPrefix") + " " + t("headingHighlight") };
+  return buildPageMetadata({
+    pageKey: "about",
+    locale,
+    fallbackTitle: t("headingPrefix") + " " + t("headingHighlight"),
+    fallbackDescription: t("paragraph1"),
+  });
 }
 
 export default async function AboutPage() {

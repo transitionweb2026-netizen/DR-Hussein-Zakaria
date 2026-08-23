@@ -8,19 +8,21 @@ import { ContactInfo } from "@/components/sections/contact-info";
 import { ContactForm } from "@/components/sections/contact-form";
 import { LocationPanel } from "@/components/sections/location-panel";
 import { getContactPageContent } from "@/lib/data/contact";
-import { getSiteSettings, getFinalCtaContent, getPageSeo } from "@/lib/data/global-settings";
+import { getSiteSettings, getFinalCtaContent } from "@/lib/data/global-settings";
 import { pickLocale } from "@/lib/i18n-content";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/contact">
 ): Promise<Metadata> {
   const { locale } = await props.params;
-  const seo = await getPageSeo("contact");
-  const seoTitle = pickLocale(seo?.seo_title, locale);
-  if (seoTitle) return { title: seoTitle, description: pickLocale(seo?.meta_description, locale) || undefined };
-
   const t = await getTranslations({ locale, namespace: "contactPage" });
-  return { title: t("hero.headingPrefix") + " " + t("hero.headingHighlight") };
+  return buildPageMetadata({
+    pageKey: "contact",
+    locale,
+    fallbackTitle: t("hero.headingPrefix") + " " + t("hero.headingHighlight"),
+    fallbackDescription: t("hero.paragraph"),
+  });
 }
 
 export default async function ContactPage() {

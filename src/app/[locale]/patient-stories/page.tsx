@@ -8,19 +8,20 @@ import { PatientStoryGrid } from "@/components/sections/patient-story-grid";
 import { Reviews } from "@/components/sections/reviews";
 import { FinalCta } from "@/components/sections/final-cta";
 import { getPatientStoriesPageContent } from "@/lib/data/patient-stories";
-import { getPageSeo } from "@/lib/data/global-settings";
 import { pickLocale } from "@/lib/i18n-content";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/patient-stories">
 ): Promise<Metadata> {
   const { locale } = await props.params;
-  const seo = await getPageSeo("patient-stories");
-  const seoTitle = pickLocale(seo?.seo_title, locale);
-  if (seoTitle) return { title: seoTitle, description: pickLocale(seo?.meta_description, locale) || undefined };
-
   const t = await getTranslations({ locale, namespace: "patientStoriesPage" });
-  return { title: t("hero.headingPrefix") + " " + t("hero.headingHighlight") };
+  return buildPageMetadata({
+    pageKey: "patient-stories",
+    locale,
+    fallbackTitle: t("hero.headingPrefix") + " " + t("hero.headingHighlight"),
+    fallbackDescription: t("hero.paragraph"),
+  });
 }
 
 export default async function PatientStoriesPage() {

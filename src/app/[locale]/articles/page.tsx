@@ -6,19 +6,20 @@ import { Footer } from "@/components/layout/footer";
 import { PageHero } from "@/components/sections/page-hero";
 import { ArticlesSection } from "@/components/sections/articles-section";
 import { getArticlesPageContent } from "@/lib/data/articles";
-import { getPageSeo } from "@/lib/data/global-settings";
 import { pickLocale } from "@/lib/i18n-content";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/articles">
 ): Promise<Metadata> {
   const { locale } = await props.params;
-  const seo = await getPageSeo("articles");
-  const seoTitle = pickLocale(seo?.seo_title, locale);
-  if (seoTitle) return { title: seoTitle, description: pickLocale(seo?.meta_description, locale) || undefined };
-
   const t = await getTranslations({ locale, namespace: "articlesPage" });
-  return { title: t("hero.headingPrefix") + " " + t("hero.headingHighlight") };
+  return buildPageMetadata({
+    pageKey: "articles",
+    locale,
+    fallbackTitle: t("hero.headingPrefix") + " " + t("hero.headingHighlight"),
+    fallbackDescription: t("hero.paragraph"),
+  });
 }
 
 export default async function ArticlesPage() {

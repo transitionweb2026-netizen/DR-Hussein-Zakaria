@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { getPageSeo } from "@/lib/data/global-settings";
 import { pickLocale } from "@/lib/i18n-content";
+import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -34,9 +35,17 @@ export async function generateMetadata(
   const t = await getTranslations({ locale, namespace: "meta" });
   const seo = await getPageSeo("default");
 
+  // Sitewide fallback only -- every actual page below sets its own full
+  // metadata (title, description, canonical, hreflang, robots, OG) via
+  // buildPageMetadata in src/lib/seo.ts, which fully replaces these
+  // fields per Next's metadata merging rules. This just covers metadataBase
+  // (needed for the whole tree) and a sane default if a segment ever omits
+  // its own generateMetadata.
   return {
+    metadataBase: new URL(SITE_URL),
     title: pickLocale(seo?.seo_title, locale) || t("title"),
     description: pickLocale(seo?.meta_description, locale) || t("description"),
+    robots: seo?.robots || undefined,
   };
 }
 
