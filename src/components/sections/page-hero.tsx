@@ -158,12 +158,12 @@ export async function PageHero({
           className="mt-8 flex justify-end px-5 motion-safe:animate-fade-up sm:px-8 sm:ps-20 lg:absolute lg:bottom-10 lg:end-8 lg:mt-0 lg:px-0 lg:ps-0"
           style={{ animationDelay: "340ms" }}
         >
-          <GlassCard className="w-full max-w-[200px] p-3.5" hover sheen>
+          <GlassCard className="w-fit p-3.5" hover sheen>
             <div className="flex items-center gap-2.5">
               <IconTile icon={Phone} size="xs" />
               <div>
-                <p className="text-[0.7rem] font-semibold text-ink-400">{phoneLabel}</p>
-                <p dir="ltr" className="mt-0.5 text-base font-extrabold text-ink-900">
+                <p className="whitespace-nowrap text-[0.7rem] font-semibold text-ink-400">{phoneLabel}</p>
+                <p dir="ltr" className="mt-0.5 whitespace-nowrap text-base font-extrabold text-ink-900">
                   {settings?.phone || ""}
                 </p>
               </div>

@@ -62,10 +62,10 @@ export function FeaturedVideosList({ items }: { items: VideoItem[] }) {
         {items.length === 0 && <p className="text-sm text-ink-400">No videos published yet.</p>}
       </div>
 
-      <Modal open={active !== null} onClose={() => setActiveId(null)} className="max-w-3xl p-3">
+      <Modal open={active !== null} onClose={() => setActiveId(null)} className="max-w-[420px] p-3">
         {active && (
           <>
-            <div className="relative aspect-video w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)] bg-navy-950">
+            <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)] bg-navy-950">
               {active.videoUrl ? (
                 <VideoEmbed url={active.videoUrl} provider={active.videoProvider} title={active.title} />
               ) : (
