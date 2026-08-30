@@ -5,6 +5,12 @@ import Image from "next/image";
 import { useFormStatus } from "react-dom";
 import { ImageOff, Upload } from "lucide-react";
 
+// Matches the server's own cap (next.config.ts, experimental.serverActions.
+// bodySizeLimit) minus headroom for multipart encoding overhead -- checked
+// here so an oversized file never leaves the browser and never has a
+// chance to surface as a raw server crash instead of a real message.
+const MAX_FILE_SIZE_BYTES = 4 * 1024 * 1024;
+
 /** Self-contained image field: selecting a file immediately uploads it and
  * updates the target column via its own Server Action (passed in as
  * `action`), independent of whatever other form this is rendered inside.
@@ -29,6 +35,7 @@ export function MediaUploadField({
 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [preview, setPreview] = useState<string | null>(currentUrl);
+  const [error, setError] = useState<string | null>(null);
 
   return (
     <div>
@@ -44,20 +51,33 @@ export function MediaUploadField({
             <ImageOff className="h-6 w-6 text-admin-muted" />
           )}
         </div>
-        <form
-          ref={formRef}
-          action={action}
-          onChange={() => {
-            const file = formRef.current?.querySelector<HTMLInputElement>("input[type=file]")?.files?.[0];
-            if (file) setPreview(URL.createObjectURL(file));
-            formRef.current?.requestSubmit();
-          }}
-        >
-          {Object.entries(hiddenFields ?? {}).map(([k, v]) => (
-            <input key={k} type="hidden" name={k} value={v} />
-          ))}
-          <UploadButton />
-        </form>
+        <div>
+          <form
+            ref={formRef}
+            action={action}
+            onChange={() => {
+              const input = formRef.current?.querySelector<HTMLInputElement>("input[type=file]");
+              const file = input?.files?.[0];
+              if (!file) return;
+
+              if (file.size > MAX_FILE_SIZE_BYTES) {
+                setError(`That image is too large (max 4MB, this one is ${(file.size / (1024 * 1024)).toFixed(1)}MB). Try a smaller or more compressed file.`);
+                if (input) input.value = "";
+                return;
+              }
+
+              setError(null);
+              setPreview(URL.createObjectURL(file));
+              formRef.current?.requestSubmit();
+            }}
+          >
+            {Object.entries(hiddenFields ?? {}).map(([k, v]) => (
+              <input key={k} type="hidden" name={k} value={v} />
+            ))}
+            <UploadButton />
+          </form>
+          {error && <p className="mt-1.5 max-w-xs text-xs text-admin-danger">{error}</p>}
+        </div>
       </div>
     </div>
   );

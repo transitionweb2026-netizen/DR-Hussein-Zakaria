@@ -23,6 +23,18 @@ const nextConfig: NextConfig = {
         ]
       : [],
   },
+  experimental: {
+    // Default is 1MB, well under what a real photo (logo, doctor portrait,
+    // service/certificate images) commonly is -- every admin image upload
+    // goes through a Server Action (MediaUploadField), so a plain JPEG
+    // over ~1MB was being rejected before it ever reached our own code,
+    // surfacing as a generic crash instead of a real error. Raised to 4MB,
+    // just under Vercel's own hard 4.5MB request-body ceiling (which no
+    // config can raise further).
+    serverActions: {
+      bodySizeLimit: "4mb",
+    },
+  },
 };
 
 export default withNextIntl(nextConfig);
