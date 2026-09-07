@@ -23,7 +23,11 @@ export default async function PatientStoriesAdminPage() {
         <TranslatableInput name="hero_heading_highlight" label="Hero heading (highlighted part)" defaultValue={content?.hero_heading_highlight} />
         <TranslatableInput name="hero_paragraph" label="Hero paragraph" defaultValue={content?.hero_paragraph} multiline />
         <TranslatableInput name="intro_eyebrow" label="Stories intro eyebrow" defaultValue={content?.intro_eyebrow} />
-        <TranslatableInput name="intro_heading" label="Stories intro heading" defaultValue={content?.intro_heading} />
+        <TranslatableInput
+          name="intro_heading"
+          label="Stories intro heading (also shown as the Hero button label)"
+          defaultValue={content?.intro_heading}
+        />
         <TranslatableInput name="reviews_intro_eyebrow" label="Reviews intro eyebrow" defaultValue={content?.reviews_intro_eyebrow} />
         <TranslatableInput name="reviews_intro_heading" label="Reviews intro heading" defaultValue={content?.reviews_intro_heading} />
         <TranslatableInput name="read_story_label" label='"Read Full Story" link label' defaultValue={content?.read_story_label} />
