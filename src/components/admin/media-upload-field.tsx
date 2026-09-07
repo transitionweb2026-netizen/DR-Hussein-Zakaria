@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useTransition } from "react";
 import Image from "next/image";
 import { useFormStatus } from "react-dom";
-import { ImageOff, Upload } from "lucide-react";
+import { ImageOff, Upload, X } from "lucide-react";
 
 // Matches the server's own cap (next.config.ts, experimental.serverActions.
 // bodySizeLimit) minus headroom for multipart encoding overhead -- checked
@@ -21,12 +21,19 @@ export function MediaUploadField({
   label,
   currentUrl,
   action,
+  removeAction,
   hiddenFields,
   size = 80,
 }: {
   label: string;
   currentUrl: string | null;
   action: (formData: FormData) => Promise<void>;
+  /** Optional -- when provided, a "Remove" control appears whenever an
+   * image is set, clearing the field back to its default fallback (e.g.
+   * the built-in library icon) instead of leaving it stuck on a custom
+   * image forever. Omit for fields with no meaningful "no image" state
+   * (favicon, logo). */
+  removeAction?: (formData: FormData) => Promise<void>;
   /** Extra fields the action needs beyond the file itself -- e.g. which
    * row's image this is, for per-item uploads (certificates, surgeries,
    * videos, ...). */
@@ -36,6 +43,7 @@ export function MediaUploadField({
   const formRef = useRef<HTMLFormElement>(null);
   const [preview, setPreview] = useState<string | null>(currentUrl);
   const [error, setError] = useState<string | null>(null);
+  const [removing, startRemove] = useTransition();
 
   return (
     <div>
@@ -74,7 +82,27 @@ export function MediaUploadField({
             {Object.entries(hiddenFields ?? {}).map(([k, v]) => (
               <input key={k} type="hidden" name={k} value={v} />
             ))}
-            <UploadButton />
+            <div className="flex items-center gap-2">
+              <UploadButton />
+              {removeAction && preview && (
+                <button
+                  type="button"
+                  disabled={removing}
+                  onClick={() => {
+                    const formData = new FormData();
+                    for (const [k, v] of Object.entries(hiddenFields ?? {})) formData.set(k, v);
+                    startRemove(async () => {
+                      await removeAction(formData);
+                      setPreview(null);
+                    });
+                  }}
+                  className="flex items-center gap-1.5 rounded-lg border border-admin-border px-3 py-1.5 text-xs font-semibold text-admin-danger hover:bg-admin-danger/10 disabled:opacity-60"
+                >
+                  <X className="h-3.5 w-3.5" />
+                  {removing ? "Removing…" : "Remove"}
+                </button>
+              )}
+            </div>
           </form>
           {error && <p className="mt-1.5 max-w-xs text-xs text-admin-danger">{error}</p>}
         </div>

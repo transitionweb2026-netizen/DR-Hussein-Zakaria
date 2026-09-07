@@ -6,7 +6,16 @@ import { Field } from "@/components/admin/field";
 import { MediaUploadField } from "@/components/admin/media-upload-field";
 import { ReorderDeleteControls } from "@/components/admin/reorder-delete-controls";
 import { getHomeWhyChooseSection, getAllWhyChooseReasons } from "@/lib/data/home";
-import { updateWhyChooseSection, updateWhyChooseImage, addReason, updateReason, deleteReason, moveReason } from "./actions";
+import {
+  updateWhyChooseSection,
+  updateWhyChooseImage,
+  addReason,
+  updateReason,
+  deleteReason,
+  moveReason,
+  updateReasonIcon,
+  removeReasonIcon,
+} from "./actions";
 
 export default async function HomeWhyChoosePage() {
   const [section, reasons] = await Promise.all([getHomeWhyChooseSection(), getAllWhyChooseReasons()]);
@@ -31,11 +40,19 @@ export default async function HomeWhyChoosePage() {
         <div className="space-y-3">
           {reasons.map((reason, i) => (
             <div key={reason.id} className="rounded-xl border border-admin-border bg-admin-surface p-4">
-              <form action={updateReason} className="space-y-3">
+              <MediaUploadField
+                label="Custom icon image (optional)"
+                currentUrl={reason.icon_url}
+                action={updateReasonIcon}
+                removeAction={removeReasonIcon}
+                hiddenFields={{ id: reason.id }}
+                size={64}
+              />
+              <form action={updateReason} className="mt-4 space-y-3">
                 <input type="hidden" name="id" value={reason.id} />
                 <TranslatableInput name="title" label="Reason title" defaultValue={reason.title} />
                 <TranslatableInput name="description" label="Reason description" defaultValue={reason.description} multiline rows={2} />
-                <Field name="icon" label="Icon key" defaultValue={reason.icon} />
+                <Field name="icon" label="Icon key (fallback)" defaultValue={reason.icon} />
                 <div className="flex items-center justify-between">
                   <label className="flex items-center gap-2 text-sm text-admin-text">
                     <input type="checkbox" name="published" defaultChecked={reason.status === "published"} className="h-4 w-4 rounded" />

@@ -1,4 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement> & { strokeWidth?: number }>;
@@ -32,11 +33,16 @@ const sizeMap = {
 
 export function IconTile({
   icon: Icon,
+  imageUrl,
   size = "md",
   tone = "brand",
   className,
 }: {
   icon: IconComponent;
+  /** A CMS-uploaded custom icon image -- when present, replaces the
+   * library icon glyph inside the same tile (same size/halo/border), so
+   * the outer footprint never changes. Falls back to `icon` when unset. */
+  imageUrl?: string | null;
   size?: keyof typeof sizeMap;
   tone?: "brand" | "onNavy";
   className?: string;
@@ -54,20 +60,24 @@ export function IconTile({
       />
       <div
         className={cn(
-          "relative flex h-full w-full items-center justify-center rounded-full border-2 backdrop-blur-md",
+          "relative flex h-full w-full items-center justify-center overflow-hidden rounded-full border-2 backdrop-blur-md",
           tone === "brand" &&
             "border-brand-300/60 bg-glass-strong shadow-[inset_0_1px_0_0_rgb(255_255_255_/_0.85),0_8px_22px_-8px_rgb(49_107_233_/_0.45)]",
           tone === "onNavy" && "border-white/25 bg-white/15 text-white"
         )}
       >
-        <Icon
-          className={cn(
-            s.icon,
-            tone === "brand" && "text-brand-600 drop-shadow-[0_0_10px_rgba(49,107,233,0.55)]",
-            tone === "onNavy" && "text-white"
-          )}
-          strokeWidth={s.strokeWidth}
-        />
+        {imageUrl ? (
+          <Image src={imageUrl} alt="" fill sizes="96px" className="object-cover" />
+        ) : (
+          <Icon
+            className={cn(
+              s.icon,
+              tone === "brand" && "text-brand-600 drop-shadow-[0_0_10px_rgba(49,107,233,0.55)]",
+              tone === "onNavy" && "text-white"
+            )}
+            strokeWidth={s.strokeWidth}
+          />
+        )}
       </div>
     </div>
   );

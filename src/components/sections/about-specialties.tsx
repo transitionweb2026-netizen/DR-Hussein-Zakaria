@@ -37,7 +37,7 @@ export async function AboutSpecialties() {
           {items.map((item, i) => (
             <Reveal key={item.id} delay={i * 90}>
               <GlassCard hover className="h-full p-6">
-                <IconTile icon={getIcon(item.icon)} />
+                <IconTile icon={getIcon(item.icon)} imageUrl={item.icon_url} />
                 <h3 className="mt-5 text-[1.05rem] font-bold text-ink-900">{pickLocale(item.title, locale)}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-600">{pickLocale(item.description, locale)}</p>
               </GlassCard>

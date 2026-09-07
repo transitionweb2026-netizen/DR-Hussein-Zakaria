@@ -36,17 +36,14 @@ export async function getHomeStatsSection() {
 export async function getAllHomeStats() {
   const supabase = await createClient();
   const { data } = await supabase.from("home_stats").select("*").order("sort_order", { ascending: true });
-  return data ?? [];
+  if (!data) return [];
+  const urls = await resolveMediaUrls(supabase, data.map((s) => s.icon_media_id));
+  return data.map((s) => ({ ...s, icon_url: s.icon_media_id ? urls[s.icon_media_id] ?? null : null }));
 }
 
 export async function getPublishedHomeStats() {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("home_stats")
-    .select("*")
-    .eq("status", "published")
-    .order("sort_order", { ascending: true });
-  return data ?? [];
+  const all = await getAllHomeStats();
+  return all.filter((s) => s.status === "published");
 }
 
 export async function getHomeTimelineSection() {
@@ -112,7 +109,9 @@ export async function getHomeWhyChooseSection() {
 export async function getAllWhyChooseReasons() {
   const supabase = await createClient();
   const { data } = await supabase.from("why_choose_reasons").select("*").order("sort_order", { ascending: true });
-  return data ?? [];
+  if (!data) return [];
+  const urls = await resolveMediaUrls(supabase, data.map((r) => r.icon_media_id));
+  return data.map((r) => ({ ...r, icon_url: r.icon_media_id ? urls[r.icon_media_id] ?? null : null }));
 }
 
 export async function getPublishedWhyChooseReasons() {

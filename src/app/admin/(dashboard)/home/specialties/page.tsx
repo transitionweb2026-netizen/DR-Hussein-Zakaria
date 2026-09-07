@@ -14,6 +14,8 @@ import {
   deleteServiceCategory,
   moveServiceCategory,
   updateServiceCategoryImage,
+  updateServiceCategoryIcon,
+  removeServiceCategoryIcon,
 } from "./actions";
 
 export default async function HomeSpecialtiesPage() {
@@ -45,11 +47,21 @@ export default async function HomeSpecialtiesPage() {
                 hiddenFields={{ id: item.id }}
                 size={64}
               />
+              <div className="mt-3">
+                <MediaUploadField
+                  label="Custom icon image (optional)"
+                  currentUrl={item.icon_url}
+                  action={updateServiceCategoryIcon}
+                  removeAction={removeServiceCategoryIcon}
+                  hiddenFields={{ id: item.id }}
+                  size={64}
+                />
+              </div>
               <form action={updateServiceCategory} className="mt-4 space-y-3">
                 <input type="hidden" name="id" value={item.id} />
                 <TranslatableInput name="title" label="Title" defaultValue={item.title} />
                 <TranslatableInput name="description" label="Description" defaultValue={item.description} multiline rows={2} />
-                <Field name="icon" label="Icon key" defaultValue={item.icon} />
+                <Field name="icon" label="Icon key (fallback, used when no custom icon image is set)" defaultValue={item.icon} />
                 <div className="flex items-center justify-between">
                   <label className="flex items-center gap-2 text-sm text-admin-text">
                     <input type="checkbox" name="published" defaultChecked={item.status === "published"} className="h-4 w-4 rounded" />

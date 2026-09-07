@@ -6,8 +6,8 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { GlassCard } from "@/components/ui/glass-card";
 import { IconTile } from "@/components/ui/icon-tile";
 import { CursorGlow } from "@/components/decorative/cursor-glow";
+import { SocialIcon } from "@/components/ui/social-icon";
 import { getSiteSettings, getActiveSocialLinks } from "@/lib/data/global-settings";
-import { getSocialIcon } from "@/lib/social-icon-map";
 
 type CtaConfig = {
   label: string;
@@ -74,22 +74,19 @@ export async function PageHero({
 
       <div className="absolute inset-y-0 start-3 z-10 hidden flex-col items-center justify-center gap-3 sm:flex lg:start-8">
         <span className="sr-only">{socialLabel}</span>
-        {socials.map((social, i) => {
-          const Icon = getSocialIcon(social.icon);
-          return (
-            <a
-              key={social.id}
-              href={social.url || "#"}
-              aria-label={social.platform}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ animationDelay: `${300 + i * 90}ms` }}
-              className="motion-safe:animate-fade-up flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-300/60 hover:bg-white/20"
-            >
-              <Icon className="h-4.5 w-4.5" />
-            </a>
-          );
-        })}
+        {socials.map((social, i) => (
+          <a
+            key={social.id}
+            href={social.url || "#"}
+            aria-label={social.platform}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ animationDelay: `${300 + i * 90}ms` }}
+            className="motion-safe:animate-fade-up flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-300/60 hover:bg-white/20"
+          >
+            <SocialIcon platform={social.icon} imageUrl={social.icon_url} />
+          </a>
+        ))}
       </div>
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-5 sm:px-8 sm:ps-20 lg:gap-10 lg:ps-24">
@@ -133,21 +130,18 @@ export async function PageHero({
             className="mt-8 flex items-center gap-3 sm:hidden motion-safe:animate-fade-up"
             style={{ animationDelay: "300ms" }}
           >
-            {socials.map((social) => {
-              const Icon = getSocialIcon(social.icon);
-              return (
-                <a
-                  key={social.id}
-                  href={social.url || "#"}
-                  aria-label={social.platform}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              );
-            })}
+            {socials.map((social) => (
+              <a
+                key={social.id}
+                href={social.url || "#"}
+                aria-label={social.platform}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
+              >
+                <SocialIcon platform={social.icon} imageUrl={social.icon_url} className="h-4 w-4" />
+              </a>
+            ))}
           </div>
         </div>
 

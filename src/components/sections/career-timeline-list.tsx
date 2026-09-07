@@ -10,6 +10,7 @@ type ResolvedTimelineItem = {
   id: string;
   year: string;
   icon: string;
+  iconUrl?: string | null;
   title: string;
   description: string;
 };
@@ -74,7 +75,7 @@ export function CareerTimelineList({ items }: { items: ResolvedTimelineItem[] })
               >
                 <GlassCard hover className="w-full p-5">
                   <div className={cn("flex items-center gap-3", i % 2 === 0 && "lg:flex-row-reverse")}>
-                    <IconTile icon={Icon} size="xs" />
+                    <IconTile icon={Icon} imageUrl={item.iconUrl} size="xs" />
                     <span className="text-xs font-bold uppercase tracking-wider text-brand-600">{item.year}</span>
                   </div>
                   <h3 className="mt-3 text-base font-bold text-ink-900">{item.title}</h3>

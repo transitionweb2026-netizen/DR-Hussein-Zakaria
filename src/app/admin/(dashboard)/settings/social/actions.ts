@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { uploadMedia } from "@/lib/admin/media-upload";
 import { stringFromForm } from "@/lib/admin/form-helpers";
 
 const PATH = "/admin/settings/social";
@@ -59,5 +60,29 @@ export async function moveSocialLink(formData: FormData) {
   const swap = items[swapIndex];
   await supabase.from("social_links").update({ sort_order: swap.sort_order }).eq("id", current.id);
   await supabase.from("social_links").update({ sort_order: current.sort_order }).eq("id", swap.id);
+  revalidatePath(PATH);
+}
+
+/** Custom icon image, shown instead of the platform's built-in brand
+ * glyph when set -- falls back to the icon key above when removed or
+ * never uploaded. */
+export async function updateSocialLinkIcon(formData: FormData) {
+  const file = formData.get("file") as File | null;
+  const id = stringFromForm(formData, "id");
+  if (!file || !id) return;
+
+  const result = await uploadMedia(file, "global/social-icons");
+  if ("error" in result) return;
+
+  const supabase = await createClient();
+  await supabase.from("social_links").update({ icon_media_id: result.id }).eq("id", id);
+  revalidatePath(PATH);
+}
+
+export async function removeSocialLinkIcon(formData: FormData) {
+  const id = stringFromForm(formData, "id");
+  if (!id) return;
+  const supabase = await createClient();
+  await supabase.from("social_links").update({ icon_media_id: null }).eq("id", id);
   revalidatePath(PATH);
 }

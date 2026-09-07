@@ -16,6 +16,7 @@ export async function AboutCareer() {
     id: item.id,
     year: item.year,
     icon: item.icon,
+    iconUrl: item.icon_url,
     title: pickLocale(item.title, locale),
     description: pickLocale(item.description, locale),
   }));

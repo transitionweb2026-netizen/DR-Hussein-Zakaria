@@ -76,7 +76,7 @@ export interface Database {
       }>;
 
       social_links: Derive<
-        { id: string; platform: string; url: string; icon: string; is_active: boolean } & { sort_order: number } & Timestamps
+        { id: string; platform: string; url: string; icon: string; icon_media_id: string | null; is_active: boolean } & { sort_order: number } & Timestamps
       >;
 
       nav_items: Derive<
@@ -116,7 +116,7 @@ export interface Database {
       }>;
 
       career_timeline: Derive<
-        { id: string; year: string; title: Bilingual; description: Bilingual; icon: string } & Repeatable
+        { id: string; year: string; title: Bilingual; description: Bilingual; icon: string; icon_media_id: string | null } & Repeatable
       >;
 
       certificates: Derive<
@@ -130,6 +130,7 @@ export interface Database {
           title: Bilingual;
           description: Bilingual;
           icon: string;
+          icon_media_id: string | null;
           image_media_id: string | null;
         } & Repeatable
       >;
@@ -176,7 +177,7 @@ export interface Database {
 
       home_stats_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; description: Bilingual; updated_at: string }>;
       home_stats: Derive<
-        { id: string; label: Bilingual; value: number; suffix: string; icon: string } & Repeatable
+        { id: string; label: Bilingual; value: number; suffix: string; icon: string; icon_media_id: string | null } & Repeatable
       >;
 
       home_timeline_section: Derive<{ id: string; eyebrow: Bilingual; heading: Bilingual; updated_at: string }>;
@@ -212,7 +213,7 @@ export interface Database {
       }>;
 
       why_choose_reasons: Derive<
-        { id: string; title: Bilingual; description: Bilingual; icon: string } & Repeatable
+        { id: string; title: Bilingual; description: Bilingual; icon: string; icon_media_id: string | null } & Repeatable
       >;
 
       home_reviews_section: Derive<{

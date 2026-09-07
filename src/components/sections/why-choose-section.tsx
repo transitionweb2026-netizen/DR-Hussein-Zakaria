@@ -43,7 +43,7 @@ export async function WhyChooseSection() {
               <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
                 {reasons.map((reason) => (
                   <div key={reason.id} className="flex items-start gap-3.5">
-                    <IconTile icon={getIcon(reason.icon)} size="sm" />
+                    <IconTile icon={getIcon(reason.icon)} imageUrl={reason.icon_url} size="sm" />
                     <div>
                       <h3 className="text-sm font-bold text-ink-900">{pickLocale(reason.title, locale)}</h3>
                       <p className="mt-1 text-[0.85rem] leading-relaxed text-ink-600">{pickLocale(reason.description, locale)}</p>

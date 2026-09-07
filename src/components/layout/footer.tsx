@@ -3,9 +3,9 @@ import { getLocale } from "next-intl/server";
 import { Brain, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { GlowOrb } from "@/components/decorative/glow-orb";
+import { SocialIcon } from "@/components/ui/social-icon";
 import { getActiveNavItems, getActiveSocialLinks, getFooterContent, getSiteSettings } from "@/lib/data/global-settings";
 import { getPublishedServiceCategories } from "@/lib/data/shared-content";
-import { getSocialIcon } from "@/lib/social-icon-map";
 import { pickLocale } from "@/lib/i18n-content";
 
 export async function Footer() {
@@ -47,21 +47,18 @@ export async function Footer() {
             </Link>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-ink-600">{pickLocale(footer?.description, locale)}</p>
             <div className="mt-6 flex items-center gap-2.5">
-              {socials.map((social) => {
-                const Icon = getSocialIcon(social.icon);
-                return (
-                  <a
-                    key={social.id}
-                    href={social.url || "#"}
-                    aria-label={social.platform}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-line bg-glass-strong text-brand-600 shadow-glass-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-700"
-                  >
-                    <Icon className="h-4.5 w-4.5" />
-                  </a>
-                );
-              })}
+              {socials.map((social) => (
+                <a
+                  key={social.id}
+                  href={social.url || "#"}
+                  aria-label={social.platform}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-line bg-glass-strong text-brand-600 shadow-glass-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-700"
+                >
+                  <SocialIcon platform={social.icon} imageUrl={social.icon_url} />
+                </a>
+              ))}
             </div>
           </div>
 

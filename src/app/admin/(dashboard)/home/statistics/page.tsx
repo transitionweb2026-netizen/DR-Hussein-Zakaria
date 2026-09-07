@@ -3,9 +3,10 @@ import { PageHeader } from "@/components/admin/page-header";
 import { AdminForm } from "@/components/admin/admin-form";
 import { TranslatableInput } from "@/components/admin/translatable-input";
 import { Field } from "@/components/admin/field";
+import { MediaUploadField } from "@/components/admin/media-upload-field";
 import { ReorderDeleteControls } from "@/components/admin/reorder-delete-controls";
 import { getHomeStatsSection, getAllHomeStats } from "@/lib/data/home";
-import { updateStatsSection, addStat, updateStat, deleteStat, moveStat } from "./actions";
+import { updateStatsSection, addStat, updateStat, deleteStat, moveStat, updateStatIcon, removeStatIcon } from "./actions";
 
 export default async function HomeStatisticsPage() {
   const [section, stats] = await Promise.all([getHomeStatsSection(), getAllHomeStats()]);
@@ -25,13 +26,21 @@ export default async function HomeStatisticsPage() {
         <div className="space-y-3">
           {stats.map((stat, i) => (
             <div key={stat.id} className="rounded-xl border border-admin-border bg-admin-surface p-4">
-              <form action={updateStat} className="space-y-3">
+              <MediaUploadField
+                label="Custom icon image (optional)"
+                currentUrl={stat.icon_url}
+                action={updateStatIcon}
+                removeAction={removeStatIcon}
+                hiddenFields={{ id: stat.id }}
+                size={64}
+              />
+              <form action={updateStat} className="mt-4 space-y-3">
                 <input type="hidden" name="id" value={stat.id} />
                 <TranslatableInput name="label" label="Label" defaultValue={stat.label} />
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                   <Field name="value" label="Number" type="number" defaultValue={stat.value} />
                   <Field name="suffix" label="Suffix (e.g. +, %)" defaultValue={stat.suffix} />
-                  <Field name="icon" label="Icon key" defaultValue={stat.icon} />
+                  <Field name="icon" label="Icon key (fallback)" defaultValue={stat.icon} />
                 </div>
                 <div className="flex items-center justify-between">
                   <label className="flex items-center gap-2 text-sm text-admin-text">

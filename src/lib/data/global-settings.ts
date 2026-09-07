@@ -22,20 +22,21 @@ export async function getSiteSettings() {
   };
 }
 
-export async function getActiveSocialLinks() {
+async function getAllSocialLinksResolved() {
   const supabase = await createClient();
-  const { data } = await supabase
-    .from("social_links")
-    .select("*")
-    .eq("is_active", true)
-    .order("sort_order", { ascending: true });
-  return data ?? [];
+  const { data } = await supabase.from("social_links").select("*").order("sort_order", { ascending: true });
+  if (!data) return [];
+  const urls = await resolveMediaUrls(supabase, data.map((s) => s.icon_media_id));
+  return data.map((s) => ({ ...s, icon_url: s.icon_media_id ? urls[s.icon_media_id] ?? null : null }));
+}
+
+export async function getActiveSocialLinks() {
+  const all = await getAllSocialLinksResolved();
+  return all.filter((s) => s.is_active);
 }
 
 export async function getAllSocialLinks() {
-  const supabase = await createClient();
-  const { data } = await supabase.from("social_links").select("*").order("sort_order", { ascending: true });
-  return data ?? [];
+  return getAllSocialLinksResolved();
 }
 
 export async function getActiveNavItems() {

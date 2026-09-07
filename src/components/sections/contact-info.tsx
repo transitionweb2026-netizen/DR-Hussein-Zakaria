@@ -5,8 +5,8 @@ import { IconTile } from "@/components/ui/icon-tile";
 import { Reveal } from "@/components/ui/reveal";
 import { GlowOrb } from "@/components/decorative/glow-orb";
 import { WhatsappIcon } from "@/components/icons/social-icons";
+import { SocialIcon } from "@/components/ui/social-icon";
 import { getSiteSettings, getActiveSocialLinks, getFooterContent } from "@/lib/data/global-settings";
-import { getSocialIcon } from "@/lib/social-icon-map";
 import { pickLocale } from "@/lib/i18n-content";
 
 export async function ContactInfo() {
@@ -61,21 +61,18 @@ export async function ContactInfo() {
               </div>
             </div>
             <div className="flex items-center gap-2.5">
-              {socials.map((social) => {
-                const Icon = getSocialIcon(social.icon);
-                return (
-                  <a
-                    key={social.id}
-                    href={social.url || "#"}
-                    aria-label={social.platform}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-line bg-glass-strong text-brand-600 shadow-glass-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-700"
-                  >
-                    <Icon className="h-4.5 w-4.5" />
-                  </a>
-                );
-              })}
+              {socials.map((social) => (
+                <a
+                  key={social.id}
+                  href={social.url || "#"}
+                  aria-label={social.platform}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-line bg-glass-strong text-brand-600 shadow-glass-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-400 hover:text-brand-700"
+                >
+                  <SocialIcon platform={social.icon} imageUrl={social.icon_url} />
+                </a>
+              ))}
             </div>
           </GlassCard>
         </Reveal>

@@ -22,6 +22,19 @@ const nextConfig: NextConfig = {
           },
         ]
       : [],
+    // Vercel's on-demand image optimization has a monthly transformation
+    // quota; this deployment has exhausted it (every /_next/image request
+    // site-wide -- local and Supabase-hosted alike -- now returns 402
+    // OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED, confirmed directly against
+    // production). That's the actual cause of every "broken image" on the
+    // site, not a code or storage bug -- every real file loads fine
+    // directly. Turning optimization off serves the original file straight
+    // from its source (Supabase Storage or /public) with no transform
+    // step, so it can never hit this wall again, at the cost of no more
+    // automatic per-viewport resizing or WebP/AVIF conversion. Every
+    // <Image> already sets explicit width/height/fill + a sizing
+    // className, so the rendered layout is unchanged.
+    unoptimized: true,
   },
   experimental: {
     // Default is 1MB, well under what a real photo (logo, doctor portrait,

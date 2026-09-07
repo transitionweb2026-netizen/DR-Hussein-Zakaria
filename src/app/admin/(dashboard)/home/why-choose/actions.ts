@@ -88,3 +88,26 @@ export async function moveReason(formData: FormData) {
   await supabase.from("why_choose_reasons").update({ sort_order: current.sort_order }).eq("id", swap.id);
   revalidatePath(PATH);
 }
+
+/** Custom icon image, shown instead of the icon-key glyph when set --
+ * falls back to the icon key above when removed or never uploaded. */
+export async function updateReasonIcon(formData: FormData) {
+  const file = formData.get("file") as File | null;
+  const id = stringFromForm(formData, "id");
+  if (!file || !id) return;
+
+  const result = await uploadMedia(file, "home/why-choose/icons");
+  if ("error" in result) return;
+
+  const supabase = await createClient();
+  await supabase.from("why_choose_reasons").update({ icon_media_id: result.id }).eq("id", id);
+  revalidatePath(PATH);
+}
+
+export async function removeReasonIcon(formData: FormData) {
+  const id = stringFromForm(formData, "id");
+  if (!id) return;
+  const supabase = await createClient();
+  await supabase.from("why_choose_reasons").update({ icon_media_id: null }).eq("id", id);
+  revalidatePath(PATH);
+}

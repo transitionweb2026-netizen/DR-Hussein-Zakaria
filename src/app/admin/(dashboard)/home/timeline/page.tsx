@@ -3,10 +3,19 @@ import { PageHeader } from "@/components/admin/page-header";
 import { AdminForm } from "@/components/admin/admin-form";
 import { TranslatableInput } from "@/components/admin/translatable-input";
 import { Field } from "@/components/admin/field";
+import { MediaUploadField } from "@/components/admin/media-upload-field";
 import { ReorderDeleteControls } from "@/components/admin/reorder-delete-controls";
 import { getHomeTimelineSection } from "@/lib/data/home";
 import { getAllCareerTimeline } from "@/lib/data/shared-content";
-import { updateTimelineSection, addTimelineItem, updateTimelineItem, deleteTimelineItem, moveTimelineItem } from "./actions";
+import {
+  updateTimelineSection,
+  addTimelineItem,
+  updateTimelineItem,
+  deleteTimelineItem,
+  moveTimelineItem,
+  updateTimelineItemIcon,
+  removeTimelineItemIcon,
+} from "./actions";
 
 export default async function HomeTimelinePage() {
   const [section, items] = await Promise.all([getHomeTimelineSection(), getAllCareerTimeline()]);
@@ -28,11 +37,19 @@ export default async function HomeTimelinePage() {
         <div className="space-y-3">
           {items.map((item, i) => (
             <div key={item.id} className="rounded-xl border border-admin-border bg-admin-surface p-4">
-              <form action={updateTimelineItem} className="space-y-3">
+              <MediaUploadField
+                label="Custom icon image (optional)"
+                currentUrl={item.icon_url}
+                action={updateTimelineItemIcon}
+                removeAction={removeTimelineItemIcon}
+                hiddenFields={{ id: item.id }}
+                size={64}
+              />
+              <form action={updateTimelineItem} className="mt-4 space-y-3">
                 <input type="hidden" name="id" value={item.id} />
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-[120px_1fr]">
                   <Field name="year" label="Year" defaultValue={item.year} />
-                  <Field name="icon" label="Icon key" defaultValue={item.icon} />
+                  <Field name="icon" label="Icon key (fallback)" defaultValue={item.icon} />
                 </div>
                 <TranslatableInput name="title" label="Title" defaultValue={item.title} />
                 <TranslatableInput name="description" label="Description" defaultValue={item.description} multiline rows={2} />

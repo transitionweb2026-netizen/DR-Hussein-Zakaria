@@ -1,8 +1,16 @@
 import { ArrowUp, ArrowDown, Trash2, Plus } from "lucide-react";
 import { PageHeader } from "@/components/admin/page-header";
 import { Field } from "@/components/admin/field";
+import { MediaUploadField } from "@/components/admin/media-upload-field";
 import { getAllSocialLinks } from "@/lib/data/global-settings";
-import { addSocialLink, updateSocialLink, deleteSocialLink, moveSocialLink } from "./actions";
+import {
+  addSocialLink,
+  updateSocialLink,
+  deleteSocialLink,
+  moveSocialLink,
+  updateSocialLinkIcon,
+  removeSocialLinkIcon,
+} from "./actions";
 
 export default async function SocialSettingsPage() {
   const items = await getAllSocialLinks();
@@ -17,11 +25,19 @@ export default async function SocialSettingsPage() {
       <div className="space-y-3">
         {items.map((item, i) => (
           <div key={item.id} className="rounded-xl border border-admin-border bg-admin-surface p-4">
-            <form action={updateSocialLink} className="space-y-3">
+            <MediaUploadField
+              label="Custom icon image (optional)"
+              currentUrl={item.icon_url}
+              action={updateSocialLinkIcon}
+              removeAction={removeSocialLinkIcon}
+              hiddenFields={{ id: item.id }}
+              size={64}
+            />
+            <form action={updateSocialLink} className="mt-4 space-y-3">
               <input type="hidden" name="id" value={item.id} />
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <Field name="platform" label="Platform" defaultValue={item.platform} />
-                <Field name="icon" label="Icon key" defaultValue={item.icon} />
+                <Field name="icon" label="Icon key (fallback)" defaultValue={item.icon} />
                 <Field name="url" label="URL" defaultValue={item.url} dir="ltr" />
               </div>
               <div className="flex items-center justify-between">

@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { uploadMedia } from "@/lib/admin/media-upload";
 import { bilingualFromForm, stringFromForm, type ActionState } from "@/lib/admin/form-helpers";
 
 const ID = "00000000-0000-0000-0000-000000000001";
@@ -75,5 +76,28 @@ export async function moveStat(formData: FormData) {
   const swap = items[swapIndex];
   await supabase.from("home_stats").update({ sort_order: swap.sort_order }).eq("id", current.id);
   await supabase.from("home_stats").update({ sort_order: current.sort_order }).eq("id", swap.id);
+  revalidatePath(PATH);
+}
+
+/** Custom icon image, shown instead of the icon-key glyph when set --
+ * falls back to the icon key above when removed or never uploaded. */
+export async function updateStatIcon(formData: FormData) {
+  const file = formData.get("file") as File | null;
+  const id = stringFromForm(formData, "id");
+  if (!file || !id) return;
+
+  const result = await uploadMedia(file, "home/stats/icons");
+  if ("error" in result) return;
+
+  const supabase = await createClient();
+  await supabase.from("home_stats").update({ icon_media_id: result.id }).eq("id", id);
+  revalidatePath(PATH);
+}
+
+export async function removeStatIcon(formData: FormData) {
+  const id = stringFromForm(formData, "id");
+  if (!id) return;
+  const supabase = await createClient();
+  await supabase.from("home_stats").update({ icon_media_id: null }).eq("id", id);
   revalidatePath(PATH);
 }

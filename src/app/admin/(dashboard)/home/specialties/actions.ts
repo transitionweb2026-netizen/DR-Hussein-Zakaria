@@ -98,3 +98,26 @@ export async function updateServiceCategoryImage(formData: FormData) {
   await supabase.from("service_categories").update({ image_media_id: result.id }).eq("id", id);
   revalidatePath(PATH);
 }
+
+/** Custom icon image, shown instead of the icon-key glyph when set --
+ * falls back to the icon key above when removed or never uploaded. */
+export async function updateServiceCategoryIcon(formData: FormData) {
+  const file = formData.get("file") as File | null;
+  const id = stringFromForm(formData, "id");
+  if (!file || !id) return;
+
+  const result = await uploadMedia(file, "services/categories/icons");
+  if ("error" in result) return;
+
+  const supabase = await createClient();
+  await supabase.from("service_categories").update({ icon_media_id: result.id }).eq("id", id);
+  revalidatePath(PATH);
+}
+
+export async function removeServiceCategoryIcon(formData: FormData) {
+  const id = stringFromForm(formData, "id");
+  if (!id) return;
+  const supabase = await createClient();
+  await supabase.from("service_categories").update({ icon_media_id: null }).eq("id", id);
+  revalidatePath(PATH);
+}

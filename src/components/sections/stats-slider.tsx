@@ -18,7 +18,7 @@ export async function StatsSlider() {
     const Icon = getIcon(item.icon);
     return (
       <GlassCard key={item.id} hover className="flex w-[220px] flex-col items-center gap-4 p-7 text-center sm:w-[240px]">
-        <IconTile icon={Icon} />
+        <IconTile icon={Icon} imageUrl={item.icon_url} />
         <Counter
           value={item.value}
           suffix={item.suffix}
