@@ -3,8 +3,9 @@ import { AdminForm } from "@/components/admin/admin-form";
 import { TranslatableInput } from "@/components/admin/translatable-input";
 import { Field } from "@/components/admin/field";
 import { MediaUploadField } from "@/components/admin/media-upload-field";
+import { VideoUploadField } from "@/components/admin/video-upload-field";
 import { getAboutVideoIntro } from "@/lib/data/about";
-import { updateAboutVideoIntro, updateAboutVideoThumbnail } from "./actions";
+import { updateAboutVideoIntro, updateAboutVideoFile, updateAboutVideoThumbnail } from "./actions";
 
 export default async function AboutVideoIntroPage() {
   const video = await getAboutVideoIntro();
@@ -17,8 +18,15 @@ export default async function AboutVideoIntroPage() {
       />
 
       <MediaUploadField label="Video thumbnail" currentUrl={video?.thumbnail_url ?? null} action={updateAboutVideoThumbnail} />
+      <VideoUploadField
+        label="Video file"
+        currentUrl={video?.video_url ?? null}
+        currentProvider={video?.video_provider ?? null}
+        folder="about"
+        action={updateAboutVideoFile}
+      />
 
-      <AdminForm action={updateAboutVideoIntro}>
+      <AdminForm action={updateAboutVideoIntro} key={video?.updated_at}>
         <TranslatableInput name="eyebrow" label="Eyebrow" defaultValue={video?.eyebrow} />
         <TranslatableInput name="heading" label="Heading" defaultValue={video?.heading} />
         <TranslatableInput name="description" label="Description" defaultValue={video?.description} multiline rows={3} />

@@ -31,6 +31,20 @@ export async function updateAboutVideoIntro(_prevState: ActionState, formData: F
   return { status: "success", message: "Intro video saved." };
 }
 
+/** Companion to updateAboutVideoIntro, but scoped to just video_url/
+ * video_provider -- called by VideoUploadField's own self-contained
+ * upload flow, so it can't be clobbered by whatever the sibling manual
+ * URL field happens to be showing in the main form. */
+export async function updateAboutVideoFile(formData: FormData) {
+  const supabase = await createClient();
+  const videoUrl = nullableStringFromForm(formData, "video_url");
+  await supabase
+    .from("about_video_intro")
+    .update({ video_url: videoUrl, video_provider: videoUrl ? "mp4" : null })
+    .eq("id", ID);
+  revalidatePath(PATH);
+}
+
 export async function updateAboutVideoThumbnail(formData: FormData) {
   const file = formData.get("file") as File | null;
   if (!file) return;

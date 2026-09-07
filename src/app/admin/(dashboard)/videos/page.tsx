@@ -4,9 +4,10 @@ import { AdminForm } from "@/components/admin/admin-form";
 import { TranslatableInput } from "@/components/admin/translatable-input";
 import { Field } from "@/components/admin/field";
 import { MediaUploadField } from "@/components/admin/media-upload-field";
+import { VideoUploadField } from "@/components/admin/video-upload-field";
 import { ReorderDeleteControls } from "@/components/admin/reorder-delete-controls";
 import { getVideosPageContent, getAllVideos } from "@/lib/data/videos";
-import { updatePageContent, addVideo, updateVideo, deleteVideo, moveVideo, updateVideoThumbnail } from "./actions";
+import { updatePageContent, addVideo, updateVideo, updateVideoFile, deleteVideo, moveVideo, updateVideoThumbnail } from "./actions";
 
 export default async function VideosAdminPage() {
   const [content, items] = await Promise.all([getVideosPageContent(), getAllVideos()]);
@@ -37,7 +38,15 @@ export default async function VideosAdminPage() {
                 hiddenFields={{ id: item.id }}
                 size={72}
               />
-              <form action={updateVideo} className="mt-4 space-y-3">
+              <VideoUploadField
+                label="Video file"
+                currentUrl={item.video_url}
+                currentProvider={item.video_provider}
+                folder="videos"
+                action={updateVideoFile}
+                hiddenFields={{ id: item.id }}
+              />
+              <form action={updateVideo} className="mt-4 space-y-3" key={item.updated_at}>
                 <input type="hidden" name="id" value={item.id} />
                 <TranslatableInput name="title" label="Title" defaultValue={item.title} />
                 <TranslatableInput name="description" label="Description" defaultValue={item.description} multiline rows={2} />

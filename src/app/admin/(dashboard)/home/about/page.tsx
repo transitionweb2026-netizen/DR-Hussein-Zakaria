@@ -3,8 +3,9 @@ import { AdminForm } from "@/components/admin/admin-form";
 import { TranslatableInput } from "@/components/admin/translatable-input";
 import { Field } from "@/components/admin/field";
 import { MediaUploadField } from "@/components/admin/media-upload-field";
+import { VideoUploadField } from "@/components/admin/video-upload-field";
 import { getHomeAbout, getHomeVideoIntro } from "@/lib/data/home";
-import { updateHomeAbout, updateHomeVideo, updateVideoThumbnail } from "./actions";
+import { updateHomeAbout, updateHomeVideo, updateHomeVideoFile, updateVideoThumbnail } from "./actions";
 
 export default async function HomeAboutPage() {
   const [about, video] = await Promise.all([getHomeAbout(), getHomeVideoIntro()]);
@@ -30,8 +31,15 @@ export default async function HomeAboutPage() {
       <div className="space-y-6 border-t border-admin-border pt-8">
         <h2 className="text-sm font-semibold text-admin-text">Video</h2>
         <MediaUploadField label="Video thumbnail" currentUrl={video?.thumbnail_url ?? null} action={updateVideoThumbnail} />
+        <VideoUploadField
+          label="Video file"
+          currentUrl={video?.video_url ?? null}
+          currentProvider={video?.video_provider ?? null}
+          folder="home"
+          action={updateHomeVideoFile}
+        />
 
-        <AdminForm action={updateHomeVideo} saveLabel="Save video">
+        <AdminForm action={updateHomeVideo} saveLabel="Save video" key={video?.updated_at}>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <Field name="duration" label="Duration badge (e.g. 02:14)" defaultValue={video?.duration} />
             <div>
