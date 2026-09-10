@@ -5,12 +5,10 @@ import { useRouter } from "next/navigation";
 import { Film, Upload, X } from "lucide-react";
 import { uploadVideoFromBrowser } from "@/lib/admin/client-video-upload";
 
-// Generous for a short web clip; Supabase's own project Storage limit is
-// the real ceiling (unlike images, no fixed Vercel-side number is known
-// here), so an oversized file surfaces that real error rather than a
-// guessed one -- this is just a sanity cap to avoid a multi-minute stuck
-// upload for something wildly too large.
-const MAX_VIDEO_SIZE_BYTES = 100 * 1024 * 1024;
+// Pure sanity cap to catch an obviously-wrong pick (a multi-GB raw
+// export); the real ceiling is the project's Storage upload limit, and
+// that error is surfaced with a clear message if hit.
+const MAX_VIDEO_SIZE_BYTES = 2 * 1024 * 1024 * 1024;
 
 /** Direct-to-Storage video file upload, self-contained like
  * MediaUploadField (its own action, independent of any other form on the
@@ -42,6 +40,7 @@ export function VideoUploadField({
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const isUploadedVideo = currentProvider === "mp4" && !!currentUrl;
 
@@ -60,13 +59,14 @@ export function VideoUploadField({
   async function handleFile(file: File) {
     setError(null);
     if (file.size > MAX_VIDEO_SIZE_BYTES) {
-      setError(`That video is too large (max 100MB, this one is ${(file.size / (1024 * 1024)).toFixed(0)}MB).`);
+      setError(`That file is ${(file.size / (1024 * 1024 * 1024)).toFixed(1)}GB — far too large for a web video. Compress it first.`);
       if (inputRef.current) inputRef.current.value = "";
       return;
     }
 
     setUploading(true);
-    const result = await uploadVideoFromBrowser(file, folder);
+    setProgress(0);
+    const result = await uploadVideoFromBrowser(file, folder, setProgress);
     if (inputRef.current) inputRef.current.value = "";
     if ("error" in result) {
       setError(result.error);
@@ -75,6 +75,14 @@ export function VideoUploadField({
     }
     await callAction({ video_url: result.url, video_provider: "mp4" });
   }
+
+  const buttonLabel = uploading
+    ? progress > 0 && progress < 100
+      ? `Uploading… ${progress}%`
+      : "Uploading…"
+    : isUploadedVideo
+      ? "Replace video file"
+      : "Upload video file";
 
   return (
     <div>
@@ -97,7 +105,7 @@ export function VideoUploadField({
 
       <label className="flex w-fit cursor-pointer items-center gap-1.5 rounded-lg border border-admin-border px-3 py-1.5 text-xs font-semibold text-admin-text hover:bg-admin-bg">
         {uploading ? <Film className="h-3.5 w-3.5 animate-pulse" /> : <Upload className="h-3.5 w-3.5" />}
-        {uploading ? "Uploading…" : isUploadedVideo ? "Replace video file" : "Upload video file"}
+        {buttonLabel}
         <input
           ref={inputRef}
           type="file"
@@ -110,7 +118,12 @@ export function VideoUploadField({
           }}
         />
       </label>
-      {error && <p className="mt-1.5 max-w-xs text-xs text-admin-danger">{error}</p>}
+      {uploading && progress > 0 && (
+        <div className="mt-2 h-1.5 w-40 overflow-hidden rounded-full bg-admin-border">
+          <div className="h-full rounded-full bg-admin-accent transition-[width] duration-300" style={{ width: `${progress}%` }} />
+        </div>
+      )}
+      {error && <p className="mt-1.5 max-w-sm text-xs text-admin-danger">{error}</p>}
       <p className="mt-1.5 text-xs text-admin-muted">Or paste a YouTube/Vimeo link in the Video URL field below instead.</p>
     </div>
   );
