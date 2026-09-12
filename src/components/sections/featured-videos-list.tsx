@@ -25,9 +25,13 @@ export function FeaturedVideosList({ items }: { items: VideoItem[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-wrap justify-center gap-6">
         {items.map((item, i) => (
-          <Reveal key={item.id} delay={i * 90}>
+          <Reveal
+            key={item.id}
+            delay={i * 90}
+            className="w-full sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)]"
+          >
             <GlassCard hover className="group h-full p-2.5">
               <button type="button" onClick={() => setActiveId(item.id)} className="block w-full text-start">
                 <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)] bg-navy-950">

@@ -33,9 +33,9 @@ export async function AboutSpecialties() {
           )}
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-wrap justify-center gap-5">
           {items.map((item, i) => (
-            <Reveal key={item.id} delay={i * 90}>
+            <Reveal key={item.id} delay={i * 90} className="w-full sm:w-[calc((100%-20px)/2)] lg:w-[calc((100%-60px)/4)]">
               <GlassCard hover className="h-full p-6">
                 <IconTile icon={getIcon(item.icon)} imageUrl={item.icon_url} />
                 <h3 className="mt-5 text-[1.05rem] font-bold text-ink-900">{pickLocale(item.title, locale)}</h3>

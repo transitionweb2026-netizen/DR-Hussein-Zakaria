@@ -56,7 +56,13 @@ export function Carousel({
   return (
     <div className={cn("relative", className)}>
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="-ms-4 flex">
+        {/* justify-center only has any effect when the slides don't fill the
+            viewport (nothing to scroll) -- it centers that short row as a
+            group instead of leaving it stuck at the start edge. Once slides
+            overflow and become scrollable, there's no leftover space left to
+            redistribute, so this is a no-op and normal carousel scrolling is
+            unaffected. */}
+        <div className="-ms-4 flex justify-center">
           {slides.map((slide, i) => (
             <div key={i} className={cn("min-w-0 shrink-0 grow-0 ps-4", slideClassName)}>
               {slide}

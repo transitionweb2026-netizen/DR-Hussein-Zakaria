@@ -27,9 +27,9 @@ export async function MainServices() {
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-wrap justify-center gap-5">
           {items.map((item, i) => (
-            <Reveal key={item.id} delay={i * 90}>
+            <Reveal key={item.id} delay={i * 90} className="w-full sm:w-[calc((100%-20px)/2)] lg:w-[calc((100%-60px)/4)]">
               <GlassCard hover className="group flex h-full flex-col overflow-hidden p-2.5">
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)]">
                   <Image

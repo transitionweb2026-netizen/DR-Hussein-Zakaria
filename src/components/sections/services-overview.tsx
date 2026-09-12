@@ -27,9 +27,13 @@ export async function ServicesOverview() {
           <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-600">{pickLocale(content?.intro_paragraph, locale)}</p>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-wrap justify-center gap-6">
           {categories.map((category, i) => (
-            <Reveal key={category.id} delay={i * 90}>
+            <Reveal
+              key={category.id}
+              delay={i * 90}
+              className="w-full sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-72px)/4)]"
+            >
               <a href={`#surgeries-${category.slug}`} className="group block h-full">
                 <GlassCard hover className="flex h-full flex-col overflow-hidden p-2.5">
                   <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)]">

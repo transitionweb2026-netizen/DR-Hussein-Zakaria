@@ -42,9 +42,13 @@ export function DetailedSurgeriesList({
             <Reveal>
               <h3 className="text-balance text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">{category.title}</h3>
             </Reveal>
-            <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 flex flex-wrap justify-center gap-5">
               {category.surgeries.map((surgery, i) => (
-                <Reveal key={surgery.id} delay={i * 90}>
+                <Reveal
+                  key={surgery.id}
+                  delay={i * 90}
+                  className="w-full sm:w-[calc((100%-20px)/2)] lg:w-[calc((100%-40px)/3)]"
+                >
                   <GlassCard hover className="group h-full overflow-hidden p-2.5">
                     <button type="button" onClick={() => setActive(surgery)} className="block w-full text-start">
                       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)]">
