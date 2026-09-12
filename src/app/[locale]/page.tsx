@@ -36,9 +36,9 @@ export default function Home() {
         <Hero />
         <AboutVideoIntro />
         <MainServices />
-        <StatsSlider />
         <Technologies />
         <WhyChooseSection />
+        <StatsSlider />
         <HomeReviews />
         <HomeFeaturedVideos />
         <Certificates />
