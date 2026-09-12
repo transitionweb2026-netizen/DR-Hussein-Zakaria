@@ -17,6 +17,7 @@ export async function updatePageContent(_prevState: ActionState, formData: FormD
       hero_heading_prefix: bilingualFromForm(formData, "hero_heading_prefix"),
       hero_heading_highlight: bilingualFromForm(formData, "hero_heading_highlight"),
       hero_paragraph: bilingualFromForm(formData, "hero_paragraph"),
+      hero_cta_label: bilingualFromForm(formData, "hero_cta_label"),
       intro_eyebrow: bilingualFromForm(formData, "intro_eyebrow"),
       intro_heading: bilingualFromForm(formData, "intro_heading"),
       intro_description: bilingualFromForm(formData, "intro_description"),

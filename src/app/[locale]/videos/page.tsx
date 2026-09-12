@@ -37,7 +37,15 @@ export default async function VideosPage() {
           headingPrefix={pickLocale(content?.hero_heading_prefix, locale)}
           headingHighlight={pickLocale(content?.hero_heading_highlight, locale)}
           paragraph={pickLocale(content?.hero_paragraph, locale)}
-          primaryCta={{ label: pickLocale(content?.intro_heading, locale), href: "#featured-videos", icon: <Play className="h-4 w-4" /> }}
+          primaryCta={{
+            // Falls back to intro_heading only if hero_cta_label is still
+            // empty (e.g. the migration adding this column hasn't run
+            // yet) -- matches what the button showed before this field
+            // existed, so this can never regress to blank text.
+            label: pickLocale(content?.hero_cta_label, locale) || pickLocale(content?.intro_heading, locale),
+            href: "#featured-videos",
+            icon: <Play className="h-4 w-4" />,
+          }}
           showPhoneCard={false}
           compact
         />

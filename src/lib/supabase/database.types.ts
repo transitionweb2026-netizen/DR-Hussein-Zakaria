@@ -347,6 +347,7 @@ export interface Database {
         hero_heading_prefix: Bilingual;
         hero_heading_highlight: Bilingual;
         hero_paragraph: Bilingual;
+        hero_cta_label: Bilingual;
         intro_eyebrow: Bilingual;
         intro_heading: Bilingual;
         intro_description: Bilingual;

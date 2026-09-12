@@ -21,6 +21,7 @@ export default async function VideosAdminPage() {
         <TranslatableInput name="hero_heading_prefix" label="Hero heading (first part)" defaultValue={content?.hero_heading_prefix} />
         <TranslatableInput name="hero_heading_highlight" label="Hero heading (highlighted part)" defaultValue={content?.hero_heading_highlight} />
         <TranslatableInput name="hero_paragraph" label="Hero paragraph" defaultValue={content?.hero_paragraph} multiline />
+        <TranslatableInput name="hero_cta_label" label="Hero button label" defaultValue={content?.hero_cta_label} />
         <TranslatableInput name="intro_eyebrow" label="Intro eyebrow" defaultValue={content?.intro_eyebrow} />
         <TranslatableInput name="intro_heading" label="Intro heading" defaultValue={content?.intro_heading} />
         <TranslatableInput name="intro_description" label="Intro description" defaultValue={content?.intro_description} multiline rows={2} />
