@@ -37,6 +37,7 @@ export default async function VideosPage() {
           headingPrefix={pickLocale(content?.hero_heading_prefix, locale)}
           headingHighlight={pickLocale(content?.hero_heading_highlight, locale)}
           paragraph={pickLocale(content?.hero_paragraph, locale)}
+          backgroundImage={content?.hero_background_url}
           primaryCta={{
             // Falls back to intro_heading only if hero_cta_label is still
             // empty (e.g. the migration adding this column hasn't run

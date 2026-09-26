@@ -33,6 +33,17 @@ export async function updatePageContent(_prevState: ActionState, formData: FormD
   return { status: "success", message: "Page content saved." };
 }
 
+export async function updateHeroBackground(formData: FormData) {
+  const file = formData.get("file") as File | null;
+  if (!file) return;
+  const result = await uploadMedia(file, "patient-stories");
+  if ("error" in result) return;
+
+  const supabase = await createClient();
+  await supabase.from("patient_stories_page_content").update({ hero_background_media_id: result.id }).eq("id", ID);
+  revalidatePath(PATH);
+}
+
 export async function addStory(formData: FormData) {
   const supabase = await createClient();
   const { count } = await supabase.from("patient_stories").select("id", { count: "exact", head: true });

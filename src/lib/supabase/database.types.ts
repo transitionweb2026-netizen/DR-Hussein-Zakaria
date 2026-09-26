@@ -272,6 +272,7 @@ export interface Database {
         hero_heading_highlight: Bilingual;
         hero_paragraph: Bilingual;
         hero_cta_label: Bilingual;
+        hero_background_media_id: string | null;
         biography_eyebrow: Bilingual;
         biography_heading: Bilingual;
         biography: Bilingual;
@@ -310,6 +311,7 @@ export interface Database {
         hero_heading_prefix: Bilingual;
         hero_heading_highlight: Bilingual;
         hero_paragraph: Bilingual;
+        hero_background_media_id: string | null;
         intro_eyebrow: Bilingual;
         intro_heading: Bilingual;
         intro_paragraph: Bilingual;
@@ -348,6 +350,7 @@ export interface Database {
         hero_heading_highlight: Bilingual;
         hero_paragraph: Bilingual;
         hero_cta_label: Bilingual;
+        hero_background_media_id: string | null;
         intro_eyebrow: Bilingual;
         intro_heading: Bilingual;
         intro_description: Bilingual;
@@ -372,6 +375,7 @@ export interface Database {
         hero_heading_prefix: Bilingual;
         hero_heading_highlight: Bilingual;
         hero_paragraph: Bilingual;
+        hero_background_media_id: string | null;
         intro_eyebrow: Bilingual;
         intro_heading: Bilingual;
         reviews_intro_eyebrow: Bilingual;
@@ -414,6 +418,7 @@ export interface Database {
         hero_heading_prefix: Bilingual;
         hero_heading_highlight: Bilingual;
         hero_paragraph: Bilingual;
+        hero_background_media_id: string | null;
         read_more_label: Bilingual;
         updated_at: string;
       }>;
@@ -442,6 +447,7 @@ export interface Database {
         hero_heading_prefix: Bilingual;
         hero_heading_highlight: Bilingual;
         hero_paragraph: Bilingual;
+        hero_background_media_id: string | null;
         form_eyebrow: Bilingual;
         form_heading: Bilingual;
         form_name_label: Bilingual;

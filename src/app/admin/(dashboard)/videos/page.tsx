@@ -7,7 +7,16 @@ import { MediaUploadField } from "@/components/admin/media-upload-field";
 import { VideoUploadField } from "@/components/admin/video-upload-field";
 import { ReorderDeleteControls } from "@/components/admin/reorder-delete-controls";
 import { getVideosPageContent, getAllVideos } from "@/lib/data/videos";
-import { updatePageContent, addVideo, updateVideo, updateVideoFile, deleteVideo, moveVideo, updateVideoThumbnail } from "./actions";
+import {
+  updatePageContent,
+  addVideo,
+  updateVideo,
+  updateVideoFile,
+  deleteVideo,
+  moveVideo,
+  updateVideoThumbnail,
+  updateHeroBackground,
+} from "./actions";
 
 export default async function VideosAdminPage() {
   const [content, items] = await Promise.all([getVideosPageContent(), getAllVideos()]);
@@ -15,6 +24,12 @@ export default async function VideosAdminPage() {
   return (
     <div className="max-w-3xl space-y-8">
       <PageHeader title="Videos" description="The /videos page's hero, intro copy, and the full video library." />
+
+      <MediaUploadField
+        label="Hero background image"
+        currentUrl={content?.hero_background_url ?? null}
+        action={updateHeroBackground}
+      />
 
       <AdminForm action={updatePageContent} saveLabel="Save page content">
         <TranslatableInput name="hero_eyebrow" label="Hero eyebrow" defaultValue={content?.hero_eyebrow} />

@@ -1,8 +1,9 @@
 import { PageHeader } from "@/components/admin/page-header";
 import { AdminForm } from "@/components/admin/admin-form";
 import { TranslatableInput } from "@/components/admin/translatable-input";
+import { MediaUploadField } from "@/components/admin/media-upload-field";
 import { getAboutPageContent } from "@/lib/data/about";
-import { updateAboutHero } from "./actions";
+import { updateAboutHero, updateAboutHeroBackground } from "./actions";
 
 export default async function AboutHeroPage() {
   const content = await getAboutPageContent();
@@ -11,7 +12,12 @@ export default async function AboutHeroPage() {
     <div className="max-w-2xl space-y-8">
       <PageHeader
         title="About Doctor — Hero"
-        description="The banner at the top of the /about page. Background image falls back to Global Settings → Branding's default hero image."
+        description="The banner at the top of the /about page. Leave the background image unset to keep using Global Settings → Branding's sitewide default."
+      />
+      <MediaUploadField
+        label="Hero background image"
+        currentUrl={content?.hero_background_url ?? null}
+        action={updateAboutHeroBackground}
       />
       <AdminForm action={updateAboutHero}>
         <TranslatableInput name="hero_eyebrow" label="Eyebrow" defaultValue={content?.hero_eyebrow} />

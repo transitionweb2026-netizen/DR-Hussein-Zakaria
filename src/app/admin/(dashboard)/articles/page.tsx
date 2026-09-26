@@ -6,7 +6,15 @@ import { Field } from "@/components/admin/field";
 import { MediaUploadField } from "@/components/admin/media-upload-field";
 import { ReorderDeleteControls } from "@/components/admin/reorder-delete-controls";
 import { getArticlesPageContent, getAllArticles } from "@/lib/data/articles";
-import { updatePageContent, addArticle, updateArticle, deleteArticle, moveArticle, updateArticleImage } from "./actions";
+import {
+  updatePageContent,
+  addArticle,
+  updateArticle,
+  deleteArticle,
+  moveArticle,
+  updateArticleImage,
+  updateHeroBackground,
+} from "./actions";
 
 export default async function ArticlesAdminPage() {
   const [content, items] = await Promise.all([getArticlesPageContent(), getAllArticles()]);
@@ -14,6 +22,12 @@ export default async function ArticlesAdminPage() {
   return (
     <div className="max-w-3xl space-y-8">
       <PageHeader title="Articles" description="The /articles page's hero and every article. Exactly one article can be featured at a time." />
+
+      <MediaUploadField
+        label="Hero background image"
+        currentUrl={content?.hero_background_url ?? null}
+        action={updateHeroBackground}
+      />
 
       <AdminForm action={updatePageContent} saveLabel="Save page content">
         <TranslatableInput name="hero_eyebrow" label="Hero eyebrow" defaultValue={content?.hero_eyebrow} />

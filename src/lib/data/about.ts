@@ -7,8 +7,12 @@ export async function getAboutPageContent() {
   const supabase = await createClient();
   const { data } = await supabase.from("about_page_content").select("*").eq("id", ID).maybeSingle();
   if (!data) return null;
-  const urls = await resolveMediaUrls(supabase, [data.doctor_image_media_id]);
-  return { ...data, doctor_image_url: data.doctor_image_media_id ? urls[data.doctor_image_media_id] ?? null : null };
+  const urls = await resolveMediaUrls(supabase, [data.doctor_image_media_id, data.hero_background_media_id]);
+  return {
+    ...data,
+    doctor_image_url: data.doctor_image_media_id ? urls[data.doctor_image_media_id] ?? null : null,
+    hero_background_url: data.hero_background_media_id ? urls[data.hero_background_media_id] ?? null : null,
+  };
 }
 
 export async function getAboutTimelineSection() {

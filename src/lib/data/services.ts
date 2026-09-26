@@ -6,7 +6,9 @@ const ID = "00000000-0000-0000-0000-000000000001";
 export async function getServicesPageContent() {
   const supabase = await createClient();
   const { data } = await supabase.from("services_page_content").select("*").eq("id", ID).maybeSingle();
-  return data;
+  if (!data) return null;
+  const urls = await resolveMediaUrls(supabase, [data.hero_background_media_id]);
+  return { ...data, hero_background_url: data.hero_background_media_id ? urls[data.hero_background_media_id] ?? null : null };
 }
 
 export async function getAllSurgeries() {

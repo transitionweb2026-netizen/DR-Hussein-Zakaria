@@ -38,6 +38,7 @@ export default async function PatientStoriesPage() {
           headingPrefix={pickLocale(content?.hero_heading_prefix, locale)}
           headingHighlight={pickLocale(content?.hero_heading_highlight, locale)}
           paragraph={pickLocale(content?.hero_paragraph, locale)}
+          backgroundImage={content?.hero_background_url}
           primaryCta={{ label: pickLocale(content?.intro_heading, locale), href: "#patient-stories", icon: <Heart className="h-4 w-4" /> }}
           showPhoneCard={false}
           compact

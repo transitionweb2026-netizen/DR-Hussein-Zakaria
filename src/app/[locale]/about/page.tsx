@@ -43,6 +43,7 @@ export default async function AboutPage() {
           headingPrefix={pickLocale(content?.hero_heading_prefix, locale)}
           headingHighlight={pickLocale(content?.hero_heading_highlight, locale)}
           paragraph={pickLocale(content?.hero_paragraph, locale)}
+          backgroundImage={content?.hero_background_url}
           primaryCta={{ label: pickLocale(content?.hero_cta_label, locale), href: "#biography", icon: <ArrowRight className="h-4 w-4" /> }}
           showPhoneCard={false}
           showOverlay={false}

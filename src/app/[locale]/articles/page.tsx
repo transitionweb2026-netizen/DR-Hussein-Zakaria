@@ -36,6 +36,7 @@ export default async function ArticlesPage() {
           headingPrefix={pickLocale(content?.hero_heading_prefix, locale)}
           headingHighlight={pickLocale(content?.hero_heading_highlight, locale)}
           paragraph={pickLocale(content?.hero_paragraph, locale)}
+          backgroundImage={content?.hero_background_url}
           primaryCta={{ label: pickLocale(content?.read_more_label, locale), href: "#articles", icon: <BookOpen className="h-4 w-4" /> }}
           showPhoneCard={false}
           compact

@@ -5,7 +5,7 @@ import { TranslatableInput } from "@/components/admin/translatable-input";
 import { MediaUploadField } from "@/components/admin/media-upload-field";
 import { ReorderDeleteControls } from "@/components/admin/reorder-delete-controls";
 import { getPatientStoriesPageContent, getAllPatientStories } from "@/lib/data/patient-stories";
-import { updatePageContent, addStory, updateStory, deleteStory, moveStory, updateStoryImage } from "./actions";
+import { updatePageContent, addStory, updateStory, deleteStory, moveStory, updateStoryImage, updateHeroBackground } from "./actions";
 
 export default async function PatientStoriesAdminPage() {
   const [content, items] = await Promise.all([getPatientStoriesPageContent(), getAllPatientStories()]);
@@ -15,6 +15,12 @@ export default async function PatientStoriesAdminPage() {
       <PageHeader
         title="Patient Stories"
         description="The /patient-stories page's hero, intro copy, and every story. Only non-sensitive narrative fields are collected -- no medical record numbers or identifying details beyond a display name."
+      />
+
+      <MediaUploadField
+        label="Hero background image"
+        currentUrl={content?.hero_background_url ?? null}
+        action={updateHeroBackground}
       />
 
       <AdminForm action={updatePageContent} saveLabel="Save page content">

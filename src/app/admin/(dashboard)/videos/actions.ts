@@ -29,6 +29,17 @@ export async function updatePageContent(_prevState: ActionState, formData: FormD
   return { status: "success", message: "Page content saved." };
 }
 
+export async function updateHeroBackground(formData: FormData) {
+  const file = formData.get("file") as File | null;
+  if (!file) return;
+  const result = await uploadMedia(file, "videos");
+  if ("error" in result) return;
+
+  const supabase = await createClient();
+  await supabase.from("videos_page_content").update({ hero_background_media_id: result.id }).eq("id", ID);
+  revalidatePath(PATH);
+}
+
 function normalizeProvider(value: string): "youtube" | "vimeo" | "mp4" | null {
   return value === "youtube" || value === "vimeo" || value === "mp4" ? value : null;
 }

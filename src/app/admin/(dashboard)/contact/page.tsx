@@ -2,8 +2,9 @@ import { PageHeader } from "@/components/admin/page-header";
 import { AdminForm } from "@/components/admin/admin-form";
 import { TranslatableInput } from "@/components/admin/translatable-input";
 import { Field } from "@/components/admin/field";
+import { MediaUploadField } from "@/components/admin/media-upload-field";
 import { getContactPageContent, getContactSubmissions } from "@/lib/data/contact";
-import { updatePageContent, updateSubmissionStatus, deleteSubmission } from "./actions";
+import { updatePageContent, updateSubmissionStatus, deleteSubmission, updateHeroBackground } from "./actions";
 
 const STATUS_STYLES: Record<string, string> = {
   new: "bg-admin-accent/10 text-admin-accent",
@@ -20,6 +21,12 @@ export default async function ContactAdminPage() {
         <PageHeader
           title="Contact Us"
           description="The /contact page's hero and contact form labels. Phone/WhatsApp/email/address themselves live in Global Settings → Contact Info; social links live in Global Settings → Social Media."
+        />
+
+        <MediaUploadField
+          label="Hero background image"
+          currentUrl={content?.hero_background_url ?? null}
+          action={updateHeroBackground}
         />
 
         <AdminForm action={updatePageContent} saveLabel="Save page content">

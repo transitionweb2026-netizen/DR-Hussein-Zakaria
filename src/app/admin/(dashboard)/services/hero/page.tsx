@@ -1,8 +1,9 @@
 import { PageHeader } from "@/components/admin/page-header";
 import { AdminForm } from "@/components/admin/admin-form";
 import { TranslatableInput } from "@/components/admin/translatable-input";
+import { MediaUploadField } from "@/components/admin/media-upload-field";
 import { getServicesPageContent } from "@/lib/data/services";
-import { updateServicesHero } from "./actions";
+import { updateServicesHero, updateServicesHeroBackground } from "./actions";
 
 export default async function ServicesHeroPage() {
   const content = await getServicesPageContent();
@@ -11,7 +12,12 @@ export default async function ServicesHeroPage() {
     <div className="max-w-2xl space-y-8">
       <PageHeader
         title="Services — Hero"
-        description="The banner at the top of the /services page. Background image falls back to Global Settings → Branding's default hero image."
+        description="The banner at the top of the /services page. Leave the background image unset to keep using Global Settings → Branding's sitewide default."
+      />
+      <MediaUploadField
+        label="Hero background image"
+        currentUrl={content?.hero_background_url ?? null}
+        action={updateServicesHeroBackground}
       />
       <AdminForm action={updateServicesHero}>
         <TranslatableInput name="hero_eyebrow" label="Eyebrow" defaultValue={content?.hero_eyebrow} />
