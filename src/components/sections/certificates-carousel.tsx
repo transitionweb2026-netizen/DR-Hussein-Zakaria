@@ -28,7 +28,7 @@ export function CertificatesCarousel({ items }: { items: ResolvedCertificate[] }
       <button
         type="button"
         onClick={() => setActive(item)}
-        className="relative block aspect-[7/5] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)]"
+        className="relative block aspect-[3/4] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)]"
         aria-label={item.title}
       >
         {item.imageUrl && (
@@ -63,10 +63,10 @@ export function CertificatesCarousel({ items }: { items: ResolvedCertificate[] }
         <p className="text-center text-sm text-ink-400">No certificates published yet.</p>
       )}
 
-      <Modal open={active !== null} onClose={() => setActive(null)} className="max-w-2xl p-3">
+      <Modal open={active !== null} onClose={() => setActive(null)} className="max-w-md p-3">
         {active && (
           <>
-            <div className="relative aspect-[7/5] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)]">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.625rem)]">
               {active.imageUrl && (
                 <Image src={active.imageUrl} alt={active.title} fill sizes="700px" className="object-cover" />
               )}
