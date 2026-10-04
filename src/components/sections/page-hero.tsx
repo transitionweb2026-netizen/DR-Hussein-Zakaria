@@ -64,7 +64,7 @@ export async function PageHero({
       }
     >
       <div className="absolute inset-0 -z-10">
-        <Image src={resolvedBackground} alt="" fill priority sizes="100vw" className="object-cover" />
+        <Image src={resolvedBackground} alt="" fill priority sizes="100vw" className="object-cover object-[50%_15%]" />
         {showOverlay && (
           <div className="absolute inset-0 bg-gradient-to-b from-navy-950/75 via-navy-950/45 to-navy-950/80" />
         )}

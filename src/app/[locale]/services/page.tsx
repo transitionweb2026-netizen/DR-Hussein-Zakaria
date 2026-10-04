@@ -28,6 +28,7 @@ export async function generateMetadata(
 
 export default async function ServicesPage() {
   const locale = await getLocale();
+  const t = await getTranslations("hero");
   const [content, settings, finalCta] = await Promise.all([getServicesPageContent(), getSiteSettings(), getFinalCtaContent()]);
   const whatsappHref = `https://wa.me/${settings?.whatsapp_number ?? ""}`;
 
@@ -42,6 +43,7 @@ export default async function ServicesPage() {
           headingHighlight={pickLocale(content?.hero_heading_highlight, locale)}
           paragraph={pickLocale(content?.hero_paragraph, locale)}
           backgroundImage={content?.hero_background_url}
+          phoneLabel={t("phoneLabel")}
           primaryCta={{ label: pickLocale(content?.view_procedures_label, locale), href: "/videos", icon: <ArrowRight className="h-4 w-4" /> }}
           secondaryCta={{ label: pickLocale(finalCta?.whatsapp_label, locale), href: whatsappHref, icon: <WhatsappIcon className="h-4 w-4" /> }}
           compact
