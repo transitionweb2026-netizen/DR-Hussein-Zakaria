@@ -23,6 +23,18 @@ export default async function ContactInfoSettingsPage() {
           placeholder="201234567890"
           required
         />
+        <div>
+          <Field
+            name="whatsapp_number_2"
+            label="Second WhatsApp number (optional)"
+            defaultValue={settings?.whatsapp_number_2 ?? ""}
+            placeholder="201234567890"
+          />
+          <p className="mt-1 text-xs text-admin-muted">
+            Leave blank for a single WhatsApp link everywhere (today&apos;s behavior). Fill it in and every WhatsApp
+            button sitewide offers both numbers to choose from.
+          </p>
+        </div>
         <Field name="email" label="Email address" type="email" defaultValue={settings?.email} required />
         <TranslatableInput name="address" label="Address" defaultValue={settings?.address} />
       </AdminForm>

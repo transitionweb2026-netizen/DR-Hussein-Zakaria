@@ -15,6 +15,7 @@ export async function updateContactInfo(_prevState: ActionState, formData: FormD
     .update({
       phone: stringFromForm(formData, "phone"),
       whatsapp_number: stringFromForm(formData, "whatsapp_number"),
+      whatsapp_number_2: stringFromForm(formData, "whatsapp_number_2"),
       email: stringFromForm(formData, "email"),
       address: bilingualFromForm(formData, "address"),
     })

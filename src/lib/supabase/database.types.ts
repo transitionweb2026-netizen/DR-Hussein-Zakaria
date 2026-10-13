@@ -67,6 +67,7 @@ export interface Database {
         default_hero_bg_media_id: string | null;
         phone: string;
         whatsapp_number: string;
+        whatsapp_number_2: string;
         email: string;
         address: Bilingual;
         book_appointment_label: Bilingual;

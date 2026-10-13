@@ -7,6 +7,7 @@ import { PageHero } from "@/components/sections/page-hero";
 import { ServicesOverview } from "@/components/sections/services-overview";
 import { DetailedSurgeries } from "@/components/sections/detailed-surgeries";
 import { FinalCta } from "@/components/sections/final-cta";
+import { WhatsappButton } from "@/components/ui/whatsapp-button";
 import { WhatsappIcon } from "@/components/icons/social-icons";
 import { getServicesPageContent } from "@/lib/data/services";
 import { getSiteSettings, getFinalCtaContent } from "@/lib/data/global-settings";
@@ -30,7 +31,6 @@ export default async function ServicesPage() {
   const locale = await getLocale();
   const t = await getTranslations("hero");
   const [content, settings, finalCta] = await Promise.all([getServicesPageContent(), getSiteSettings(), getFinalCtaContent()]);
-  const whatsappHref = `https://wa.me/${settings?.whatsapp_number ?? ""}`;
 
   return (
     <>
@@ -45,7 +45,16 @@ export default async function ServicesPage() {
           backgroundImage={content?.hero_background_url}
           phoneLabel={t("phoneLabel")}
           primaryCta={{ label: pickLocale(content?.view_procedures_label, locale), href: "/videos", icon: <ArrowRight className="h-4 w-4" /> }}
-          secondaryCta={{ label: pickLocale(finalCta?.whatsapp_label, locale), href: whatsappHref, icon: <WhatsappIcon className="h-4 w-4" /> }}
+          secondarySlot={
+            <WhatsappButton
+              numbers={[settings?.whatsapp_number, settings?.whatsapp_number_2]}
+              size="lg"
+              variant="outline"
+              icon={<WhatsappIcon className="h-4 w-4" />}
+            >
+              {pickLocale(finalCta?.whatsapp_label, locale)}
+            </WhatsappButton>
+          }
           compact
         />
         <ServicesOverview />

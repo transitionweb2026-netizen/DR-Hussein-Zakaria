@@ -33,7 +33,6 @@ export default async function ContactPage() {
     getFinalCtaContent(),
   ]);
 
-  const whatsappHref = `https://wa.me/${settings?.whatsapp_number ?? ""}`;
   const phoneHref = `tel:${settings?.phone ?? ""}`;
 
   return (
@@ -70,7 +69,7 @@ export default async function ContactPage() {
           orLabel={pickLocale(content?.form_or_label, locale)}
           whatsappLabel={pickLocale(finalCta?.whatsapp_label, locale)}
           callLabel={pickLocale(finalCta?.call_label, locale)}
-          whatsappHref={whatsappHref}
+          whatsappNumbers={[settings?.whatsapp_number, settings?.whatsapp_number_2]}
           phoneHref={phoneHref}
         />
         <LocationPanel />

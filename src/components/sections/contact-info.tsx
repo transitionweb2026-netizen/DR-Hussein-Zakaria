@@ -1,5 +1,6 @@
 import { getLocale } from "next-intl/server";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { IconTile } from "@/components/ui/icon-tile";
 import { Reveal } from "@/components/ui/reveal";
@@ -14,15 +15,17 @@ export async function ContactInfo() {
   const [settings, socials, footer] = await Promise.all([getSiteSettings(), getActiveSocialLinks(), getFooterContent()]);
 
   const phone = settings?.phone ?? "";
-  const whatsapp = settings?.whatsapp_number ?? "";
+  const whatsappNumbers = [settings?.whatsapp_number, settings?.whatsapp_number_2]
+    .map((n) => n?.trim())
+    .filter((n): n is string => Boolean(n));
   const email = settings?.email ?? "";
   const address = pickLocale(settings?.address, locale);
 
-  const cards = [
-    { icon: Phone, label: phone, href: `tel:${phone}`, dir: "ltr" as const },
-    { icon: WhatsappIcon, label: phone, href: `https://wa.me/${whatsapp}`, dir: "ltr" as const },
-    { icon: Mail, label: email, href: `mailto:${email}`, dir: "ltr" as const },
-    { icon: MapPin, label: address, href: undefined, dir: undefined },
+  const cards: { icon: ComponentType<SVGProps<SVGSVGElement> & { strokeWidth?: number }>; links: { label: string; href?: string }[] }[] = [
+    { icon: Phone, links: [{ label: phone, href: `tel:${phone}` }] },
+    { icon: WhatsappIcon, links: whatsappNumbers.map((n) => ({ label: `+${n}`, href: `https://wa.me/${n}` })) },
+    { icon: Mail, links: [{ label: email, href: `mailto:${email}` }] },
+    { icon: MapPin, links: [{ label: address }] },
   ];
 
   return (
@@ -31,15 +34,26 @@ export async function ContactInfo() {
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((card, i) => (
-            <Reveal key={card.label + i} delay={i * 90}>
-              <GlassCard hover className="flex h-full flex-col items-center gap-3 p-6 text-center">
-                <IconTile icon={card.icon} size="sm" />
-                {card.href ? (
-                  <a href={card.href} dir={card.dir} className="text-sm font-bold text-ink-900 transition-colors hover:text-brand-600">
-                    {card.label}
-                  </a>
-                ) : (
-                  <p className="text-sm font-bold text-ink-900">{card.label}</p>
+            <Reveal key={i} delay={i * 90}>
+              <GlassCard hover className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
+                <IconTile icon={card.icon} size="sm" className="mb-1" />
+                {card.links.map((link, j) =>
+                  link.href ? (
+                    <a
+                      key={j}
+                      href={link.href}
+                      target={link.href.startsWith("https://wa.me/") ? "_blank" : undefined}
+                      rel={link.href.startsWith("https://wa.me/") ? "noopener noreferrer" : undefined}
+                      dir="ltr"
+                      className="text-sm font-bold text-ink-900 transition-colors hover:text-brand-600"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <p key={j} className="text-sm font-bold text-ink-900">
+                      {link.label}
+                    </p>
+                  )
                 )}
               </GlassCard>
             </Reveal>

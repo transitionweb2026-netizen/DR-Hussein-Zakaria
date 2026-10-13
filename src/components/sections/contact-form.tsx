@@ -3,6 +3,7 @@
 import { useId, useActionState } from "react";
 import { CheckCircle2, AlertCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { WhatsappButton } from "@/components/ui/whatsapp-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Reveal } from "@/components/ui/reveal";
@@ -31,7 +32,7 @@ export function ContactForm({
   orLabel,
   whatsappLabel,
   callLabel,
-  whatsappHref,
+  whatsappNumbers,
   phoneHref,
 }: {
   locale: string;
@@ -51,7 +52,7 @@ export function ContactForm({
   orLabel: string;
   whatsappLabel: string;
   callLabel: string;
-  whatsappHref: string;
+  whatsappNumbers: (string | null | undefined)[];
   phoneHref: string;
 }) {
   const [state, formAction, pending] = useActionState(submitContactForm, idleContactFormState);
@@ -147,9 +148,9 @@ export function ContactForm({
             </div>
 
             <div className="mx-auto mt-6 flex max-w-lg flex-col gap-3 sm:flex-row">
-              <Button href={whatsappHref} size="lg" variant="ghost" icon={<WhatsappIcon className="h-5 w-5" />} className="w-full sm:w-1/2">
+              <WhatsappButton numbers={whatsappNumbers} size="lg" variant="ghost" icon={<WhatsappIcon className="h-5 w-5" />} className="w-full sm:w-1/2">
                 {whatsappLabel}
-              </Button>
+              </WhatsappButton>
               <Button href={phoneHref} size="lg" variant="ghost" icon={<Phone className="h-4.5 w-4.5" />} className="w-full sm:w-1/2">
                 {callLabel}
               </Button>
