@@ -23,7 +23,6 @@ export async function PageHero({
   paragraph,
   primaryCta,
   secondaryCta,
-  secondarySlot,
   showPhoneCard = true,
   // Defaults cover the pages whose own hero content isn't wired to Supabase
   // yet (Services/Videos/Patient Stories/Articles/Contact -- later phases);
@@ -41,10 +40,6 @@ export async function PageHero({
   paragraph: string;
   primaryCta: CtaConfig;
   secondaryCta?: CtaConfig;
-  /** Renders instead of secondaryCta when provided -- for a secondary
-   * action that isn't a plain link (e.g. a WhatsApp button offering more
-   * than one number). Same visual slot, same position next to primaryCta. */
-  secondarySlot?: ReactNode;
   showPhoneCard?: boolean;
   phoneLabel?: string;
   socialLabel?: string;
@@ -124,12 +119,11 @@ export async function PageHero({
             <Button href={primaryCta.href} size="lg" icon={primaryCta.icon}>
               {primaryCta.label}
             </Button>
-            {secondarySlot ??
-              (secondaryCta && (
-                <Button href={secondaryCta.href} size="lg" variant="outline" icon={secondaryCta.icon}>
-                  {secondaryCta.label}
-                </Button>
-              ))}
+            {secondaryCta && (
+              <Button href={secondaryCta.href} size="lg" variant="outline" icon={secondaryCta.icon}>
+                {secondaryCta.label}
+              </Button>
+            )}
           </div>
 
           <div

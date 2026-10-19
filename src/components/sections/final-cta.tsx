@@ -1,7 +1,6 @@
 import { getLocale } from "next-intl/server";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { WhatsappButton } from "@/components/ui/whatsapp-button";
 import { GlassCard } from "@/components/ui/glass-card";
 import { GlowOrb } from "@/components/decorative/glow-orb";
 import { Reveal } from "@/components/ui/reveal";
@@ -20,6 +19,7 @@ export async function FinalCta({
 }) {
   const locale = await getLocale();
   const [cta, settings] = await Promise.all([getFinalCtaContent(), getSiteSettings()]);
+  const whatsappHref = `https://wa.me/${settings?.whatsapp_number || ""}`;
   const phoneHref = `tel:${settings?.phone || ""}`;
 
   return (
@@ -34,14 +34,14 @@ export async function FinalCta({
               <p className="mt-2.5 text-sm text-white/70 sm:text-base">{subtitle ?? pickLocale(cta?.subtitle, locale)}</p>
 
               <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <WhatsappButton
-                  numbers={[settings?.whatsapp_number, settings?.whatsapp_number_2]}
+                <Button
+                  href={whatsappHref}
                   size="lg"
                   icon={<WhatsappIcon className="h-5 w-5" />}
                   className="w-full border-2 border-white/40 sm:w-auto"
                 >
                   {pickLocale(cta?.whatsapp_label, locale)}
-                </WhatsappButton>
+                </Button>
                 <Button
                   href={phoneHref}
                   size="lg"

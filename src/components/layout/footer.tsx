@@ -4,6 +4,7 @@ import { Brain, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { GlowOrb } from "@/components/decorative/glow-orb";
 import { SocialIcon } from "@/components/ui/social-icon";
+import { WhatsappIcon } from "@/components/icons/social-icons";
 import { getActiveNavItems, getActiveSocialLinks, getFooterContent, getSiteSettings } from "@/lib/data/global-settings";
 import { getPublishedServiceCategories } from "@/lib/data/shared-content";
 import { pickLocale } from "@/lib/i18n-content";
@@ -87,6 +88,17 @@ export async function Footer() {
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />
               <span dir="ltr" className="text-start">{settings?.phone}</span>
             </a>
+            {settings?.whatsapp_number && (
+              <a
+                href={`https://wa.me/${settings.whatsapp_number}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-2.5 text-sm text-ink-600 hover:text-brand-600"
+              >
+                <WhatsappIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />
+                <span dir="ltr" className="text-start">+{settings.whatsapp_number}</span>
+              </a>
+            )}
             <a href={`mailto:${settings?.email ?? ""}`} className="flex items-start gap-2.5 text-sm text-ink-600 hover:text-brand-600">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />
               <span dir="ltr" className="text-start">{settings?.email}</span>
