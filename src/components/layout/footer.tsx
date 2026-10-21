@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { GlowOrb } from "@/components/decorative/glow-orb";
 import { SocialIcon } from "@/components/ui/social-icon";
 import { WhatsappIcon } from "@/components/icons/social-icons";
+import { AgencyCredit } from "./agency-credit";
 import { getActiveNavItems, getActiveSocialLinks, getFooterContent, getSiteSettings } from "@/lib/data/global-settings";
 import { getPublishedServiceCategories } from "@/lib/data/shared-content";
 import { pickLocale } from "@/lib/i18n-content";
@@ -121,8 +122,9 @@ export async function Footer() {
           </FooterColumn>
         </div>
 
-        <div className="mt-14 border-t border-line pt-7 text-center text-sm text-ink-400">
-          {pickLocale(footer?.copyright, locale).replace("{year}", String(year))}
+        <div className="mt-14 flex flex-col items-center gap-5 border-t border-line pt-7 text-center text-sm text-ink-400">
+          <p>{pickLocale(footer?.copyright, locale).replace("{year}", String(year))}</p>
+          <AgencyCredit locale={locale} />
         </div>
       </div>
     </footer>
